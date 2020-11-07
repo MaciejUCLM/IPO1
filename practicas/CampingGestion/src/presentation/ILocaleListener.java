@@ -1,5 +1,5 @@
 package presentation;
 
-public interface LocaleListener {
+public interface ILocaleListener {
 	void onLocaleChange();
 }
