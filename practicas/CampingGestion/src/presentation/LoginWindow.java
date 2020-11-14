@@ -10,10 +10,12 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import java.awt.Font;
+import java.util.Locale;
+
 import javax.swing.SwingConstants;
 import javax.swing.DefaultComboBoxModel;
 
-public class LoginWindow implements ILocaleListener {
+public class LoginWindow implements IAppWindow {
 
 	private JFrame frmLogin;
 	private JLabel lblUser;
@@ -31,15 +33,15 @@ public class LoginWindow implements ILocaleListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LoginWindow window = new LoginWindow();
-					window.frmLogin.setVisible(true);
+					IController ctl = DefaultController.getInstance();
+					ctl.openWindow(EnumWindows.LOGIN);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
 	}
-
+	
 	/**
 	 * Create the application.
 	 */
@@ -116,8 +118,20 @@ public class LoginWindow implements ILocaleListener {
 		frmLogin.getContentPane().add(lblMessage);
 		
 	}
+	
+	// TODO: darken background on input focus
 
 	@Override
-	public void onLocaleChange() {
+	public void onLocaleChange(Locale rb) {
+	}
+
+	@Override
+	public EnumWindows getName() {
+		return EnumWindows.LOGIN;
+	}
+
+	@Override
+	public void setVisible() {
+		frmLogin.setVisible(true);
 	}
 }
