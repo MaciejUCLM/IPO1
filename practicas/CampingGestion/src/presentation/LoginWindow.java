@@ -10,12 +10,21 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import java.awt.Font;
+import java.util.Arrays;
 import java.util.Locale;
 
 import javax.swing.SwingConstants;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class LoginWindow implements IAppWindow {
+	
+	private static final Color bgDefault = new Color(31, 52, 144);
+	private static final Color bgError = new Color(144, 52, 31);
+	private static final Color bgSucess = new Color(31, 144, 31);
 
 	private JFrame frmLogin;
 	private JLabel lblUser;
@@ -33,7 +42,7 @@ public class LoginWindow implements IAppWindow {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					IController ctl = DefaultController.getInstance();
+					IController ctl = IAppWindow.getController();
 					ctl.openWindow(EnumWindows.LOGIN);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,10 +60,11 @@ public class LoginWindow implements IAppWindow {
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @wbp.parser.entryPoint
 	 */
 	private void initialize() {
 		frmLogin = new JFrame();
-		frmLogin.getContentPane().setBackground(new Color(51, 102, 204));
+		frmLogin.getContentPane().setBackground(bgDefault);
 		frmLogin.setResizable(false);
 		frmLogin.setTitle("Camping Manager - Login");
 		frmLogin.setBounds(100, 100, 520, 360);
@@ -88,6 +98,20 @@ public class LoginWindow implements IAppWindow {
 		frmLogin.getContentPane().add(passwordField);
 		
 		btnLogin = new JButton("Log in");
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (Arrays.equals(passwordField.getPassword(), "1234".toCharArray()) && textUser.getText().equals("JJ")) {
+					lblMessage.setText("Kocham Cie");
+					frmLogin.getContentPane().setBackground(bgSucess);
+					IAppWindow.getController().openWindow(EnumWindows.MAIN);
+					setVisible(false);
+				}
+				else {
+					lblMessage.setText("Spierdalaj");
+					frmLogin.getContentPane().setBackground(bgError);
+				}
+			}
+		});
 		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnLogin.setBackground(new Color(255, 255, 255));
 		btnLogin.setBounds(311, 216, 89, 23);
@@ -119,8 +143,6 @@ public class LoginWindow implements IAppWindow {
 		
 	}
 	
-	// TODO: darken background on input focus
-
 	@Override
 	public void onLocaleChange(Locale rb) {
 	}
@@ -133,5 +155,10 @@ public class LoginWindow implements IAppWindow {
 	@Override
 	public void setVisible() {
 		frmLogin.setVisible(true);
+	}
+
+	@Override
+	public void setVisible(boolean state) {
+		frmLogin.setVisible(state);
 	}
 }

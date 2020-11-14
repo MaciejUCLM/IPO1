@@ -57,4 +57,9 @@ public class MainWindow implements IAppWindow {
 	public void setVisible() {
 		frmMain.setVisible(true);
 	}
+
+	@Override
+	public void setVisible(boolean state) {
+		frmMain.setVisible(state);
+	}
 }
