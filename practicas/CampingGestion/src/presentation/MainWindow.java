@@ -10,6 +10,8 @@ import javax.swing.JToolBar;
 import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 import javax.swing.JButton;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
 
 public class MainWindow implements IAppWindow {
 
@@ -34,14 +36,34 @@ public class MainWindow implements IAppWindow {
 		JToolBar toolBar = new JToolBar();
 		frmMain.getContentPane().add(toolBar, BorderLayout.NORTH);
 		
-		JButton btnNewButton = new JButton("New button");
-		toolBar.add(btnNewButton);
+		JButton btnLogout = new JButton("Logout");
+		toolBar.add(btnLogout);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		frmMain.getContentPane().add(lblNewLabel, BorderLayout.SOUTH);
+		JLabel lblStatus = new JLabel("...");
+		lblStatus.setBackground(new Color(255, 255, 255));
+		lblStatus.setBorder(new LineBorder(new Color(0, 0, 0)));
+		frmMain.getContentPane().add(lblStatus, BorderLayout.SOUTH);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		frmMain.getContentPane().add(tabbedPane, BorderLayout.CENTER);
+		
+		JPanel pnlWelcome = new JPanel();
+		tabbedPane.addTab("New tab", null, pnlWelcome, null);
+		
+		JPanel pnlReservations = new JPanel();
+		tabbedPane.addTab("New tab", null, pnlReservations, null);
+		
+		JPanel pnlCamping = new JPanel();
+		tabbedPane.addTab("New tab", null, pnlCamping, null);
+		
+		JPanel pnlActivities = new JPanel();
+		tabbedPane.addTab("New tab", null, pnlActivities, null);
+		
+		JPanel pnlEmployees = new JPanel();
+		tabbedPane.addTab("New tab", null, pnlEmployees, null);
+		
+		JPanel pnlRoutes = new JPanel();
+		tabbedPane.addTab("New tab", null, pnlRoutes, null);
 	}
 
 	@Override

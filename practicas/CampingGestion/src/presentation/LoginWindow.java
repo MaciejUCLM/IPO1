@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import java.awt.Color;
+
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
@@ -15,16 +16,16 @@ import java.util.Locale;
 
 import javax.swing.SwingConstants;
 import javax.swing.DefaultComboBoxModel;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
+import javax.swing.ImageIcon;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class LoginWindow implements IAppWindow {
 	
-	private static final Color bgDefault = new Color(31, 52, 144);
-	private static final Color bgError = new Color(144, 52, 31);
-	private static final Color bgSucess = new Color(31, 144, 31);
+	private static final Color bgDefault = new Color(100, 0, 200);
+	private static final Color bgError = new Color(160, 0, 0);
+	private static final Color bgSucess = new Color(11, 100, 11);
 
 	private JFrame frmLogin;
 	private JLabel lblUser;
@@ -118,8 +119,8 @@ public class LoginWindow implements IAppWindow {
 		frmLogin.getContentPane().add(btnLogin);
 		
 		JComboBox comboLanguage = new JComboBox();
-		comboLanguage.setModel(new DefaultComboBoxModel(EnumLanguages.values()));
-		comboLanguage.setBounds(415, 298, 89, 22);
+		comboLanguage.setModel(new LangComboModel());
+		comboLanguage.setBounds(415, 260, 89, 60);
 		frmLogin.getContentPane().add(comboLanguage);
 		
 		JLabel lblLogo = new JLabel("Camping Manager");
@@ -141,6 +142,24 @@ public class LoginWindow implements IAppWindow {
 		lblMessage.setBounds(10, 108, 494, 22);
 		frmLogin.getContentPane().add(lblMessage);
 		
+	}
+	
+	class LangComboModel extends DefaultComboBoxModel<ImageIcon> {
+		public LangComboModel() {
+			for (EnumLanguages e : EnumLanguages.values()) {
+				switch (e) {
+				case POLISH:
+					this.addElement(new ImageIcon(LoginWindow.class.getResource("/presentation/flags/polish.png")));
+					break;
+				case SPANISH:
+					this.addElement(new ImageIcon(LoginWindow.class.getResource("/presentation/flags/spanish.png")));
+					break;
+				default:
+				case ENGLISH:
+					this.addElement(new ImageIcon(LoginWindow.class.getResource("/presentation/flags/english.png")));
+				}
+			}
+		}
 	}
 	
 	@Override
