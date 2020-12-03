@@ -39,7 +39,7 @@ public class DefaultController implements IController {
 			}
 			windows[win.ordinal()] = newWindow;
 		}
-		getWindow(win).setVisible();
+		getWindow(win).getFrame().setVisible(true);
 	}
 
 	@Override

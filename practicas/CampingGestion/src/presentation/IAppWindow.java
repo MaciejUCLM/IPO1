@@ -2,6 +2,8 @@ package presentation;
 
 import java.util.Locale;
 
+import javax.swing.JFrame;
+
 public interface IAppWindow {
 
 	static IController getController() {
@@ -12,7 +14,6 @@ public interface IAppWindow {
 
 	void onLocaleChange(Locale rb);
 
-	void setVisible();
-	void setVisible(boolean state);
+	JFrame getFrame();
 
 }
