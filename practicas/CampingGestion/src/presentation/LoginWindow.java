@@ -87,12 +87,14 @@ public class LoginWindow implements IAppWindow {
 		frmLogin.getContentPane().add(lblPass);
 		
 		textUser = new JTextField();
+		textUser.setText("JJ");
 		textUser.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textUser.setBounds(260, 150, 140, 22);
 		frmLogin.getContentPane().add(textUser);
 		textUser.setColumns(10);
 		
 		passwordField = new JPasswordField();
+		passwordField.setText("1234");
 		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		passwordField.setColumns(10);
 		passwordField.setBounds(260, 183, 140, 22);
@@ -102,13 +104,13 @@ public class LoginWindow implements IAppWindow {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (Arrays.equals(passwordField.getPassword(), "1234".toCharArray()) && textUser.getText().equals("JJ")) {
-					lblMessage.setText("Kocham Cie");
+					lblMessage.setText("Login succesful");
 					frmLogin.getContentPane().setBackground(bgSucess);
 					IAppWindow.getController().openWindow(EnumWindows.MAIN);
-					setVisible(false);
+					frmLogin.dispose();
 				}
 				else {
-					lblMessage.setText("Spierdalaj");
+					lblMessage.setText("Incorrect login or password");
 					frmLogin.getContentPane().setBackground(bgError);
 				}
 			}
@@ -172,12 +174,8 @@ public class LoginWindow implements IAppWindow {
 	}
 
 	@Override
-	public void setVisible() {
-		frmLogin.setVisible(true);
+	public JFrame getFrame() {
+		return frmLogin;
 	}
 
-	@Override
-	public void setVisible(boolean state) {
-		frmLogin.setVisible(state);
-	}
 }

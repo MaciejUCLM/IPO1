@@ -76,12 +76,8 @@ public class MainWindow implements IAppWindow {
 	}
 
 	@Override
-	public void setVisible() {
-		frmMain.setVisible(true);
+	public JFrame getFrame() {
+		return frmMain;
 	}
 
-	@Override
-	public void setVisible(boolean state) {
-		frmMain.setVisible(state);
-	}
 }
