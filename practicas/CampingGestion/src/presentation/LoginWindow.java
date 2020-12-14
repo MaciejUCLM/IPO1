@@ -68,28 +68,28 @@ public class LoginWindow implements IAppWindow {
 		frmLogin.getContentPane().setBackground(bgDefault);
 		frmLogin.setResizable(false);
 		frmLogin.setTitle("Camping Manager - Login");
-		frmLogin.setBounds(100, 100, 520, 360);
+		frmLogin.setBounds(100, 100, 520, 370);
 		frmLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmLogin.getContentPane().setLayout(null);
 		
 		lblUser = new JLabel("Username");
-		lblUser.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblUser.setHorizontalAlignment(SwingConstants.LEFT);
 		lblUser.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblUser.setForeground(new Color(255, 255, 255));
-		lblUser.setBounds(80, 150, 150, 22);
+		lblUser.setBounds(120, 141, 270, 22);
 		frmLogin.getContentPane().add(lblUser);
 		
 		lblPass = new JLabel("Password");
-		lblPass.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblPass.setHorizontalAlignment(SwingConstants.LEFT);
 		lblPass.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblPass.setForeground(new Color(255, 255, 255));
-		lblPass.setBounds(80, 183, 150, 22);
+		lblPass.setBounds(120, 195, 270, 22);
 		frmLogin.getContentPane().add(lblPass);
 		
 		textUser = new JTextField();
 		textUser.setText("JJ");
 		textUser.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		textUser.setBounds(260, 150, 140, 22);
+		textUser.setBounds(120, 162, 270, 22);
 		frmLogin.getContentPane().add(textUser);
 		textUser.setColumns(10);
 		
@@ -97,32 +97,32 @@ public class LoginWindow implements IAppWindow {
 		passwordField.setText("1234");
 		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		passwordField.setColumns(10);
-		passwordField.setBounds(260, 183, 140, 22);
+		passwordField.setBounds(120, 215, 270, 22);
 		frmLogin.getContentPane().add(passwordField);
 		
 		btnLogin = new JButton("Log in");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (Arrays.equals(passwordField.getPassword(), "1234".toCharArray()) && textUser.getText().equals("JJ")) {
-					lblMessage.setText("Login succesful");
+					log("Login succesful");
 					frmLogin.getContentPane().setBackground(bgSucess);
 					IAppWindow.getController().openWindow(EnumWindows.MAIN);
 					frmLogin.dispose();
 				}
 				else {
-					lblMessage.setText("Incorrect login or password");
+					log("Incorrect login or password");
 					frmLogin.getContentPane().setBackground(bgError);
 				}
 			}
 		});
 		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnLogin.setBackground(new Color(255, 255, 255));
-		btnLogin.setBounds(311, 216, 89, 23);
+		btnLogin.setBounds(210, 248, 89, 23);
 		frmLogin.getContentPane().add(btnLogin);
 		
 		JComboBox comboLanguage = new JComboBox();
 		comboLanguage.setModel(new LangComboModel());
-		comboLanguage.setBounds(415, 260, 89, 60);
+		comboLanguage.setBounds(415, 270, 89, 60);
 		frmLogin.getContentPane().add(comboLanguage);
 		
 		JLabel lblLogo = new JLabel("Camping Manager");
@@ -134,7 +134,7 @@ public class LoginWindow implements IAppWindow {
 		
 		lblSources = new JLabel("Icons source: icons8.com");
 		lblSources.setForeground(new Color(255, 255, 255));
-		lblSources.setBounds(10, 302, 245, 14);
+		lblSources.setBounds(10, 316, 245, 14);
 		frmLogin.getContentPane().add(lblSources);
 		
 		lblMessage = new JLabel("Please enter your credentials");
@@ -166,6 +166,7 @@ public class LoginWindow implements IAppWindow {
 	
 	@Override
 	public void onLocaleChange(Locale rb) {
+		// TODO implement
 	}
 
 	@Override
@@ -176,6 +177,11 @@ public class LoginWindow implements IAppWindow {
 	@Override
 	public JFrame getFrame() {
 		return frmLogin;
+	}
+
+	@Override
+	public void log(String msg) {
+		lblMessage.setText(msg);
 	}
 
 }

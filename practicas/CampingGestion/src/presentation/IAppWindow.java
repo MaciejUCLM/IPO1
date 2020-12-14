@@ -11,6 +11,8 @@ public interface IAppWindow {
 	}
 
 	EnumWindows getName();
+	
+	void log(String msg);
 
 	void onLocaleChange(Locale rb);
 

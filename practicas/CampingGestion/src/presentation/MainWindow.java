@@ -1,21 +1,35 @@
 package presentation;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.util.Locale;
 
 import javax.swing.JToolBar;
 import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
-import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 public class MainWindow implements IAppWindow {
 
 	private JFrame frmMain;
+	private MainPanel pnlAccount;
+	private MainPanel pnlActivities;
+	private MainPanel pnlAccomodation;
+	private MainPanel pnlEmployees;
+	private MainPanel pnlRoutes;
+	private MainPanel pnlMap;
+	private JTabbedPane tabbedPane;
+	private JToolBar toolBar;
+	private JLabel lblStatus;
+	private JPanel pnlBars;
 
 	/**
 	 * Create the application.
@@ -33,41 +47,59 @@ public class MainWindow implements IAppWindow {
 		frmMain.setBounds(100, 100, 700, 500);
 		frmMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JToolBar toolBar = new JToolBar();
-		frmMain.getContentPane().add(toolBar, BorderLayout.NORTH);
-		
-		JButton btnLogout = new JButton("Logout");
-		toolBar.add(btnLogout);
-		
-		JLabel lblStatus = new JLabel("...");
+		lblStatus = new JLabel("...");
 		lblStatus.setBackground(new Color(255, 255, 255));
 		lblStatus.setBorder(new LineBorder(new Color(0, 0, 0)));
 		frmMain.getContentPane().add(lblStatus, BorderLayout.SOUTH);
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		pnlBars = new JPanel();
+		frmMain.getContentPane().add(pnlBars, BorderLayout.NORTH);
+		pnlBars.setLayout(new BorderLayout(0, 0));
+		
+		JMenuBar menuBar = new JMenuBar();
+		pnlBars.add(menuBar, BorderLayout.NORTH);
+		
+		JMenu mnFile = new JMenu("File");
+		menuBar.add(mnFile);
+		
+		JMenuItem mntmLogout = new JMenuItem("Logout");
+		mnFile.add(mntmLogout);
+		
+		JMenu mnHelp = new JMenu("Help");
+		menuBar.add(mnHelp);
+		
+		JMenu mnAbout = new JMenu("About");
+		menuBar.add(mnAbout);
+		
+		toolBar = new JToolBar();
+		pnlBars.add(toolBar, BorderLayout.CENTER);
+		
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.addChangeListener(new TabbedPaneChangeListener());
 		frmMain.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
-		JPanel pnlWelcome = new JPanel();
-		tabbedPane.addTab("New tab", null, pnlWelcome, null);
+		pnlAccount = new PanelAccount();
+		tabbedPane.addTab("Account", null, pnlAccount, null);
 		
-		JPanel pnlReservations = new JPanel();
-		tabbedPane.addTab("New tab", null, pnlReservations, null);
+		pnlAccomodation = new PanelAccomodation();
+		tabbedPane.addTab("Reservations & Accomodation", null, pnlAccomodation, null);
 		
-		JPanel pnlCamping = new JPanel();
-		tabbedPane.addTab("New tab", null, pnlCamping, null);
+		pnlActivities = new PanelManager();
+		tabbedPane.addTab("Activities", null, pnlActivities, null);
 		
-		JPanel pnlActivities = new JPanel();
-		tabbedPane.addTab("New tab", null, pnlActivities, null);
+		pnlEmployees = new PanelManager();
+		tabbedPane.addTab("Employees", null, pnlEmployees, null);
 		
-		JPanel pnlEmployees = new JPanel();
-		tabbedPane.addTab("New tab", null, pnlEmployees, null);
+		pnlRoutes = new PanelManager();
+		tabbedPane.addTab("Routes", null, pnlRoutes, null);
 		
-		JPanel pnlRoutes = new JPanel();
-		tabbedPane.addTab("New tab", null, pnlRoutes, null);
+		pnlMap = new PanelMap();
+		tabbedPane.addTab("Map", null, pnlMap, null);
 	}
 
 	@Override
 	public void onLocaleChange(Locale rb) {
+		// TODO implement
 	}
 
 	@Override
@@ -80,4 +112,19 @@ public class MainWindow implements IAppWindow {
 		return frmMain;
 	}
 
+	private class TabbedPaneChangeListener implements ChangeListener {
+		public void stateChanged(ChangeEvent arg0) {
+			toolBar.removeAll();
+			MainPanel tab = (MainPanel) tabbedPane.getSelectedComponent();
+			for (JButton b : tab.getToolBarButtons()) {
+				toolBar.add(b);
+			}
+			pnlBars.repaint();
+		}
+	}
+
+	@Override
+	public void log(String msg) {
+		lblStatus.setText(msg);
+	}
 }

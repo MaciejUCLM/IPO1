@@ -3,5 +3,6 @@ package presentation;
 public enum EnumWindows {
 	LOGIN,
 	MAIN,
-	HELP
+	HELP,
+	ABOUT
 }
