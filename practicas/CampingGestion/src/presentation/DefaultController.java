@@ -45,6 +45,13 @@ public class DefaultController implements IController {
 			case MAIN:
 				newWindow = new MainWindow();
 				break;
+			case HELP:
+				newWindow = new HelpWindow();
+				break;
+			case ABOUT:
+				newWindow = new HelpWindow();
+				break;
+			case LOGIN:
 			default:
 				newWindow = new LoginWindow();
 			}

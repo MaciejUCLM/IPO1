@@ -16,6 +16,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MainWindow implements IAppWindow {
 
@@ -63,12 +65,15 @@ public class MainWindow implements IAppWindow {
 		menuBar.add(mnFile);
 		
 		JMenuItem mntmLogout = new JMenuItem("Logout");
+		mntmLogout.addActionListener(new LogoutActionListener());
 		mnFile.add(mntmLogout);
 		
 		JMenu mnHelp = new JMenu("Help");
+		mnHelp.addMouseListener(new MnHelpMouseListener());
 		menuBar.add(mnHelp);
 		
 		JMenu mnAbout = new JMenu("About");
+		mnAbout.addMouseListener(new MnAboutMouseListener());
 		menuBar.add(mnAbout);
 		
 		toolBar = new JToolBar();
@@ -112,6 +117,11 @@ public class MainWindow implements IAppWindow {
 		return frmMain;
 	}
 
+	@Override
+	public void log(String msg) {
+		lblStatus.setText(msg);
+	}
+
 	private class TabbedPaneChangeListener implements ChangeListener {
 		public void stateChanged(ChangeEvent arg0) {
 			toolBar.removeAll();
@@ -123,8 +133,19 @@ public class MainWindow implements IAppWindow {
 		}
 	}
 
-	@Override
-	public void log(String msg) {
-		lblStatus.setText(msg);
+	private class MnHelpMouseListener extends MouseAdapter {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			IAppWindow.getController().openWindow(EnumWindows.HELP);
+			log("Opened help window");
+		}
 	}
+	private class MnAboutMouseListener extends MouseAdapter {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			IAppWindow.getController().openWindow(EnumWindows.ABOUT);
+			log("Opened about window");
+		}
+	}
+
 }
