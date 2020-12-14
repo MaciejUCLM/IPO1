@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 
 public class LogoutActionListener implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO implement
+		IController ctrl = DefaultController.getInstance();
+		ctrl.disposeAll();
+		ctrl.openWindow(EnumWindows.LOGIN);
 	}
 }

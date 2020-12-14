@@ -23,7 +23,18 @@ public class DefaultController implements IController {
 	}
 
 	@Override
+	public void disposeAll() {
+		for (int i = 0; i < windows.length; i++) {
+			if (windows[i] != null) {
+				windows[i].getFrame().dispose();
+				windows[i] = null;
+			}
+		}
+	}
+
+	@Override
 	public void changeLocale(Locale rb) {
+		// TODO
 	}
 
 	@Override

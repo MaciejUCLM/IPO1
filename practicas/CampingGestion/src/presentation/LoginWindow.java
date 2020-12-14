@@ -87,6 +87,7 @@ public class LoginWindow implements IAppWindow {
 		frmLogin.getContentPane().add(lblPass);
 		
 		textUser = new JTextField();
+		textUser.addFocusListener(new TextInputFocusListener());
 		textUser.setText("JJ");
 		textUser.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textUser.setBounds(120, 162, 270, 22);
@@ -94,6 +95,7 @@ public class LoginWindow implements IAppWindow {
 		textUser.setColumns(10);
 		
 		passwordField = new JPasswordField();
+		passwordField.addFocusListener(new TextInputFocusListener());
 		passwordField.setText("1234");
 		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		passwordField.setColumns(10);
