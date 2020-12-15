@@ -54,6 +54,7 @@ public class PanelMap extends MainPanel {
 	public PanelMap() {
 		tools = new JButton[8];
 		tools[0] = new JButton("Clear route");
+		tools[0].addActionListener(new BtnClearActionListener());
 		tools[0].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/trash.png")), toolBarImageSize, toolBarImageSize));
 
 		tools[1] = new JButton("Load route");
@@ -63,7 +64,7 @@ public class PanelMap extends MainPanel {
 		tools[2] = new JButton("Save route");
 		tools[2].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/save.png")), toolBarImageSize, toolBarImageSize));
 		
-		tools[3] = new JButton("Remove");
+		tools[3] = new JButton("Erase");
 		tools[3].addActionListener(new BtnChangeModeActionListener(EnumMapMode.REMOVE));
 		tools[3].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/erase-line.png")), toolBarImageSize, toolBarImageSize));
 
@@ -122,6 +123,13 @@ public class PanelMap extends MainPanel {
 		if (frame == null)
 			frame = IAppWindow.getController().getWindow(EnumWindows.MAIN).getFrame();
 		return frame;
+	}
+
+	private class BtnClearActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			sketchMap.clear();
+			sketchMap.repaint();
+		}
 	}
 
 	private class BtnLoadActionListener implements ActionListener {
@@ -194,12 +202,12 @@ public class PanelMap extends MainPanel {
 			if (img != null)
 			{
 				switch (mode) {
-				// TODO
 				case POINT:
-					sketchMap.addGraphicObject(null);
+					sketchMap.addGraphicObject(new GraphicPoint(x, y, 10, Color.RED));
 					sketchMap.repaint();
 					break;
 				case LINE:
+					sketchMap.addGraphicObject(new GraphicLine(x, y, x, y, Color.RED));
 					break;
 				case RECTANGLE:
 					sketchMap.addGraphicObject(new GraphicRectangle(x, y, x, y, Color.RED));
@@ -211,9 +219,7 @@ public class PanelMap extends MainPanel {
 					txtCaption.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent arg) {
 							if(!txtCaption.getText().equals(""))
-								// TODO
-								//miAreaDibujo.addObjetoGrafico(new TextoGrafico(x, y+15, txtCaption.getText(), Color.RED));
-								sketchMap.addGraphicObject(null);
+								sketchMap.addGraphicObject(new GraphicText(x, y, txtCaption.getText(), Color.RED));
 
 							txtCaption.setText("");
 							txtCaption.setVisible(false);
@@ -223,6 +229,8 @@ public class PanelMap extends MainPanel {
 					sketchMap.add(txtCaption);
 					break;
 				case REMOVE:
+					sketchMap.erase(x, y);
+					sketchMap.repaint();
 					break;
 				case NONE:
 				default:
@@ -240,6 +248,10 @@ public class PanelMap extends MainPanel {
 			else if (mode == EnumMapMode.RECTANGLE) {
 				((GraphicRectangle)sketchMap.getLastGraphicObject()).setX1(e.getX());
 				((GraphicRectangle)sketchMap.getLastGraphicObject()).setY1(e.getY());
+				sketchMap.repaint();
+			} else if (mode == EnumMapMode.LINE) {
+				((GraphicLine)sketchMap.getLastGraphicObject()).setX1(e.getX());
+				((GraphicLine)sketchMap.getLastGraphicObject()).setY1(e.getY());
 				sketchMap.repaint();
 			}
 		}
