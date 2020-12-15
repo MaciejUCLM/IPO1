@@ -20,7 +20,7 @@ public class PanelMap extends MainPanel {
 		tools[1] = new JButton("Point");
 		tools[2] = new JButton("Line");
 		tools[3] = new JButton("Rectangle");
-		tools[4] = new JButton("Text");
+		tools[4] = new JButton("Caption");
 		// TODO
 		//tools[0].addActionListener(new LogoutActionListener());
 		//tools[0].setIcon(new ImageIcon(PanelAccount.class.getResource("/presentation/flags/polish.png")));

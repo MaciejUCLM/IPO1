@@ -49,7 +49,7 @@ public class DefaultController implements IController {
 				newWindow = new HelpWindow();
 				break;
 			case ABOUT:
-				newWindow = new HelpWindow();
+				newWindow = new AboutWindow();
 				break;
 			case LOGIN:
 			default:
