@@ -68,7 +68,7 @@ public class LoginWindow implements IAppWindow {
 		frmLogin.getContentPane().setBackground(bgDefault);
 		frmLogin.setResizable(false);
 		frmLogin.setTitle("Camping Manager - Login");
-		frmLogin.setBounds(100, 100, 520, 370);
+		frmLogin.setBounds(100, 100, 520, 400);
 		frmLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmLogin.getContentPane().setLayout(null);
 		
@@ -103,6 +103,7 @@ public class LoginWindow implements IAppWindow {
 		frmLogin.getContentPane().add(passwordField);
 		
 		btnLogin = new JButton("Log in");
+		btnLogin.setIcon(IAppWindow.resizeImage(new ImageIcon(LoginWindow.class.getResource("/presentation/resources/enter.png")), 8, 8));
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (Arrays.equals(passwordField.getPassword(), "1234".toCharArray()) && textUser.getText().equals("JJ")) {
@@ -119,12 +120,12 @@ public class LoginWindow implements IAppWindow {
 		});
 		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnLogin.setBackground(new Color(255, 255, 255));
-		btnLogin.setBounds(210, 248, 89, 23);
+		btnLogin.setBounds(157, 248, 203, 39);
 		frmLogin.getContentPane().add(btnLogin);
 		
 		JComboBox comboLanguage = new JComboBox();
 		comboLanguage.setModel(new LangComboModel());
-		comboLanguage.setBounds(415, 270, 89, 60);
+		comboLanguage.setBounds(415, 300, 89, 60);
 		frmLogin.getContentPane().add(comboLanguage);
 		
 		JLabel lblLogo = new JLabel("Camping Manager");
@@ -136,7 +137,7 @@ public class LoginWindow implements IAppWindow {
 		
 		lblSources = new JLabel("Icons source: icons8.com");
 		lblSources.setForeground(new Color(255, 255, 255));
-		lblSources.setBounds(10, 316, 245, 14);
+		lblSources.setBounds(10, 346, 245, 14);
 		frmLogin.getContentPane().add(lblSources);
 		
 		lblMessage = new JLabel("Please enter your credentials");

@@ -18,8 +18,11 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
 
 public class MainWindow implements IAppWindow {
+	
+	private static final int tabImageSize = 24;
 
 	private JFrame frmMain;
 	private MainPanel pnlAccount;
@@ -84,22 +87,34 @@ public class MainWindow implements IAppWindow {
 		frmMain.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
 		pnlAccount = new PanelAccount();
-		tabbedPane.addTab("Account", null, pnlAccount, null);
+		tabbedPane.addTab("Account",
+				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/home.png")), tabImageSize, tabImageSize),
+				pnlAccount, null);
 		
 		pnlAccomodation = new PanelAccomodation();
-		tabbedPane.addTab("Reservations & Accomodation", null, pnlAccomodation, null);
+		tabbedPane.addTab("Reservations & Accomodation",
+				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/calendar.png")), tabImageSize, tabImageSize),
+				pnlAccomodation, null);
 		
 		pnlActivities = new PanelManager();
-		tabbedPane.addTab("Activities", null, pnlActivities, null);
+		tabbedPane.addTab("Activities",
+				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/clock.png")), tabImageSize, tabImageSize),
+				pnlActivities, null);
 		
 		pnlEmployees = new PanelManager();
-		tabbedPane.addTab("Employees", null, pnlEmployees, null);
+		tabbedPane.addTab("Employees",
+				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/search-client.png")), tabImageSize, tabImageSize),
+				pnlEmployees, null);
 		
 		pnlRoutes = new PanelManager();
-		tabbedPane.addTab("Routes", null, pnlRoutes, null);
+		tabbedPane.addTab("Routes",
+				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/anchor-nodes.png")), tabImageSize, tabImageSize),
+				pnlRoutes, null);
 		
 		pnlMap = new PanelMap();
-		tabbedPane.addTab("Map", null, pnlMap, null);
+		tabbedPane.addTab("Map",
+				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/waypoint-map.png")), tabImageSize, tabImageSize),
+				pnlMap, null);
 	}
 
 	@Override

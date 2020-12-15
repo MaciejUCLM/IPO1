@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -127,8 +128,11 @@ public class PanelMap extends MainPanel {
 
 	private class BtnClearActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			sketchMap.clear();
-			sketchMap.repaint();
+			int v = JOptionPane.showConfirmDialog(getFrame(), "Are you sure you want to remove all map markings?", "Clear route", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+			if (v == JOptionPane.YES_OPTION) {
+				sketchMap.clear();
+				sketchMap.repaint();
+			}
 		}
 	}
 
@@ -136,11 +140,11 @@ public class PanelMap extends MainPanel {
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO load map from last route selected on PanelRoutes
 			// TODO confirm reject unsaved changes
-			JFileChooser fcAbrir = new JFileChooser();
-			int valor = fcAbrir.showOpenDialog(getFrame());
+			JFileChooser fc = new JFileChooser();
+			int valor = fc.showOpenDialog(getFrame());
 
 			if (valor == JFileChooser.APPROVE_OPTION) {
-				File file = fcAbrir.getSelectedFile();
+				File file = fc.getSelectedFile();
 				img = new ImageIcon(file.getAbsolutePath());
 				sketchMap.clear();
 				sketchMap.setIcon(img);

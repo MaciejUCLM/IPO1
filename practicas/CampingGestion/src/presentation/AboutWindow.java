@@ -14,6 +14,7 @@ import javax.swing.JTextPane;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class AboutWindow implements IAppWindow {
 
@@ -31,6 +32,7 @@ public class AboutWindow implements IAppWindow {
 	 */
 	private void initialize() {
 		frmAboutCampingManager = new JFrame();
+		frmAboutCampingManager.setIconImage(Toolkit.getDefaultToolkit().getImage(AboutWindow.class.getResource("/presentation/resources/about.png")));
 		frmAboutCampingManager.setTitle("About Camping Manager");
 		frmAboutCampingManager.setBounds(100, 100, 450, 300);
 		frmAboutCampingManager.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
