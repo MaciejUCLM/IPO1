@@ -2,6 +2,7 @@ package presentation;
 
 import java.util.Locale;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.BorderLayout;
 import javax.swing.JScrollPane;
@@ -16,10 +17,12 @@ public class PanelManager extends MainPanel {
 	public PanelManager() {
 		tools = new JButton[2];
 		tools[0] = new JButton("Add");
+		tools[0].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/add.png")), toolBarImageSize, toolBarImageSize));
+
 		tools[1] = new JButton("Delete");
+		tools[1].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/delete-bin.png")), toolBarImageSize, toolBarImageSize));
 		// TODO
 		//tools[0].addActionListener(new LogoutActionListener());
-		//tools[0].setIcon(new ImageIcon(PanelAccount.class.getResource("/presentation/flags/polish.png")));
 
 		setLayout(new BorderLayout(0, 0));
 		

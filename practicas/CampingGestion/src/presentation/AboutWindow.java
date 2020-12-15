@@ -49,7 +49,7 @@ public class AboutWindow implements IAppWindow {
 		
 		JTextPane txtpnAbout = new JTextPane();
 		txtpnAbout.setEditable(false);
-		txtpnAbout.setText("This application is a project made for the purpose of practice in the subject Human-Computer Interactions 1 on the University of Castilla La Mancha.\r\n\r\nAuthors: Maciej Nalepa, Piotr Maliszewski\r\n\r\nVersion: 0.0.1");
+		txtpnAbout.setText("This application is a project made for the purpose of practice in the subject Human-Computer Interactions 1 on the University of Castilla La Mancha.\r\n\r\nAuthors: Maciej Nalepa, Piotr Maliszewski\r\n\r\nVersion: 0.0.1\r\n\r\nProject uses following sources:\r\n- https://icons8.com/");
 		frmAboutCampingManager.getContentPane().add(txtpnAbout, BorderLayout.CENTER);
 	}
 

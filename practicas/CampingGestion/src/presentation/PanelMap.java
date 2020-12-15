@@ -53,34 +53,35 @@ public class PanelMap extends MainPanel {
 	 */
 	public PanelMap() {
 		tools = new JButton[8];
-		
-		// TODO
 		tools[0] = new JButton("Clear route");
+		tools[0].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/trash.png")), toolBarImageSize, toolBarImageSize));
 
 		tools[1] = new JButton("Load route");
 		tools[1].addActionListener(new BtnLoadActionListener());
+		tools[1].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/download.png")), toolBarImageSize, toolBarImageSize));
 
 		tools[2] = new JButton("Save route");
+		tools[2].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/save.png")), toolBarImageSize, toolBarImageSize));
 		
 		tools[3] = new JButton("Remove");
 		tools[3].addActionListener(new BtnChangeModeActionListener(EnumMapMode.REMOVE));
-		tools[3].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/erase-line.png")), 24, 24));
+		tools[3].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/erase-line.png")), toolBarImageSize, toolBarImageSize));
 
 		tools[4] = new JButton("Point");
 		tools[4].addActionListener(new BtnChangeModeActionListener(EnumMapMode.POINT));
-		tools[4].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/heart-plus.png")), 24, 24));
+		tools[4].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/heart-plus.png")), toolBarImageSize, toolBarImageSize));
 
 		tools[5] = new JButton("Line");
 		tools[5].addActionListener(new BtnChangeModeActionListener(EnumMapMode.LINE));
-		tools[5].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/ruler.png")), 24, 24));
+		tools[5].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/ruler.png")), toolBarImageSize, toolBarImageSize));
 
 		tools[6] = new JButton("Rectangle");
 		tools[6].addActionListener(new BtnChangeModeActionListener(EnumMapMode.RECTANGLE));
-		tools[6].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/rectangle.png")), 24, 24));
+		tools[6].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/rectangle.png")), toolBarImageSize, toolBarImageSize));
 
 		tools[7] = new JButton("Caption");
 		tools[7].addActionListener(new BtnChangeModeActionListener(EnumMapMode.CAPTION));
-		tools[7].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/speech-bubble.png")), 24, 24));
+		tools[7].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/speech-bubble.png")), toolBarImageSize, toolBarImageSize));
 
 		setLayout(new BorderLayout(0, 0));
 		
@@ -125,6 +126,7 @@ public class PanelMap extends MainPanel {
 
 	private class BtnLoadActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
+			// TODO load map from last route selected on PanelRoutes
 			// TODO confirm reject unsaved changes
 			JFileChooser fcAbrir = new JFileChooser();
 			int valor = fcAbrir.showOpenDialog(getFrame());
@@ -181,6 +183,12 @@ public class PanelMap extends MainPanel {
 	private class SketchMouseListener extends MouseAdapter {
 		@Override
 		public void mousePressed(MouseEvent e) {
+			if (e.getButton() == MouseEvent.BUTTON3) {
+				// right mouse button exits tool
+				mode = EnumMapMode.NONE;
+				getFrame().setCursor(cursorDefault);
+				return;
+			}
 			x = e.getX();
 			y = e.getY();
 			if (img != null)

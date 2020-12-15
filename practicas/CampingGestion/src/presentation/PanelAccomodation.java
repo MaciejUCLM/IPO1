@@ -2,6 +2,7 @@ package presentation;
 
 import java.util.Locale;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.BorderLayout;
 import javax.swing.JSplitPane;
@@ -28,13 +29,19 @@ public class PanelAccomodation extends MainPanel {
 	 * Create the panel.
 	 */
 	public PanelAccomodation() {
-		tools = new JButton[3];
+		tools = new JButton[4];
 		tools[0] = new JButton("New reservation");
+		tools[0].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/add.png")), toolBarImageSize, toolBarImageSize));
+
 		tools[1] = new JButton("New category");
 		tools[1].addActionListener(new NewNodeActionListener());
-		tools[2] = new JButton("Delete");
-		// TODO
-		//tools[0].setIcon(new ImageIcon(PanelAccount.class.getResource("/presentation/flags/polish.png")));
+		tools[1].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/add-tab.png")), toolBarImageSize, toolBarImageSize));
+
+		tools[2] = new JButton("Delete reservation");
+		tools[2].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/delete-bin.png")), toolBarImageSize, toolBarImageSize));
+		
+		tools[3] = new JButton("Delete category");
+		tools[3].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/close-tab.png")), toolBarImageSize, toolBarImageSize));
 
 		setLayout(new BorderLayout(0, 0));
 		

@@ -46,7 +46,7 @@ public class MainWindow implements IAppWindow {
 	private void initialize() {
 		frmMain = new JFrame();
 		frmMain.setTitle("Camping Manager");
-		frmMain.setBounds(100, 100, 700, 500);
+		frmMain.setBounds(100, 100, 800, 500);
 		frmMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		lblStatus = new JLabel("...");
