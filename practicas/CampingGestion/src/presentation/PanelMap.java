@@ -22,7 +22,6 @@ import java.io.File;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.JLabel;
 
 public class PanelMap extends MainPanel {
 
@@ -55,6 +54,7 @@ public class PanelMap extends MainPanel {
 	public PanelMap() {
 		tools = new JButton[8];
 		
+		// TODO
 		tools[0] = new JButton("Clear route");
 
 		tools[1] = new JButton("Load route");
@@ -64,20 +64,23 @@ public class PanelMap extends MainPanel {
 		
 		tools[3] = new JButton("Remove");
 		tools[3].addActionListener(new BtnChangeModeActionListener(EnumMapMode.REMOVE));
+		tools[3].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/erase-line.png")), 24, 24));
 
 		tools[4] = new JButton("Point");
 		tools[4].addActionListener(new BtnChangeModeActionListener(EnumMapMode.POINT));
+		tools[4].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/heart-plus.png")), 24, 24));
 
 		tools[5] = new JButton("Line");
 		tools[5].addActionListener(new BtnChangeModeActionListener(EnumMapMode.LINE));
+		tools[5].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/ruler.png")), 24, 24));
 
 		tools[6] = new JButton("Rectangle");
 		tools[6].addActionListener(new BtnChangeModeActionListener(EnumMapMode.RECTANGLE));
+		tools[6].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/rectangle.png")), 24, 24));
 
 		tools[7] = new JButton("Caption");
 		tools[7].addActionListener(new BtnChangeModeActionListener(EnumMapMode.CAPTION));
-		// TODO
-		//tools[0].setIcon(new ImageIcon(PanelAccount.class.getResource("/presentation/flags/polish.png")));
+		tools[7].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/speech-bubble.png")), 24, 24));
 
 		setLayout(new BorderLayout(0, 0));
 		
@@ -91,10 +94,10 @@ public class PanelMap extends MainPanel {
 
 		// Images and cursors
 		toolkit = Toolkit.getDefaultToolkit();
-		imgCursorLine = toolkit.getImage(getClass().getClassLoader().getResource("presentation/resources/line.png"));
+		imgCursorLine = toolkit.getImage(getClass().getClassLoader().getResource("presentation/resources/ruler.png"));
 		imgCursorRectangle = toolkit.getImage(getClass().getClassLoader().getResource("presentation/resources/rectangle.png"));
-		imgCursorCaption = toolkit.getImage(getClass().getClassLoader().getResource("presentation/resources/caption.png"));
-		imgCursorRemove = toolkit.getImage(getClass().getClassLoader().getResource("presentation/resources/remove.png"));
+		imgCursorCaption = toolkit.getImage(getClass().getClassLoader().getResource("presentation/resources/speech-bubble.png"));
+		imgCursorRemove = toolkit.getImage(getClass().getClassLoader().getResource("presentation/resources/erase-line.png"));
 
 		cursorPoint = Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR);
 		cursorLine = toolkit.createCustomCursor(imgCursorLine, new Point(0,0), "CURSOR_LINE");
