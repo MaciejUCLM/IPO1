@@ -4,6 +4,8 @@ import java.util.Locale;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+
 import java.awt.BorderLayout;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
@@ -145,16 +147,22 @@ public class PanelAccomodation extends MainPanel {
 		public void actionPerformed(ActionEvent arg0) {
 			DefaultMutableTreeNode parentNode = null;
 			TreePath parentPath = tree.getSelectionPath();
-
-			if (parentPath != null) {
-				parentNode = (DefaultMutableTreeNode) (parentPath.getLastPathComponent());
-				if (parentNode != (DefaultMutableTreeNode) (tree.getModel().getRoot()))
-					((DefaultTreeModel) tree.getModel()).removeNodeFromParent(parentNode);
-				else
-					getMain().log("ERROR: trying to remove root node");
-			}
-			else
+			if (parentPath == null) {
 				getMain().log("Cannot delete category. Please select a node!");
+				return;
+			}
+
+			int v = JOptionPane.showConfirmDialog(getMain().getFrame(),
+					"Are you sure you want to remove "+parentPath.getLastPathComponent().toString()+" category and all its reservations?",
+					"Delete category", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+			if (v == JOptionPane.YES_OPTION) {
+					parentNode = (DefaultMutableTreeNode) (parentPath.getLastPathComponent());
+					if (parentNode != (DefaultMutableTreeNode) (tree.getModel().getRoot()))
+						((DefaultTreeModel) tree.getModel()).removeNodeFromParent(parentNode);
+					else
+						getMain().log("ERROR: trying to remove root node");
+			}
 		}
 	}
 }

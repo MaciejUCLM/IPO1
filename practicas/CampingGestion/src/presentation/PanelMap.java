@@ -26,7 +26,6 @@ import javax.swing.JTextField;
 
 public class PanelMap extends MainPanel {
 
-	private JFrame frame;
 	private SketchArea sketchMap;
 	
 	// Sketch fields
@@ -127,16 +126,10 @@ public class PanelMap extends MainPanel {
 	public void onLocaleChange(Locale rb) {
 		// TODO Auto-generated method stub
 	}
-	
-	private JFrame getFrame() {
-		if (frame == null)
-			frame = IAppWindow.getController().getWindow(EnumWindows.MAIN).getFrame();
-		return frame;
-	}
 
 	private class BtnClearActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			int v = JOptionPane.showConfirmDialog(getFrame(), "Are you sure you want to remove all map markings?", "Clear route", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+			int v = JOptionPane.showConfirmDialog(getMain().getFrame(), "Are you sure you want to remove all map markings?", "Clear route", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 			if (v == JOptionPane.YES_OPTION) {
 				sketchMap.clear();
 				sketchMap.repaint();
@@ -149,7 +142,7 @@ public class PanelMap extends MainPanel {
 			// TODO load map from last route selected on PanelRoutes
 			// TODO confirm reject unsaved changes
 			JFileChooser fc = new JFileChooser();
-			int valor = fc.showOpenDialog(getFrame());
+			int valor = fc.showOpenDialog(getMain().getFrame());
 
 			if (valor == JFileChooser.APPROVE_OPTION) {
 				File file = fc.getSelectedFile();
@@ -196,7 +189,7 @@ public class PanelMap extends MainPanel {
 			default:
 				c = cursorDefault;
 			}
-			getFrame().setCursor(c);
+			getMain().getFrame().setCursor(c);
 		}
 	}
 
@@ -206,7 +199,7 @@ public class PanelMap extends MainPanel {
 			if (e.getButton() == MouseEvent.BUTTON3) {
 				// right mouse button exits tool
 				mode = EnumMapMode.NONE;
-				getFrame().setCursor(cursorDefault);
+				getMain().getFrame().setCursor(cursorDefault);
 				return;
 			}
 			x = e.getX();
