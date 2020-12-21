@@ -19,6 +19,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.event.TreeSelectionEvent;
+import java.awt.Dimension;
 
 public class PanelAccomodation extends MainPanel {
 
@@ -69,6 +70,7 @@ public class PanelAccomodation extends MainPanel {
 		);
 		
 		tree = new JTree();
+		tree.setMinimumSize(new Dimension(150, 0));
 		tree.addTreeSelectionListener(new TreeTreeSelectionListener());
 		tree.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		tree.setEditable(true);
