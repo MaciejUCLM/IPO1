@@ -12,10 +12,10 @@ import java.awt.Font;
 
 public class PanelAccount extends MainPanel {
 	
-	private static JButton[] tools;
 	private JLabel lblLogin;
 	private JLabel lblPhoto;
 	private JLabel lblLastAccess;
+	private JLabel lblName;
 
 	/**
 	 * Create the panel.
@@ -33,14 +33,14 @@ public class PanelAccount extends MainPanel {
 		gridBagLayout.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		lblPhoto = new JLabel("FOTO");
+		lblPhoto = new JLabel("");
 		GridBagConstraints gbc_lblPhoto = new GridBagConstraints();
 		gbc_lblPhoto.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPhoto.gridx = 0;
 		gbc_lblPhoto.gridy = 0;
 		add(lblPhoto, gbc_lblPhoto);
 		
-		JLabel lblName = new JLabel("Name Surname");
+		lblName = new JLabel("Name Surname");
 		lblName.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GridBagConstraints gbc_lblName = new GridBagConstraints();
 		gbc_lblName.insets = new Insets(0, 0, 5, 0);
@@ -56,7 +56,7 @@ public class PanelAccount extends MainPanel {
 		gbc_lblLogin.gridy = 1;
 		add(lblLogin, gbc_lblLogin);
 		
-		lblLastAccess = new JLabel("Last access:");
+		lblLastAccess = new JLabel("Last access time");
 		GridBagConstraints gbc_lblLastAccess = new GridBagConstraints();
 		gbc_lblLastAccess.insets = new Insets(0, 0, 5, 0);
 		gbc_lblLastAccess.gridx = 1;
@@ -85,13 +85,15 @@ public class PanelAccount extends MainPanel {
 	}
 
 	@Override
-	public JButton[] getToolBarButtons() {
-		return tools;
-	}
-
-	@Override
 	public void onLocaleChange(Locale rb) {
 		// TODO Auto-generated method stub
+	}
+	
+	public void updateUser(User user) {
+		lblLastAccess.setText("Last access: " + user.getAccessTime().toString());
+		lblLogin.setText(user.getLogin());
+		lblPhoto.setIcon(user.getAvatar());
+		lblName.setText(user.getName());
 	}
 
 }

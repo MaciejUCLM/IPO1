@@ -9,8 +9,6 @@ import javax.swing.JScrollPane;
 
 public class PanelManager extends MainPanel {
 
-	private static JButton[] tools;
-
 	/**
 	 * Create the panel.
 	 */
@@ -28,11 +26,6 @@ public class PanelManager extends MainPanel {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		add(scrollPane, BorderLayout.CENTER);
-	}
-
-	@Override
-	public JButton[] getToolBarButtons() {
-		return tools;
 	}
 
 	@Override

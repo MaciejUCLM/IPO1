@@ -27,7 +27,6 @@ import javax.swing.JTextField;
 public class PanelMap extends MainPanel {
 
 	private JFrame frame;
-	private static JButton[] tools;
 	private SketchArea sketchMap;
 	
 	// Sketch fields
@@ -108,11 +107,20 @@ public class PanelMap extends MainPanel {
 		cursorCaption = toolkit.createCustomCursor(imgCursorCaption, new Point(0,0), "CURSOR_CAPTION");
 		cursorRemove = toolkit.createCustomCursor(imgCursorRemove, new Point(0,0), "CURSOR_REMOVE");
 		cursorDefault = Cursor.getDefaultCursor();
-	}
 
-	@Override
-	public JButton[] getToolBarButtons() {
-		return tools;
+		txtCaption.setBounds(0, 0, 200,30);
+		txtCaption.setVisible(false);
+		txtCaption.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg) {
+				if(!txtCaption.getText().equals(""))
+					sketchMap.addGraphicObject(new GraphicText(x, y, txtCaption.getText(), Color.RED));
+
+				txtCaption.setText("");
+				txtCaption.setVisible(false);
+				sketchMap.repaint();
+			}
+		});
+		sketchMap.add(txtCaption);
 	}
 
 	@Override
@@ -220,17 +228,6 @@ public class PanelMap extends MainPanel {
 					txtCaption.setBounds(x, y, 200,30);
 					txtCaption.setVisible(true);
 					txtCaption.requestFocus();
-					txtCaption.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent arg) {
-							if(!txtCaption.getText().equals(""))
-								sketchMap.addGraphicObject(new GraphicText(x, y, txtCaption.getText(), Color.RED));
-
-							txtCaption.setText("");
-							txtCaption.setVisible(false);
-							sketchMap.repaint();
-						}
-					});
-					sketchMap.add(txtCaption);
 					break;
 				case REMOVE:
 					sketchMap.erase(x, y);

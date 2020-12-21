@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.BorderLayout;
 import javax.swing.JSplitPane;
+import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.JPanel;
 import javax.swing.tree.DefaultTreeModel;
@@ -21,9 +22,9 @@ import javax.swing.event.TreeSelectionEvent;
 
 public class PanelAccomodation extends MainPanel {
 
-	private static IAppWindow main;
-	private static JButton[] tools;
 	private JTree tree;
+
+	private JTextField txtNode = new JTextField();
 
 	/**
 	 * Create the panel.
@@ -41,6 +42,7 @@ public class PanelAccomodation extends MainPanel {
 		tools[2].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/delete-bin.png")), toolBarImageSize, toolBarImageSize));
 		
 		tools[3] = new JButton("Delete category");
+		tools[3].addActionListener(new DeleteNodeActionListener());
 		tools[3].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/close-tab.png")), toolBarImageSize, toolBarImageSize));
 
 		setLayout(new BorderLayout(0, 0));
@@ -78,11 +80,19 @@ public class PanelAccomodation extends MainPanel {
 		JPanel panel = new JPanel();
 		splitPane.setRightComponent(panel);
 		panel.setLayout(new BorderLayout(0, 0));
-	}
 
-	@Override
-	public JButton[] getToolBarButtons() {
-		return tools;
+		txtNode.setBounds(0, 0, 200,30);
+		txtNode.setVisible(false);
+		txtNode.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg) {
+				if(!txtNode.getText().equals(""))
+					addObject(txtNode.getText());
+
+				txtNode.setText("");
+				txtNode.setVisible(false);
+			}
+		});
+		tree.add(txtNode);
 	}
 
 	@Override
@@ -92,9 +102,7 @@ public class PanelAccomodation extends MainPanel {
 
 	private class TreeTreeSelectionListener implements TreeSelectionListener {
 		public void valueChanged(TreeSelectionEvent arg0) {
-			if (main == null)
-				main = IAppWindow.getController().getWindow(EnumWindows.MAIN);
-			main.log("Selected node: " + arg0.getPath());
+			getMain().log("Selected node: " + arg0.getPath());
 		}
 	}
 
@@ -125,7 +133,26 @@ public class PanelAccomodation extends MainPanel {
 
 	private class NewNodeActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			addObject("Test Object");
+			txtNode.setBounds(0, 0, 200,30);
+			txtNode.setVisible(true);
+			txtNode.requestFocus();
+		}
+	}
+
+	private class DeleteNodeActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			DefaultMutableTreeNode parentNode = null;
+			TreePath parentPath = tree.getSelectionPath();
+
+			if (parentPath != null) {
+				parentNode = (DefaultMutableTreeNode) (parentPath.getLastPathComponent());
+				if (parentNode != (DefaultMutableTreeNode) (tree.getModel().getRoot()))
+					((DefaultTreeModel) tree.getModel()).removeNodeFromParent(parentNode);
+				else
+					getMain().log("ERROR: trying to remove root node");
+			}
+			else
+				getMain().log("Cannot delete category. Please select a node!");
 		}
 	}
 }
