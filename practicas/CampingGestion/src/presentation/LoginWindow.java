@@ -35,6 +35,8 @@ public class LoginWindow implements IAppWindow {
 	private JButton btnLogin;
 	private JLabel lblSources;
 	private JLabel lblMessage;
+	
+	private User user = new User("Elvis Presley", new ImageIcon(LoginWindow.class.getResource("/presentation/resources/name-tag.png")));
 
 	/**
 	 * Launch the application.
@@ -88,7 +90,7 @@ public class LoginWindow implements IAppWindow {
 		
 		textUser = new JTextField();
 		textUser.addFocusListener(new TextInputFocusListener());
-		textUser.setText("JJ");
+		textUser.setText(user.getLogin());
 		textUser.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textUser.setBounds(120, 162, 270, 22);
 		frmLogin.getContentPane().add(textUser);
@@ -96,7 +98,7 @@ public class LoginWindow implements IAppWindow {
 		
 		passwordField = new JPasswordField();
 		passwordField.addFocusListener(new TextInputFocusListener());
-		passwordField.setText("1234");
+		passwordField.setText(user.getPassword());
 		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		passwordField.setColumns(10);
 		passwordField.setBounds(120, 215, 270, 22);
@@ -106,14 +108,14 @@ public class LoginWindow implements IAppWindow {
 		btnLogin.setIcon(IAppWindow.resizeImage(new ImageIcon(LoginWindow.class.getResource("/presentation/resources/enter.png")), 8, 8));
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (Arrays.equals(passwordField.getPassword(), "1234".toCharArray()) && textUser.getText().equals("JJ")) {
+				if (Arrays.equals(passwordField.getPassword(), user.getPassword().toCharArray()) && textUser.getText().equals(user.getLogin())) {
 					log("Login succesful");
 					frmLogin.getContentPane().setBackground(bgSucess);
-					IAppWindow.getController().openWindow(EnumWindows.MAIN);
+					((MainWindow) IAppWindow.getController().openWindow(EnumWindows.MAIN)).setUser(user);
 					frmLogin.dispose();
 				}
 				else {
-					log("Incorrect login or password");
+					log("Incorrect login or password. Try again");
 					frmLogin.getContentPane().setBackground(bgError);
 				}
 			}
@@ -135,7 +137,7 @@ public class LoginWindow implements IAppWindow {
 		lblLogo.setBounds(10, 25, 494, 50);
 		frmLogin.getContentPane().add(lblLogo);
 		
-		lblSources = new JLabel("Icons source: icons8.com");
+		lblSources = new JLabel("Icons provided by icons8.com");
 		lblSources.setForeground(new Color(255, 255, 255));
 		lblSources.setBounds(10, 346, 245, 14);
 		frmLogin.getContentPane().add(lblSources);

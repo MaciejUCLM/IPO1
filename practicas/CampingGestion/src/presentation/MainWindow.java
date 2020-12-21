@@ -16,6 +16,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
@@ -35,6 +38,9 @@ public class MainWindow implements IAppWindow {
 	private JToolBar toolBar;
 	private JLabel lblStatus;
 	private JPanel pnlBars;
+	private JMenuItem mntmExit;
+	
+	private User user;
 
 	/**
 	 * Create the application.
@@ -70,6 +76,14 @@ public class MainWindow implements IAppWindow {
 		JMenuItem mntmLogout = new JMenuItem("Logout");
 		mntmLogout.addActionListener(new LogoutActionListener());
 		mnFile.add(mntmLogout);
+		
+		mntmExit = new JMenuItem("Exit");
+		mntmExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg) {
+				System.exit(0);
+			}
+		});
+		mnFile.add(mntmExit);
 		
 		JMenu mnHelp = new JMenu("Help");
 		mnHelp.addMouseListener(new MnHelpMouseListener());
@@ -135,6 +149,15 @@ public class MainWindow implements IAppWindow {
 	@Override
 	public void log(String msg) {
 		lblStatus.setText(msg);
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+		((PanelAccount) pnlAccount).updateUser(this.user);
 	}
 
 	private class TabbedPaneChangeListener implements ChangeListener {

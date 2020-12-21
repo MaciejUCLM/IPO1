@@ -3,6 +3,7 @@ package presentation;
 import java.util.Locale;
 
 import javax.swing.JFrame;
+import java.awt.Toolkit;
 
 public class HelpWindow implements IAppWindow {
 
@@ -20,6 +21,7 @@ public class HelpWindow implements IAppWindow {
 	 */
 	private void initialize() {
 		frmHelpOfCamping = new JFrame();
+		frmHelpOfCamping.setIconImage(Toolkit.getDefaultToolkit().getImage(HelpWindow.class.getResource("/presentation/resources/help.png")));
 		frmHelpOfCamping.setTitle("Help Camping Manager");
 		frmHelpOfCamping.setBounds(100, 100, 450, 300);
 		frmHelpOfCamping.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
