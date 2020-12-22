@@ -12,12 +12,12 @@ import javax.swing.JFileChooser;
 import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 
-public class FotoCellEditor extends AbstractCellEditor implements TableCellEditor {
+public class PhotoCellEditor extends AbstractCellEditor implements TableCellEditor {
 
 	private JButton button = new JButton();
 	ImageIcon photoCell;
 
-	public FotoCellEditor() {
+	public PhotoCellEditor() {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed (ActionEvent actionEvent) {
 				JFileChooser fcOpen = new JFileChooser();

@@ -4,10 +4,20 @@ import java.util.Vector;
 
 import javax.swing.table.AbstractTableModel;
 
-public class EmployeesTableModel extends AbstractTableModel {
+public class ManagerTableModel extends AbstractTableModel {
+	
+	public static ManagerTableModel employeesTableModel() {
+		return new ManagerTableModel(new String[] {"Name", "Photo", "Phone", "e-mail", "Languages", "Temporary"});
+	}
 
-	private String[] columnNames = {"Name", "Photo", "Phone", "e-mail", "Languages", "Temporary"};
-	private Vector<Object[]> data = new Vector<>();
+	protected String[] columnNames;
+	protected Vector<Object[]> data;
+	
+	public ManagerTableModel(String[] columns) {
+		super();
+		this.data = new Vector<>();
+		this.columnNames = columns;
+	}
 
 	@Override
 	public int getColumnCount() {

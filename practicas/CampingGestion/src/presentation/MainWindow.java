@@ -127,17 +127,19 @@ public class MainWindow implements IAppWindow {
 				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/calendar.png")), tabImageSize, tabImageSize),
 				pnlAccomodation, null);
 		
-		pnlActivities = new PanelManager();
+		Object[] template = {"Name Surname", new ImageIcon(getClass().getClassLoader().getResource("presentation/resources/name-tag.png")), "-", "@", "-", false};
+		pnlActivities = new PanelManager(ManagerTableModel.employeesTableModel(), template);
 		tabbedPane.addTab("Activities",
 				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/clock.png")), tabImageSize, tabImageSize),
 				pnlActivities, null);
 		
-		pnlEmployees = new PanelManager();
+		pnlEmployees = new PanelManager(ManagerTableModel.employeesTableModel(), template);
 		tabbedPane.addTab("Employees",
 				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/search-client.png")), tabImageSize, tabImageSize),
 				pnlEmployees, null);
+		((PanelManager) pnlEmployees).getTable().getColumnModel().getColumn(1).setCellEditor(new PhotoCellEditor());
 		
-		pnlRoutes = new PanelManager();
+		pnlRoutes = new PanelManager(ManagerTableModel.employeesTableModel(), template);
 		tabbedPane.addTab("Routes",
 				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/anchor-nodes.png")), tabImageSize, tabImageSize),
 				pnlRoutes, null);
