@@ -1,6 +1,7 @@
 package presentation;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
@@ -18,14 +19,14 @@ public class ManagerTableModel extends AbstractTableModel {
 	public static ManagerTableModel routesTableModel() {
 		return new ManagerTableModel(
 				new String[] {"Route", "Date", "Start Time", "Finish Time", "Capacity", "Difficulty", "Description", "Monitor", "Map"},
-				new Object[] {"title", new Date(), 0, 0, 1, 1, "none", "monitor", "map"}
+				new Object[] {"title", LocalDate.now(), LocalTime.of(1, 0), LocalTime.of(2, 0), 1, 1, "none", "monitor", "map"}
 				);
 	}
 
 	public static ManagerTableModel activitiesTableModel() {
 		return new ManagerTableModel(
 				new String[] {"Activity", "Time", "Capacity", "Location", "Children", "Description", "Price"},
-				new Object[] {"title", 0, 1, "-", false, "none", 0.0f}
+				new Object[] {"title", LocalTime.of(0, 0), 1, "-", false, "none", 0.0f}
 				);
 	}
 
