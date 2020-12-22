@@ -15,12 +15,15 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.event.ChangeListener;
+import javax.swing.text.MaskFormatter;
 import javax.swing.event.ChangeEvent;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
+
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBoxMenuItem;
 
@@ -127,19 +130,26 @@ public class MainWindow implements IAppWindow {
 				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/calendar.png")), tabImageSize, tabImageSize),
 				pnlAccomodation, null);
 		
-		Object[] template = {"Name Surname", new ImageIcon(getClass().getClassLoader().getResource("presentation/resources/name-tag.png")), "-", "@", "-", false};
-		pnlActivities = new PanelManager(ManagerTableModel.employeesTableModel(), template);
+		pnlActivities = new PanelManager(ManagerTableModel.activitiesTableModel());
 		tabbedPane.addTab("Activities",
 				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/clock.png")), tabImageSize, tabImageSize),
 				pnlActivities, null);
+		MaskFormatter formatTel;
+		try {
+			formatTel = new MaskFormatter("'(###')' ###' ###' ###");
+			formatTel.setPlaceholderCharacter('*');
+			//txtTelefono = new JFormattedTextField(formatTel);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		
-		pnlEmployees = new PanelManager(ManagerTableModel.employeesTableModel(), template);
+		pnlEmployees = new PanelManager(ManagerTableModel.employeesTableModel());
 		tabbedPane.addTab("Employees",
 				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/search-client.png")), tabImageSize, tabImageSize),
 				pnlEmployees, null);
 		((PanelManager) pnlEmployees).getTable().getColumnModel().getColumn(1).setCellEditor(new PhotoCellEditor());
 		
-		pnlRoutes = new PanelManager(ManagerTableModel.employeesTableModel(), template);
+		pnlRoutes = new PanelManager(ManagerTableModel.routesTableModel());
 		tabbedPane.addTab("Routes",
 				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/anchor-nodes.png")), tabImageSize, tabImageSize),
 				pnlRoutes, null);

@@ -1,22 +1,43 @@
 package presentation;
 
+import java.util.Date;
 import java.util.Vector;
 
+import javax.swing.ImageIcon;
 import javax.swing.table.AbstractTableModel;
 
 public class ManagerTableModel extends AbstractTableModel {
 	
 	public static ManagerTableModel employeesTableModel() {
-		return new ManagerTableModel(new String[] {"Name", "Photo", "Phone", "e-mail", "Languages", "Temporary"});
+		return new ManagerTableModel(
+				new String[] {"Name", "Photo", "Phone", "e-mail", "Languages", "Temporary"},
+				new Object[] {"name surname", new ImageIcon(MainWindow.class.getClassLoader().getResource("presentation/resources/name-tag.png")), "-", "@", "-", false}
+				);
 	}
 
-	protected String[] columnNames;
-	protected Vector<Object[]> data;
+	public static ManagerTableModel routesTableModel() {
+		return new ManagerTableModel(
+				new String[] {"Route", "Date", "Start Time", "Finish Time", "Capacity", "Difficulty", "Description", "Monitor", "Map"},
+				new Object[] {"title", new Date(), 0, 0, 1, 1, "none", "monitor", "map"}
+				);
+	}
+
+	public static ManagerTableModel activitiesTableModel() {
+		return new ManagerTableModel(
+				new String[] {"Activity", "Time", "Capacity", "Location", "Children", "Description", "Price"},
+				new Object[] {"title", 0, 1, "-", false, "none", 0.0f}
+				);
+	}
+
+	private Object[] rowTemplate;
+	private String[] columnNames;
+	private Vector<Object[]> data;
 	
-	public ManagerTableModel(String[] columns) {
+	public ManagerTableModel(String[] columns, Object[] template) {
 		super();
 		this.data = new Vector<>();
 		this.columnNames = columns;
+		this.rowTemplate = template;
 	}
 
 	@Override
@@ -63,6 +84,10 @@ public class ManagerTableModel extends AbstractTableModel {
 
 	public void addRow(Object[] row) {
 		data.add(row);
+	}
+	
+	public Object[] getRowTemplate() {
+		return rowTemplate;
 	}
 
 }

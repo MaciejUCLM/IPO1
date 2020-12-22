@@ -18,14 +18,13 @@ import javax.swing.event.ListSelectionListener;
 
 public class PanelManager extends MainPanel {
 	
-	private Object[] rowTemplate;
 	private ManagerTableModel mdlTable;
 	private JTable table;
 
 	/**
 	 * Create the panel.
 	 */
-	public PanelManager(ManagerTableModel mdl, Object[] rowTemplate) {
+	public PanelManager(ManagerTableModel mdl) {
 		tools = new JButton[2];
 		tools[0] = new JButton("Add");
 		tools[0].addActionListener(new AddRowActionListener());
@@ -36,7 +35,6 @@ public class PanelManager extends MainPanel {
 		tools[1].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/delete-bin.png")), toolBarImageSize, toolBarImageSize));
 		
 		this.mdlTable = mdl;
-		this.rowTemplate = rowTemplate;
 
 		setLayout(new BorderLayout(0, 0));
 		
@@ -75,7 +73,7 @@ public class PanelManager extends MainPanel {
 
 	private class AddRowActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			mdlTable.addRow(rowTemplate.clone());
+			mdlTable.addRow(mdlTable.getRowTemplate().clone());
 			mdlTable.fireTableDataChanged();
 			getMain().log("Added new element");
 		}
@@ -84,7 +82,8 @@ public class PanelManager extends MainPanel {
 	private class DeleteRowActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			int n = table.getSelectedRow();
-			int v = JOptionPane.showConfirmDialog(getMain().getFrame(), "Are you sure you want to remove "+mdlTable.getValueAt(n, 0).toString()+"?", "Delete entry", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+			int v = JOptionPane.showConfirmDialog(getMain().getFrame(), "Are you sure you want to remove "+mdlTable.getValueAt(n, 0).toString()+"?", "Delete entry",
+					JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 			if (v == JOptionPane.YES_OPTION) {
 				if (n != -1)
 					mdlTable.removeRow(table.getSelectedRow());
