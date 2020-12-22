@@ -22,6 +22,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
+import javax.swing.JCheckBoxMenuItem;
 
 public class MainWindow implements IAppWindow {
 	
@@ -41,6 +42,10 @@ public class MainWindow implements IAppWindow {
 	private JMenuItem mntmExit;
 	
 	private User user;
+	private JMenu mnPreferences;
+	private JCheckBoxMenuItem chmntmDarkMode;
+	private JMenuItem mntmChangeName;
+	private JMenuItem mntmChangePassword;
 
 	/**
 	 * Create the application.
@@ -85,13 +90,25 @@ public class MainWindow implements IAppWindow {
 		});
 		mnFile.add(mntmExit);
 		
-		JMenu mnHelp = new JMenu("Help");
-		mnHelp.addMouseListener(new MnHelpMouseListener());
-		menuBar.add(mnHelp);
+		mnPreferences = new JMenu("Preferences");
+		menuBar.add(mnPreferences);
+		
+		chmntmDarkMode = new JCheckBoxMenuItem("Dark mode");
+		mnPreferences.add(chmntmDarkMode);
+		
+		mntmChangeName = new JMenuItem("Change name");
+		mnPreferences.add(mntmChangeName);
+		
+		mntmChangePassword = new JMenuItem("Change password");
+		mnPreferences.add(mntmChangePassword);
 		
 		JMenu mnAbout = new JMenu("About");
 		mnAbout.addMouseListener(new MnAboutMouseListener());
 		menuBar.add(mnAbout);
+		
+		JMenu mnHelp = new JMenu("Help");
+		mnHelp.addMouseListener(new MnHelpMouseListener());
+		menuBar.add(mnHelp);
 		
 		toolBar = new JToolBar();
 		pnlBars.add(toolBar, BorderLayout.CENTER);
