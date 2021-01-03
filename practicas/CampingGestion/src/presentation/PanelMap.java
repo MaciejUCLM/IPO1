@@ -4,8 +4,6 @@ import java.util.Locale;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import java.awt.BorderLayout;
@@ -19,7 +17,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.io.File;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -139,17 +136,24 @@ public class PanelMap extends MainPanel {
 
 	private class BtnLoadActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			// TODO load map from last route selected on PanelRoutes
-			// TODO confirm reject unsaved changes
-			JFileChooser fc = new JFileChooser();
-			int valor = fc.showOpenDialog(getMain().getFrame());
-
-			if (valor == JFileChooser.APPROVE_OPTION) {
-				File file = fc.getSelectedFile();
-				img = new ImageIcon(file.getAbsolutePath());
-				sketchMap.clear();
-				sketchMap.setIcon(img);
+			if (img != null) {
+				int v = JOptionPane.showConfirmDialog(getMain().getFrame(), "Are you sure you want to load another map? Unsaved changes will be lost!", "Reload map", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+				if (v != JOptionPane.YES_OPTION)
+					return;
 			}
+			
+			Object[] row = ((MainWindow) getMain()).getSelectedRoute();
+			if (row == null) {
+				JOptionPane.showConfirmDialog(getMain().getFrame(), "No route selected!", "Load map error", JOptionPane.CLOSED_OPTION, JOptionPane.ERROR_MESSAGE);
+				getMain().log("ERROR: failed to load map, no route selected");
+				return;
+			}
+
+			img = (ImageIcon)(row[8]);
+			sketchMap.clear();
+			sketchMap.setIcon(img);
+			sketchMap.repaint();
+			getMain().log("Loaded route map");
 		}
 	}
 

@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 public class SketchArea extends JLabel {
 
 	private ArrayList<GraphicObject> graphicObjects = new ArrayList<GraphicObject>();
-	private double eraseThreshold = 15.0;
+	private double eraseThreshold = 25.0;
 
 	public SketchArea() {
 		super("");

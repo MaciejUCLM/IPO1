@@ -20,6 +20,7 @@ public class PanelManager extends MainPanel {
 	
 	private ManagerTableModel mdlTable;
 	private JTable table;
+	private int selectedRow = -1;
 
 	/**
 	 * Create the panel.
@@ -51,10 +52,9 @@ public class PanelManager extends MainPanel {
 			public void valueChanged(ListSelectionEvent e) {
 				ListSelectionModel lsm = (ListSelectionModel) e.getSource();
 				if (!lsm.isSelectionEmpty()) {
-					int n = table.getSelectedRow();
-					if (n != -1)
-					{
-						String contenido = mdlTable.getValueAt(n, 0).toString();
+					selectedRow = table.getSelectedRow();
+					if (selectedRow != -1) {
+						String contenido = mdlTable.getValueAt(selectedRow, 0).toString();
 						getMain().log("Selected: " + contenido);
 					}
 				}
@@ -67,6 +67,23 @@ public class PanelManager extends MainPanel {
 		// TODO Auto-generated method stub
 	}
 	
+	public Object[] getRow(int row) {
+		Object[] data = mdlTable.getRowTemplate().clone();
+		for (int i = 0; i < data.length; i++)
+			data[i] = mdlTable.getValueAt(row, i);
+		return data;
+	}
+	
+	public int getLength() {
+		return mdlTable.getRowCount();
+	}
+	
+	public Object[] getSelectedRow() {
+		if (selectedRow < 0)
+			return null;
+		return getRow(selectedRow);
+	}
+	
 	public JTable getTable() {
 		return table;
 	}
@@ -76,12 +93,18 @@ public class PanelManager extends MainPanel {
 			mdlTable.addRow(mdlTable.getRowTemplate().clone());
 			mdlTable.fireTableDataChanged();
 			getMain().log("Added new element");
+			((MainWindow) getMain()).updateCells();
 		}
 	}
 
 	private class DeleteRowActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			int n = table.getSelectedRow();
+			if (n < 0) {
+				getMain().log("ERROR: no row selected");
+				return;
+			}
+
 			int v = JOptionPane.showConfirmDialog(getMain().getFrame(), "Are you sure you want to remove "+mdlTable.getValueAt(n, 0).toString()+"?", "Delete entry",
 					JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 			if (v == JOptionPane.YES_OPTION) {
@@ -89,6 +112,7 @@ public class PanelManager extends MainPanel {
 					mdlTable.removeRow(table.getSelectedRow());
 				mdlTable.fireTableDataChanged();
 				getMain().log("Deleted element " + n);
+				((MainWindow) getMain()).updateCells();
 			}
 		}
 	}

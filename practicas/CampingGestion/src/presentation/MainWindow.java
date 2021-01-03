@@ -24,8 +24,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
 
+import javax.swing.DefaultCellEditor;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 
 public class MainWindow implements IAppWindow {
 	
@@ -33,10 +37,10 @@ public class MainWindow implements IAppWindow {
 
 	private JFrame frmMain;
 	private MainPanel pnlAccount;
-	private MainPanel pnlActivities;
 	private MainPanel pnlAccomodation;
-	private MainPanel pnlEmployees;
-	private MainPanel pnlRoutes;
+	private PanelManager pnlActivities;
+	private PanelManager pnlEmployees;
+	private PanelManager pnlRoutes;
 	private MainPanel pnlMap;
 	private JTabbedPane tabbedPane;
 	private JToolBar toolBar;
@@ -134,25 +138,31 @@ public class MainWindow implements IAppWindow {
 		tabbedPane.addTab("Activities",
 				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/clock.png")), tabImageSize, tabImageSize),
 				pnlActivities, null);
-		MaskFormatter formatTel;
-		try {
-			formatTel = new MaskFormatter("'(###')' ###' ###' ###");
-			formatTel.setPlaceholderCharacter('*');
-			//txtTelefono = new JFormattedTextField(formatTel);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
 		
 		pnlEmployees = new PanelManager(ManagerTableModel.employeesTableModel());
 		tabbedPane.addTab("Employees",
 				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/search-client.png")), tabImageSize, tabImageSize),
 				pnlEmployees, null);
-		((PanelManager) pnlEmployees).getTable().getColumnModel().getColumn(1).setCellEditor(new PhotoCellEditor());
+
+		pnlEmployees.getTable().getColumnModel().getColumn(1).setCellEditor(new PhotoCellEditor());
+		try {
+			MaskFormatter formatTel;
+			formatTel = new MaskFormatter("'(###')' ###' ###' ###");
+			formatTel.setPlaceholderCharacter('*');
+			pnlEmployees.getTable().getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(new JFormattedTextField(formatTel)));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		
 		pnlRoutes = new PanelManager(ManagerTableModel.routesTableModel());
 		tabbedPane.addTab("Routes",
 				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/anchor-nodes.png")), tabImageSize, tabImageSize),
 				pnlRoutes, null);
+
+		JComboBox<EnumDifficulty> cmbDifficulty = new JComboBox<>();
+		cmbDifficulty.setModel(new DefaultComboBoxModel<>(EnumDifficulty.values()));
+		pnlRoutes.getTable().getColumnModel().getColumn(5).setCellEditor(new DefaultCellEditor(cmbDifficulty));
+		pnlRoutes.getTable().getColumnModel().getColumn(8).setCellEditor(new PhotoCellEditor());
 		
 		pnlMap = new PanelMap();
 		tabbedPane.addTab("Map",
@@ -187,6 +197,26 @@ public class MainWindow implements IAppWindow {
 	public void setUser(User user) {
 		this.user = user;
 		((PanelAccount) pnlAccount).updateUser(this.user);
+
+		Object[] example = ((ManagerTableModel) pnlEmployees.getTable().getModel()).getRowTemplate().clone();
+		example[0] = user.getName();
+		((ManagerTableModel) pnlEmployees.getTable().getModel()).addRow(example);
+		updateCells();
+	}
+	
+	public Object[] getSelectedRoute() {
+		return pnlRoutes.getSelectedRow();
+	}
+	
+	public void updateCells() {
+		String[] employees = new String[pnlEmployees.getLength()];
+
+		for (int i = 0; i < employees.length; i++)
+			employees[i] = (String)(pnlEmployees.getTable().getValueAt(i, 0));
+
+		JComboBox<String> cmbMonitors = new JComboBox<>();
+		cmbMonitors.setModel(new DefaultComboBoxModel<>(employees));
+		pnlRoutes.getTable().getColumnModel().getColumn(7).setCellEditor(new DefaultCellEditor(cmbMonitors));
 	}
 
 	private class TabbedPaneChangeListener implements ChangeListener {
