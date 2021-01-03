@@ -12,7 +12,7 @@ public class ManagerTableModel extends AbstractTableModel {
 	public static ManagerTableModel employeesTableModel() {
 		return new ManagerTableModel(
 				new String[] {"Name", "Photo", "Phone", "e-mail", "Languages", "Temporary"},
-				new Object[] {"name surname", new ImageIcon(MainWindow.class.getClassLoader().getResource("presentation/resources/name-tag.png")), "", "@", "", false}
+				new Object[] {"name", new ImageIcon(MainWindow.class.getClassLoader().getResource("presentation/resources/name-tag.png")), "", "@", "", false}
 				);
 	}
 
