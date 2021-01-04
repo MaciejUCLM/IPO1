@@ -21,13 +21,13 @@ public class PanelAccount extends MainPanel {
 
 	private JPanel panel;
 	private JPanel panel_1;
-	private JLabel lblPhoto;
 	private JPanel panel_2;
-	private JLabel lblName;
-	private JPanel panel_3;
-	private JLabel lblLastAccess;
-	private JLabel lblLogin;
 	private JButton btnChangeAvatar;
+	private JLabel lblPhoto;
+	private JLabel lblLastAccess;
+	private JPanel panel_3;
+	private JLabel lblName;
+	private JLabel lblLogin;
 
 	/**
 	 * Create the panel.
@@ -43,42 +43,39 @@ public class PanelAccount extends MainPanel {
 		
 		panel = new JPanel();
 		add(panel);
-		panel.setLayout(new BorderLayout(0, 0));
+		panel.setLayout(new BorderLayout(20, 20));
 		
 		panel_1 = new JPanel();
-		FlowLayout flowLayout_1 = (FlowLayout) panel_1.getLayout();
-		flowLayout_1.setVgap(15);
-		flowLayout_1.setHgap(15);
-		panel.add(panel_1, BorderLayout.NORTH);
+		panel.add(panel_1, BorderLayout.WEST);
+		
+		btnChangeAvatar = new JButton("Change Avatar");
+		btnChangeAvatar.addActionListener(new BtnChangeAvatarActionListener());
+		panel_1.setLayout(new BorderLayout(0, 0));
+		panel_1.add(btnChangeAvatar, BorderLayout.SOUTH);
 		
 		lblPhoto = new JLabel("");
 		lblPhoto.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_1.add(lblPhoto);
 		
-		btnChangeAvatar = new JButton("Change Avatar");
-		btnChangeAvatar.addActionListener(new BtnChangeAvatarActionListener());
-		panel_1.add(btnChangeAvatar);
-		
 		panel_2 = new JPanel();
-		FlowLayout flowLayout_2 = (FlowLayout) panel_2.getLayout();
-		flowLayout_2.setHgap(15);
 		panel.add(panel_2, BorderLayout.CENTER);
+		panel_2.setLayout(new BorderLayout(0, 0));
+		
+		lblLastAccess = new JLabel("Last access time");
+		panel_2.add(lblLastAccess, BorderLayout.SOUTH);
+		
+		panel_3 = new JPanel();
+		FlowLayout flowLayout_1 = (FlowLayout) panel_3.getLayout();
+		flowLayout_1.setVgap(15);
+		flowLayout_1.setHgap(15);
+		panel_2.add(panel_3, BorderLayout.CENTER);
 		
 		lblName = new JLabel("Name Surname");
 		lblName.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		panel_2.add(lblName);
+		panel_3.add(lblName);
 		
 		lblLogin = new JLabel("LOGIN");
-		panel_2.add(lblLogin);
-		
-		panel_3 = new JPanel();
-		FlowLayout flowLayout_3 = (FlowLayout) panel_3.getLayout();
-		flowLayout_3.setVgap(15);
-		flowLayout_3.setHgap(15);
-		panel.add(panel_3, BorderLayout.SOUTH);
-		
-		lblLastAccess = new JLabel("Last access time");
-		panel_3.add(lblLastAccess);
+		panel_3.add(lblLogin);
 	}
 
 	@Override
