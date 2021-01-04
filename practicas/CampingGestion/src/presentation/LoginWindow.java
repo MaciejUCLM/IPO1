@@ -105,7 +105,7 @@ public class LoginWindow implements IAppWindow {
 		frmLogin.getContentPane().add(passwordField);
 		
 		btnLogin = new JButton("Log in");
-		btnLogin.setIcon(IAppWindow.resizeImage(new ImageIcon(LoginWindow.class.getResource("/presentation/resources/enter.png")), 8, 8));
+		btnLogin.setIcon(IAppWindow.resizeImage(new ImageIcon(LoginWindow.class.getResource("/presentation/resources/enter.png")), 24, 24));
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (Arrays.equals(passwordField.getPassword(), user.getPassword().toCharArray()) && textUser.getText().equals(user.getLogin())) {

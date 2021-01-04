@@ -7,7 +7,7 @@ public abstract class MainPanel extends JPanel implements IMainPanel {
 
 	protected JButton[] tools;
 
-	protected static final int toolBarImageSize = 16;
+	protected static final int toolBarImageSize = 24;
 	
 	private static IAppWindow main;
 	protected static IAppWindow getMain() {

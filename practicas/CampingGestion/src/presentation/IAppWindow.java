@@ -14,7 +14,7 @@ public interface IAppWindow {
 
 	static ImageIcon resizeImage(ImageIcon src, int w, int h){
 		Image resizedImg;
-		resizedImg = src.getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH);
+		resizedImg = src.getImage().getScaledInstance(w, h, Image.SCALE_SMOOTH);
 	    return new ImageIcon(resizedImg);
 	}
 
