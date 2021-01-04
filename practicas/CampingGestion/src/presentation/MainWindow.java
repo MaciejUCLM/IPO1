@@ -24,6 +24,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
@@ -139,6 +140,7 @@ public class MainWindow implements IAppWindow {
 		tabbedPane.addTab("Activities",
 				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/clock.png")), tabImageSize, tabImageSize),
 				pnlActivities, null);
+		pnlActivities.getTable().getColumnModel().getColumn(1).setCellEditor(new LocalDateTimeEditor(DateTimeFormatter.ofPattern("HH:mm")));
 		
 		pnlEmployees = new PanelManager(ManagerTableModel.employeesTableModel());
 		tabbedPane.addTab("Employees",
@@ -162,6 +164,9 @@ public class MainWindow implements IAppWindow {
 
 		JComboBox<EnumDifficulty> cmbDifficulty = new JComboBox<>();
 		cmbDifficulty.setModel(new DefaultComboBoxModel<>(EnumDifficulty.values()));
+		pnlRoutes.getTable().getColumnModel().getColumn(1).setCellEditor(new LocalDateTimeEditor(DateTimeFormatter.ofPattern("YYYY-MM-DD")));
+		pnlRoutes.getTable().getColumnModel().getColumn(2).setCellEditor(new LocalDateTimeEditor(DateTimeFormatter.ofPattern("HH:mm")));
+		pnlRoutes.getTable().getColumnModel().getColumn(3).setCellEditor(new LocalDateTimeEditor(DateTimeFormatter.ofPattern("HH:mm")));
 		pnlRoutes.getTable().getColumnModel().getColumn(5).setCellEditor(new DefaultCellEditor(cmbDifficulty));
 		pnlRoutes.getTable().getColumnModel().getColumn(8).setCellEditor(new PhotoCellEditor());
 		

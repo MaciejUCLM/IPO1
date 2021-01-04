@@ -22,12 +22,16 @@ import java.awt.event.ActionListener;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.event.TreeSelectionEvent;
 import java.awt.Dimension;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JList;
 
 public class PanelAccomodation extends MainPanel {
 
 	private JTree tree;
 
 	private JTextField txtNode = new JTextField();
+	private JTable table;
 
 	/**
 	 * Create the panel.
@@ -80,10 +84,6 @@ public class PanelAccomodation extends MainPanel {
 		tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);;
 		tree.setCellRenderer(new CampingTreeCellRenderer());
 		splitPane.setLeftComponent(tree);
-		
-		JPanel panel = new JPanel();
-		splitPane.setRightComponent(panel);
-		panel.setLayout(new BorderLayout(0, 0));
 
 		txtNode.setBounds(0, 0, 200,30);
 		txtNode.setVisible(false);
@@ -97,6 +97,21 @@ public class PanelAccomodation extends MainPanel {
 			}
 		});
 		tree.add(txtNode);
+		
+		JSplitPane splitSub = new JSplitPane();
+		splitPane.setRightComponent(splitSub);
+		
+		JScrollPane sAccomodation = new JScrollPane();
+		splitSub.setLeftComponent(sAccomodation);
+		
+		JList list = new JList();
+		sAccomodation.setViewportView(list);
+		
+		JScrollPane sReservations = new JScrollPane();
+		splitSub.setRightComponent(sReservations);
+		
+		table = new JTable();
+		sReservations.setViewportView(table);
 	}
 
 	@Override
