@@ -24,7 +24,12 @@ import javax.swing.event.TreeSelectionEvent;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JList;
+import java.awt.FlowLayout;
+import javax.swing.JLabel;
+import javax.swing.JComboBox;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.JTextArea;
 
 public class PanelAccomodation extends MainPanel {
 
@@ -41,14 +46,14 @@ public class PanelAccomodation extends MainPanel {
 		tools[0] = new JButton("New reservation");
 		tools[0].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/add.png")), toolBarImageSize, toolBarImageSize));
 
-		tools[1] = new JButton("New category");
+		tools[1] = new JButton("New object");
 		tools[1].addActionListener(new NewNodeActionListener());
 		tools[1].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/add-tab.png")), toolBarImageSize, toolBarImageSize));
 
 		tools[2] = new JButton("Delete reservation");
 		tools[2].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/delete-bin.png")), toolBarImageSize, toolBarImageSize));
 		
-		tools[3] = new JButton("Delete category");
+		tools[3] = new JButton("Delete object");
 		tools[3].addActionListener(new DeleteNodeActionListener());
 		tools[3].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/close-tab.png")), toolBarImageSize, toolBarImageSize));
 
@@ -76,7 +81,8 @@ public class PanelAccomodation extends MainPanel {
 		);
 		
 		tree = new JTree();
-		tree.setMinimumSize(new Dimension(150, 0));
+		tree.setMinimumSize(new Dimension(20, 0));
+		tree.setPreferredSize(new Dimension(150, 64));
 		tree.addTreeSelectionListener(new TreeTreeSelectionListener());
 		tree.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		tree.setEditable(true);
@@ -98,20 +104,44 @@ public class PanelAccomodation extends MainPanel {
 		});
 		tree.add(txtNode);
 		
-		JSplitPane splitSub = new JSplitPane();
-		splitPane.setRightComponent(splitSub);
-		
-		JScrollPane sAccomodation = new JScrollPane();
-		splitSub.setLeftComponent(sAccomodation);
-		
-		JList list = new JList();
-		sAccomodation.setViewportView(list);
+		JSplitPane subSplit = new JSplitPane();
+		subSplit.setOrientation(JSplitPane.VERTICAL_SPLIT);
+		splitPane.setRightComponent(subSplit);
 		
 		JScrollPane sReservations = new JScrollPane();
-		splitSub.setRightComponent(sReservations);
+		sReservations.setPreferredSize(new Dimension(2, 230));
+		subSplit.setLeftComponent(sReservations);
 		
 		table = new JTable();
 		sReservations.setViewportView(table);
+		
+		JPanel pnlDetails = new JPanel();
+		subSplit.setRightComponent(pnlDetails);
+		pnlDetails.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		JLabel lblTags = new JLabel("NAMETAGS");
+		pnlDetails.add(lblTags);
+		
+		JLabel lblStatus = new JLabel("Status");
+		pnlDetails.add(lblStatus);
+		
+		JComboBox cmbStatus = new JComboBox();
+		lblStatus.setLabelFor(cmbStatus);
+		pnlDetails.add(cmbStatus);
+		
+		JLabel lblPrice = new JLabel("Price/night");
+		pnlDetails.add(lblPrice);
+		
+		JSpinner spPrice = new JSpinner();
+		spPrice.setModel(new SpinnerNumberModel(0.0f, 0.0f, null, 0.1f));
+		lblPrice.setLabelFor(spPrice);
+		pnlDetails.add(spPrice);
+		
+		JTextArea txtFeatures = new JTextArea();
+		pnlDetails.add(txtFeatures);
+		
+		JScrollPane sGallery = new JScrollPane();
+		pnlDetails.add(sGallery);
 	}
 
 	@Override
@@ -163,13 +193,13 @@ public class PanelAccomodation extends MainPanel {
 			DefaultMutableTreeNode parentNode = null;
 			TreePath parentPath = tree.getSelectionPath();
 			if (parentPath == null) {
-				getMain().log("Cannot delete category. Please select a node!");
+				getMain().log("Cannot delete object. Please select a node!");
 				return;
 			}
 
 			int v = JOptionPane.showConfirmDialog(getMain().getFrame(),
-					"Are you sure you want to remove "+parentPath.getLastPathComponent().toString()+" category and all its reservations?",
-					"Delete category", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+					"Are you sure you want to remove "+parentPath.getLastPathComponent().toString()+" object and all its reservations?",
+					"Delete object", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
 			if (v == JOptionPane.YES_OPTION) {
 					parentNode = (DefaultMutableTreeNode) (parentPath.getLastPathComponent());
