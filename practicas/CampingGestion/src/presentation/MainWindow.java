@@ -3,11 +3,16 @@ package presentation;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 
 import java.awt.BorderLayout;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import javax.swing.JToolBar;
+import javax.swing.SpinnerDateModel;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 import javax.swing.border.LineBorder;
@@ -16,6 +21,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.event.ChangeListener;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.text.MaskFormatter;
 import javax.swing.event.ChangeEvent;
 
@@ -140,7 +147,15 @@ public class MainWindow implements IAppWindow {
 		tabbedPane.addTab("Activities",
 				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/clock.png")), tabImageSize, tabImageSize),
 				pnlActivities, null);
-		pnlActivities.getTable().getColumnModel().getColumn(1).setCellEditor(new LocalDateTimeEditor(DateTimeFormatter.ofPattern("HH:mm")));
+		JSpinner spDate = new JSpinner();
+		spDate.setModel(new SpinnerDateModel(new Date(1609801200000L), null, null, Calendar.MINUTE));
+		pnlActivities.getTable().getColumnModel().getColumn(1).setCellEditor(new SpinnerEditor(spDate));
+		JSpinner spCapacity = new JSpinner();
+		spCapacity.setModel(new SpinnerNumberModel(10, 0, null, 1));
+		pnlActivities.getTable().getColumnModel().getColumn(2).setCellEditor(new SpinnerEditor(spCapacity));
+		JSpinner spPrice = new JSpinner();
+		spPrice.setModel(new SpinnerNumberModel(0.0f, 0.0f, null, 0.1f));
+		pnlActivities.getTable().getColumnModel().getColumn(6).setCellEditor(new SpinnerEditor(spPrice));
 		
 		pnlEmployees = new PanelManager(ManagerTableModel.employeesTableModel());
 		tabbedPane.addTab("Employees",
@@ -164,11 +179,12 @@ public class MainWindow implements IAppWindow {
 
 		JComboBox<EnumDifficulty> cmbDifficulty = new JComboBox<>();
 		cmbDifficulty.setModel(new DefaultComboBoxModel<>(EnumDifficulty.values()));
-		pnlRoutes.getTable().getColumnModel().getColumn(1).setCellEditor(new LocalDateTimeEditor(DateTimeFormatter.ofPattern("YYYY-MM-DD")));
-		pnlRoutes.getTable().getColumnModel().getColumn(2).setCellEditor(new LocalDateTimeEditor(DateTimeFormatter.ofPattern("HH:mm")));
-		pnlRoutes.getTable().getColumnModel().getColumn(3).setCellEditor(new LocalDateTimeEditor(DateTimeFormatter.ofPattern("HH:mm")));
-		pnlRoutes.getTable().getColumnModel().getColumn(5).setCellEditor(new DefaultCellEditor(cmbDifficulty));
-		pnlRoutes.getTable().getColumnModel().getColumn(8).setCellEditor(new PhotoCellEditor());
+		pnlRoutes.getTable().getColumnModel().getColumn(1).setCellEditor(new SpinnerEditor(spDate));
+		pnlRoutes.getTable().getColumnModel().getColumn(1).setCellRenderer(new DateCellRenderer());
+		pnlRoutes.getTable().getColumnModel().getColumn(2).setCellEditor(new SpinnerEditor(spDate));
+		pnlRoutes.getTable().getColumnModel().getColumn(3).setCellEditor(new SpinnerEditor(spCapacity));
+		pnlRoutes.getTable().getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(cmbDifficulty));
+		pnlRoutes.getTable().getColumnModel().getColumn(7).setCellEditor(new PhotoCellEditor());
 		
 		pnlMap = new PanelMap();
 		tabbedPane.addTab("Map",

@@ -54,10 +54,10 @@ public class SpinnerEditor extends DefaultCellEditor {
     
 	// Prepares the spinner component and returns it.
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-        if ( !valueSet ) {
+        if (!valueSet) {
             spinner.setValue(value);
         }
-        SwingUtilities.invokeLater( new Runnable() {
+        SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 textField.requestFocus();
             }
@@ -66,7 +66,7 @@ public class SpinnerEditor extends DefaultCellEditor {
     }
 
     public boolean isCellEditable(EventObject eo) {
-        if ( eo instanceof KeyEvent ) {
+        if (eo instanceof KeyEvent) {
             KeyEvent ke = (KeyEvent)eo;
             textField.setText(String.valueOf(ke.getKeyChar()));
             //textField.select(1,1);
