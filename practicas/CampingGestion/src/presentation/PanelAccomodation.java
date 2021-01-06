@@ -1,5 +1,7 @@
 package presentation;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import javax.swing.ImageIcon;
@@ -10,7 +12,7 @@ import java.awt.BorderLayout;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 import javax.swing.JTree;
-import javax.swing.ListSelectionModel;
+import javax.swing.SpinnerDateModel;
 import javax.swing.JPanel;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
@@ -19,37 +21,39 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.ComponentOrientation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 
 import javax.swing.event.TreeSelectionListener;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+import javax.swing.text.MaskFormatter;
 import javax.swing.event.TreeSelectionEvent;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JTextArea;
-import javax.swing.SpinnerDateModel;
-import java.util.Date;
-import java.util.Calendar;
+import javax.swing.DefaultCellEditor;
+import javax.swing.DefaultComboBoxModel;
 
 public class PanelAccomodation extends MainPanel {
 	
 	private JTree tree;
 
 	private JTextField txtNode = new JTextField();
-	private JTable table;
+	private ManagerTable table;
 
 	/**
 	 * Create the panel.
 	 */
 	public PanelAccomodation() {
+		table = new ManagerTable(new ReservationTableModel());
+
 		tools = new JButton[4];
 		tools[0] = new JButton("New reservation");
+		tools[0].addActionListener(table.new AddRowActionListener());
 		tools[0].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/add.png")), toolBarImageSize, toolBarImageSize));
 
 		tools[1] = new JButton("New object");
@@ -57,6 +61,7 @@ public class PanelAccomodation extends MainPanel {
 		tools[1].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/add-tab.png")), toolBarImageSize, toolBarImageSize));
 
 		tools[2] = new JButton("Delete reservation");
+		tools[2].addActionListener(table.new DeleteRowActionListener());
 		tools[2].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/delete-bin.png")), toolBarImageSize, toolBarImageSize));
 		
 		tools[3] = new JButton("Delete object");
@@ -128,7 +133,8 @@ public class PanelAccomodation extends MainPanel {
 		JLabel lblStatus = new JLabel("Status");
 		pnlDetails.add(lblStatus);
 		
-		JComboBox cmbStatus = new JComboBox();
+		JComboBox<EnumObjectStates> cmbStatus = new JComboBox<>();
+		cmbStatus.setModel(new DefaultComboBoxModel<>(EnumObjectStates.values()));
 		lblStatus.setLabelFor(cmbStatus);
 		pnlDetails.add(cmbStatus);
 		
@@ -146,25 +152,28 @@ public class PanelAccomodation extends MainPanel {
 		JScrollPane sGallery = new JScrollPane();
 		pnlDetails.add(sGallery);
 		
-		table = new JTable();
+		try {
+			MaskFormatter formatTel;
+			formatTel = new MaskFormatter("'(###')' ###' ###' ###");
+			formatTel.setPlaceholderCharacter('*');
+			table.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(new JFormattedTextField(formatTel)));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 
-		table.setRowHeight(40);
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		JSpinner _spDate = new JSpinner();
+		_spDate.setModel(new SpinnerDateModel(new Date(), null, null, Calendar.MINUTE));
+		JSpinner _spCapacity = new JSpinner();
+		_spCapacity.setModel(new SpinnerNumberModel(10, 0, null, 1));
+		JSpinner _spPrice = new JSpinner();
+		_spPrice.setModel(new SpinnerNumberModel(0.0f, 0.0f, null, 0.1f));
 
-		/*this.mdlTable = new ReservationTableModel();
-		table.setModel(this.mdlTable);
-		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e) {
-				ListSelectionModel lsm = (ListSelectionModel) e.getSource();
-				if (!lsm.isSelectionEmpty()) {
-					selectedRow = table.getSelectedRow();
-					if (selectedRow != -1) {
-						String contenido = mdlTable.getValueAt(selectedRow, 0).toString();
-						getMain().log("Selected: " + contenido);
-					}
-				}
-			}
-		});*/
+		table.getColumnModel().getColumn(1).setCellEditor(new SpinnerEditor(_spDate));
+		table.getColumnModel().getColumn(1).setCellRenderer(new DateCellRenderer());
+		table.getColumnModel().getColumn(2).setCellEditor(new SpinnerEditor(_spDate));
+		table.getColumnModel().getColumn(2).setCellRenderer(new DateCellRenderer());
+		table.getColumnModel().getColumn(3).setCellEditor(new SpinnerEditor(_spCapacity));
+		table.getColumnModel().getColumn(6).setCellEditor(new SpinnerEditor(_spPrice));
 
 		sReservations.setViewportView(table);
 	}
@@ -185,7 +194,7 @@ public class PanelAccomodation extends MainPanel {
 	    TreePath parentPath = tree.getSelectionPath();
 
 	    if (parentPath == null) {
-	        //There is no selection. Default to the root node.
+	    	// Default to root node
 	        parentNode = (DefaultMutableTreeNode) (tree.getModel().getRoot());
 	    } else {
 	        parentNode = (DefaultMutableTreeNode) (parentPath.getLastPathComponent());
@@ -198,7 +207,7 @@ public class PanelAccomodation extends MainPanel {
 		DefaultMutableTreeNode childNode = new DefaultMutableTreeNode(child);
 		((DefaultTreeModel) tree.getModel()).insertNodeInto(childNode, parent, parent.getChildCount());
 
-		//Make sure the user can see the lovely new node.
+		// Make sure the user can see the lovely new node.
 		if (shouldBeVisible)
 			tree.scrollPathToVisible(new TreePath(childNode.getPath()));
 

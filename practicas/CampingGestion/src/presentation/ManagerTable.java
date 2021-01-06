@@ -22,7 +22,8 @@ public class ManagerTable extends JTable {
 	private int selectedRow = -1;
 	
 	public ManagerTable(ManagerTableModel mdl) {
-		this.setRowHeight(40);
+		this.setAutoCreateRowSorter(true);
+		this.setRowHeight(60);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		this.mdlTable = mdl;

@@ -21,8 +21,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.event.ChangeListener;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableCellRenderer;
 import javax.swing.text.MaskFormatter;
 import javax.swing.event.ChangeEvent;
 
@@ -31,7 +29,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
-import java.time.format.DateTimeFormatter;
 
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
@@ -128,6 +125,14 @@ public class MainWindow implements IAppWindow {
 		
 		toolBar = new JToolBar();
 		pnlBars.add(toolBar, BorderLayout.CENTER);
+
+		// Spinners for cell editors
+		JSpinner _spDate = new JSpinner();
+		_spDate.setModel(new SpinnerDateModel(new Date(), null, null, Calendar.MINUTE));
+		JSpinner _spCapacity = new JSpinner();
+		_spCapacity.setModel(new SpinnerNumberModel(10, 0, null, 1));
+		JSpinner _spPrice = new JSpinner();
+		_spPrice.setModel(new SpinnerNumberModel(0.0f, 0.0f, null, 0.1f));
 		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.addChangeListener(new TabbedPaneChangeListener());
@@ -147,16 +152,10 @@ public class MainWindow implements IAppWindow {
 		tabbedPane.addTab("Activities",
 				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/clock.png")), tabImageSize, tabImageSize),
 				pnlActivities, null);
-		JSpinner spDate = new JSpinner();
-		spDate.setModel(new SpinnerDateModel(new Date(1609801200000L), null, null, Calendar.MINUTE));
-		pnlActivities.getTable().getColumnModel().getColumn(1).setCellEditor(new SpinnerEditor(spDate));
+		pnlActivities.getTable().getColumnModel().getColumn(1).setCellEditor(new SpinnerEditor(_spDate));
 		pnlActivities.getTable().getColumnModel().getColumn(1).setCellRenderer(new DateCellRenderer());
-		JSpinner spCapacity = new JSpinner();
-		spCapacity.setModel(new SpinnerNumberModel(10, 0, null, 1));
-		pnlActivities.getTable().getColumnModel().getColumn(2).setCellEditor(new SpinnerEditor(spCapacity));
-		JSpinner spPrice = new JSpinner();
-		spPrice.setModel(new SpinnerNumberModel(0.0f, 0.0f, null, 0.1f));
-		pnlActivities.getTable().getColumnModel().getColumn(6).setCellEditor(new SpinnerEditor(spPrice));
+		pnlActivities.getTable().getColumnModel().getColumn(2).setCellEditor(new SpinnerEditor(_spCapacity));
+		pnlActivities.getTable().getColumnModel().getColumn(6).setCellEditor(new SpinnerEditor(_spPrice));
 		
 		pnlEmployees = new PanelManager(ManagerTableModel.employeesTableModel());
 		tabbedPane.addTab("Employees",
@@ -180,11 +179,11 @@ public class MainWindow implements IAppWindow {
 
 		JComboBox<EnumDifficulty> cmbDifficulty = new JComboBox<>();
 		cmbDifficulty.setModel(new DefaultComboBoxModel<>(EnumDifficulty.values()));
-		pnlRoutes.getTable().getColumnModel().getColumn(1).setCellEditor(new SpinnerEditor(spDate));
+		pnlRoutes.getTable().getColumnModel().getColumn(1).setCellEditor(new SpinnerEditor(_spDate));
 		pnlRoutes.getTable().getColumnModel().getColumn(1).setCellRenderer(new DateCellRenderer());
-		pnlRoutes.getTable().getColumnModel().getColumn(2).setCellEditor(new SpinnerEditor(spDate));
+		pnlRoutes.getTable().getColumnModel().getColumn(2).setCellEditor(new SpinnerEditor(_spDate));
 		pnlRoutes.getTable().getColumnModel().getColumn(2).setCellRenderer(new DateCellRenderer());
-		pnlRoutes.getTable().getColumnModel().getColumn(3).setCellEditor(new SpinnerEditor(spCapacity));
+		pnlRoutes.getTable().getColumnModel().getColumn(3).setCellEditor(new SpinnerEditor(_spCapacity));
 		pnlRoutes.getTable().getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(cmbDifficulty));
 		pnlRoutes.getTable().getColumnModel().getColumn(7).setCellEditor(new PhotoCellEditor());
 		
