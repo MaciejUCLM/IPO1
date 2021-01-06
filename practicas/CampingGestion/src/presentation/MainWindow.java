@@ -229,11 +229,11 @@ public class MainWindow implements IAppWindow {
 	}
 	
 	public Object[] getSelectedRoute() {
-		return pnlRoutes.getSelectedRow();
+		return pnlRoutes.getTable().getSelectedData();
 	}
 	
 	public void updateCells() {
-		String[] employees = new String[pnlEmployees.getLength()];
+		String[] employees = new String[pnlEmployees.getTable().getLength()];
 
 		for (int i = 0; i < employees.length; i++)
 			employees[i] = (String)(pnlEmployees.getTable().getValueAt(i, 0));
