@@ -17,7 +17,7 @@ public class ReservationTableModel extends ManagerTableModel {
 		
 		@Override
 		public String toString() {
-			return data.toString();
+			return tag;
 		}
 	}
 	
@@ -35,7 +35,7 @@ public class ReservationTableModel extends ManagerTableModel {
 	@Override
 	public void removeRow(int row) {
 		Object[] elem = getRow(row);
-		Reservation r = Arrays.stream(reservations.toArray(Reservation[]::new)).filter(x -> Arrays.equals(elem, x.data)).findFirst().get();
+		Reservation r = Arrays.stream(reservations.toArray(Reservation[]::new)).filter(x -> elem == x.data).findFirst().get();
 		reservations.remove(r);
 		super.removeRow(row);
 	}
