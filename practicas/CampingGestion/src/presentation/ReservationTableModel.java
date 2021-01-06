@@ -29,21 +29,26 @@ public class ReservationTableModel extends ManagerTableModel {
 				new String[] {"Client", "Start date", "Finish date", "Occupants", "Phone", "e-mail", "Price", "Comments"},
 				new Object[] {"?", new Date(), new Date(), 1, "", "@", 0.0f, ""}
 		);
+		reservations = new Vector<>();
 	}
 
 	@Override
-	public void setValueAt(Object value, int row, int col) {
-		super.setValueAt(value, row, col);
-	}
-	
-	@Override
 	public void removeRow(int row) {
+		Object[] elem = getRow(row);
+		Reservation r = Arrays.stream(reservations.toArray(Reservation[]::new)).filter(x -> Arrays.equals(elem, x.data)).findFirst().get();
+		reservations.remove(r);
 		super.removeRow(row);
 	}
 
 	@Override
 	public void addRow(Object[] row) {
+		reservations.add(new Reservation(row, getCurrentTag()));
 		super.addRow(row);
+	}
+	
+	public void filter() {
+		this.data.clear();
+		Arrays.stream(reservations.toArray(Reservation[]::new)).filter(x -> getCurrentTag().equals(x.tag)).map(x -> x.data).forEach(this.data::add);
 	}
 
 	public String getCurrentTag() {

@@ -49,11 +49,14 @@ public class ManagerTableModel extends AbstractTableModel {
 	public int getRowCount() {
 		return data.size();
 	}
+	
+	public Object[] getRow(int row) {
+		return (Object [])data.elementAt(row);
+	}
 
 	@Override
 	public Object getValueAt(int row, int col) {
-		Object[] rowData = (Object [])data.elementAt(row);
-		return rowData[col];
+		return getRow(row)[col];
 	}
 
 	public String getColumnName(int col) {
