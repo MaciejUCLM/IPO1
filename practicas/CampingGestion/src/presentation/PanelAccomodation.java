@@ -1,8 +1,10 @@
 package presentation;
 
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -97,7 +99,41 @@ public class PanelAccomodation extends MainPanel {
 		tree.addTreeSelectionListener(new TreeTreeSelectionListener());
 		tree.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		tree.setEditable(true);
-		tree.setModel(treeModel);
+		tree.setModel(new DefaultTreeModel(
+			new DefaultMutableTreeNode("Camping") {
+				{
+					DefaultMutableTreeNode node_1;
+					DefaultMutableTreeNode node_2;
+					node_1 = new DefaultMutableTreeNode("Bungalows");
+						node_2 = new DefaultMutableTreeNode("Deluxe");
+							node_2.add(new DefaultMutableTreeNode("A"));
+							node_2.add(new DefaultMutableTreeNode("B"));
+						node_1.add(node_2);
+						node_2 = new DefaultMutableTreeNode("Standard");
+							node_2.add(new DefaultMutableTreeNode("A"));
+							node_2.add(new DefaultMutableTreeNode("B"));
+							node_2.add(new DefaultMutableTreeNode("C"));
+						node_1.add(node_2);
+					add(node_1);
+					node_1 = new DefaultMutableTreeNode("Fields");
+						node_2 = new DefaultMutableTreeNode("Small");
+							node_2.add(new DefaultMutableTreeNode("A"));
+							node_2.add(new DefaultMutableTreeNode("B"));
+						node_1.add(node_2);
+						node_2 = new DefaultMutableTreeNode("Medium");
+							node_2.add(new DefaultMutableTreeNode("A"));
+							node_2.add(new DefaultMutableTreeNode("B"));
+						node_1.add(node_2);
+						node_2 = new DefaultMutableTreeNode("Big");
+							node_2.add(new DefaultMutableTreeNode("A"));
+						node_1.add(node_2);
+						node_2 = new DefaultMutableTreeNode("Caravan");
+							node_2.add(new DefaultMutableTreeNode("A"));
+						node_1.add(node_2);
+					add(node_1);
+				}
+			}
+		));
 		tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);;
 		tree.setCellRenderer(new CampingTreeCellRenderer());
 		splitPane.setLeftComponent(tree);
@@ -120,7 +156,7 @@ public class PanelAccomodation extends MainPanel {
 		splitPane.setRightComponent(subSplit);
 		
 		JScrollPane sReservations = new JScrollPane();
-		sReservations.setPreferredSize(new Dimension(2, 230));
+		sReservations.setPreferredSize(new Dimension(2, 350));
 		subSplit.setLeftComponent(sReservations);
 		
 		JPanel pnlDetails = new JPanel();
@@ -151,6 +187,8 @@ public class PanelAccomodation extends MainPanel {
 		
 		JScrollPane sGallery = new JScrollPane();
 		pnlDetails.add(sGallery);
+		
+		((ReservationTableModel)table.getModel()).setCurrentTags(new String[] {"Camping"});
 		
 		try {
 			MaskFormatter formatTel;
@@ -184,8 +222,13 @@ public class PanelAccomodation extends MainPanel {
 	}
 
 	private class TreeTreeSelectionListener implements TreeSelectionListener {
-		public void valueChanged(TreeSelectionEvent arg0) {
-			getMain().log("Selected node: " + arg0.getPath());
+		public void valueChanged(TreeSelectionEvent t) {
+			table.clearSelection();
+			ReservationTableModel mdl = (ReservationTableModel) table.getModel();
+			String[] tags = Arrays.stream(t.getPath().getPath()).map(x -> x.toString()).toArray(String[]::new);
+			mdl.setCurrentTags(tags);
+			mdl.filter();
+			getMain().log("Selected node: " + Arrays.stream(tags).collect(Collectors.joining(", ")));
 		}
 	}
 
