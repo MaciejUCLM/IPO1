@@ -10,6 +10,7 @@ import java.awt.BorderLayout;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 import javax.swing.JTree;
+import javax.swing.ListSelectionModel;
 import javax.swing.JPanel;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
@@ -20,6 +21,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.event.TreeSelectionListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TreeSelectionEvent;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
@@ -35,7 +38,7 @@ import java.util.Date;
 import java.util.Calendar;
 
 public class PanelAccomodation extends MainPanel {
-
+	
 	private JTree tree;
 
 	private JTextField txtNode = new JTextField();
@@ -115,9 +118,6 @@ public class PanelAccomodation extends MainPanel {
 		sReservations.setPreferredSize(new Dimension(2, 230));
 		subSplit.setLeftComponent(sReservations);
 		
-		table = new JTable();
-		sReservations.setViewportView(table);
-		
 		JPanel pnlDetails = new JPanel();
 		subSplit.setRightComponent(pnlDetails);
 		pnlDetails.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
@@ -145,6 +145,28 @@ public class PanelAccomodation extends MainPanel {
 		
 		JScrollPane sGallery = new JScrollPane();
 		pnlDetails.add(sGallery);
+		
+		table = new JTable();
+
+		table.setRowHeight(40);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+		/*this.mdlTable = new ReservationTableModel();
+		table.setModel(this.mdlTable);
+		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				ListSelectionModel lsm = (ListSelectionModel) e.getSource();
+				if (!lsm.isSelectionEmpty()) {
+					selectedRow = table.getSelectedRow();
+					if (selectedRow != -1) {
+						String contenido = mdlTable.getValueAt(selectedRow, 0).toString();
+						getMain().log("Selected: " + contenido);
+					}
+				}
+			}
+		});*/
+
+		sReservations.setViewportView(table);
 	}
 
 	@Override

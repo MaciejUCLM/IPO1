@@ -11,27 +11,27 @@ public class ManagerTableModel extends AbstractTableModel {
 	public static ManagerTableModel employeesTableModel() {
 		return new ManagerTableModel(
 				new String[] {"Name", "Photo", "Phone", "e-mail", "Languages", "Temporary"},
-				new Object[] {"name", new ImageIcon(MainWindow.class.getClassLoader().getResource("presentation/resources/name-tag.png")), "", "@", "", false}
+				new Object[] {"?", new ImageIcon(MainWindow.class.getClassLoader().getResource("presentation/resources/name-tag.png")), "", "@", "", false}
 				);
 	}
 
 	public static ManagerTableModel routesTableModel() {
 		return new ManagerTableModel(
 				new String[] {"Route", "Start Date", "Finish Date", "Capacity", "Difficulty", "Description", "Monitor", "Map"},
-				new Object[] {"title", new Date(), new Date(), 10, EnumDifficulty.MEDIUM, "none", "", new ImageIcon(MainWindow.class.getClassLoader().getResource("presentation/resources/map-cr.jpg"))}
+				new Object[] {"unnamed", new Date(), new Date(), 10, EnumDifficulty.MEDIUM, "none", "", new ImageIcon(MainWindow.class.getClassLoader().getResource("presentation/resources/map-cr.jpg"))}
 				);
 	}
 
 	public static ManagerTableModel activitiesTableModel() {
 		return new ManagerTableModel(
 				new String[] {"Activity", "Time", "Capacity", "Location", "Children", "Description", "Price"},
-				new Object[] {"title", new Date(), 10, "", false, "none", 0.0f}
+				new Object[] {"unnamed", new Date(), 10, "", false, "none", 0.0f}
 				);
 	}
 
-	private Object[] rowTemplate;
-	private String[] columnNames;
-	private Vector<Object[]> data;
+	protected Object[] rowTemplate;
+	protected String[] columnNames;
+	protected Vector<Object[]> data;
 	
 	public ManagerTableModel(String[] columns, Object[] template) {
 		super();

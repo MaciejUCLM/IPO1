@@ -149,7 +149,7 @@ public class PanelMap extends MainPanel {
 				return;
 			}
 
-			img = (ImageIcon)(row[8]);
+			img = (ImageIcon)(row[7]);
 			sketchMap.clear();
 			sketchMap.setIcon(img);
 			sketchMap.repaint();

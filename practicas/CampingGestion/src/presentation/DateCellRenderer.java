@@ -10,7 +10,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 public class DateCellRenderer extends DefaultTableCellRenderer {
 	
-	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
+	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("dd MMM YY HH:mm");
 	
 	@Override
     public Component getTableCellRendererComponent(JTable myTable, Object value, boolean isSelected, boolean hasFocus, int row, int column) {

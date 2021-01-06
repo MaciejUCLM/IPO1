@@ -150,6 +150,7 @@ public class MainWindow implements IAppWindow {
 		JSpinner spDate = new JSpinner();
 		spDate.setModel(new SpinnerDateModel(new Date(1609801200000L), null, null, Calendar.MINUTE));
 		pnlActivities.getTable().getColumnModel().getColumn(1).setCellEditor(new SpinnerEditor(spDate));
+		pnlActivities.getTable().getColumnModel().getColumn(1).setCellRenderer(new DateCellRenderer());
 		JSpinner spCapacity = new JSpinner();
 		spCapacity.setModel(new SpinnerNumberModel(10, 0, null, 1));
 		pnlActivities.getTable().getColumnModel().getColumn(2).setCellEditor(new SpinnerEditor(spCapacity));
@@ -182,6 +183,7 @@ public class MainWindow implements IAppWindow {
 		pnlRoutes.getTable().getColumnModel().getColumn(1).setCellEditor(new SpinnerEditor(spDate));
 		pnlRoutes.getTable().getColumnModel().getColumn(1).setCellRenderer(new DateCellRenderer());
 		pnlRoutes.getTable().getColumnModel().getColumn(2).setCellEditor(new SpinnerEditor(spDate));
+		pnlRoutes.getTable().getColumnModel().getColumn(2).setCellRenderer(new DateCellRenderer());
 		pnlRoutes.getTable().getColumnModel().getColumn(3).setCellEditor(new SpinnerEditor(spCapacity));
 		pnlRoutes.getTable().getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(cmbDifficulty));
 		pnlRoutes.getTable().getColumnModel().getColumn(7).setCellEditor(new PhotoCellEditor());
@@ -238,7 +240,7 @@ public class MainWindow implements IAppWindow {
 
 		JComboBox<String> cmbMonitors = new JComboBox<>();
 		cmbMonitors.setModel(new DefaultComboBoxModel<>(employees));
-		pnlRoutes.getTable().getColumnModel().getColumn(7).setCellEditor(new DefaultCellEditor(cmbMonitors));
+		pnlRoutes.getTable().getColumnModel().getColumn(6).setCellEditor(new DefaultCellEditor(cmbMonitors));
 	}
 
 	private class TabbedPaneChangeListener implements ChangeListener {
