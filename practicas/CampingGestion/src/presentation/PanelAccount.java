@@ -14,6 +14,8 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
 
 public class PanelAccount extends MainPanel {
 
@@ -37,12 +39,18 @@ public class PanelAccount extends MainPanel {
 		tools[0] = new JButton("Logout");
 		tools[0].addActionListener(new LogoutActionListener());
 		tools[0].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/exit.png")), toolBarImageSize, toolBarImageSize));
-
-		FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER, 5, 5);
-		setLayout(flowLayout);
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[]{70, 0};
+		gridBagLayout.rowHeights = new int[]{64, 0};
+		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{1.0, Double.MIN_VALUE};
+		setLayout(gridBagLayout);
 		
 		panel = new JPanel();
-		add(panel);
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.gridx = 0;
+		gbc_panel.gridy = 0;
+		add(panel, gbc_panel);
 		panel.setLayout(new BorderLayout(20, 20));
 		
 		panel_1 = new JPanel();

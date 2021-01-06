@@ -30,7 +30,6 @@ import javax.swing.text.MaskFormatter;
 import javax.swing.event.TreeSelectionEvent;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
-import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -39,6 +38,9 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.JTextArea;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 
 public class PanelAccomodation extends MainPanel {
 	
@@ -46,6 +48,14 @@ public class PanelAccomodation extends MainPanel {
 
 	private JTextField txtNode = new JTextField();
 	private ManagerTable table;
+	private JLabel lblTags;
+	private JLabel lblStatus;
+	private JComboBox<EnumObjectStates> cmbStatus;
+	private JLabel lblPrice;
+	private JSpinner spPrice;
+	private JTextArea txtFeatures;
+	private JScrollPane sGallery;
+	private JLabel lblFeatures;
 
 	/**
 	 * Create the panel.
@@ -161,32 +171,81 @@ public class PanelAccomodation extends MainPanel {
 		
 		JPanel pnlDetails = new JPanel();
 		subSplit.setRightComponent(pnlDetails);
-		pnlDetails.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		GridBagLayout gbl_pnlDetails = new GridBagLayout();
+		gbl_pnlDetails.columnWidths = new int[]{69, 54, 31, 78, 51, 0};
+		gbl_pnlDetails.rowHeights = new int[]{20, 0, 0, 0};
+		gbl_pnlDetails.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
+		gbl_pnlDetails.rowWeights = new double[]{1.0, 0.0, 0.0, Double.MIN_VALUE};
+		pnlDetails.setLayout(gbl_pnlDetails);
 		
-		JLabel lblTags = new JLabel("NAMETAGS");
-		pnlDetails.add(lblTags);
+		lblTags = new JLabel("NAMETAGS");
+		GridBagConstraints gbc_lblTags = new GridBagConstraints();
+		gbc_lblTags.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTags.gridx = 0;
+		gbc_lblTags.gridy = 0;
+		pnlDetails.add(lblTags, gbc_lblTags);
 		
-		JLabel lblStatus = new JLabel("Status");
-		pnlDetails.add(lblStatus);
+		lblFeatures = new JLabel("Features");
+		GridBagConstraints gbc_lblFeatures = new GridBagConstraints();
+		gbc_lblFeatures.anchor = GridBagConstraints.NORTHEAST;
+		gbc_lblFeatures.insets = new Insets(0, 0, 5, 5);
+		gbc_lblFeatures.gridx = 2;
+		gbc_lblFeatures.gridy = 0;
+		pnlDetails.add(lblFeatures, gbc_lblFeatures);
 		
-		JComboBox<EnumObjectStates> cmbStatus = new JComboBox<>();
+		lblStatus = new JLabel("Status");
+		GridBagConstraints gbc_lblStatus = new GridBagConstraints();
+		gbc_lblStatus.anchor = GridBagConstraints.EAST;
+		gbc_lblStatus.insets = new Insets(0, 0, 0, 5);
+		gbc_lblStatus.gridx = 1;
+		gbc_lblStatus.gridy = 2;
+		pnlDetails.add(lblStatus, gbc_lblStatus);
+		
+		cmbStatus = new JComboBox<>();
 		cmbStatus.setModel(new DefaultComboBoxModel<>(EnumObjectStates.values()));
-		lblStatus.setLabelFor(cmbStatus);
-		pnlDetails.add(cmbStatus);
+		GridBagConstraints gbc_cmbStatus = new GridBagConstraints();
+		gbc_cmbStatus.anchor = GridBagConstraints.NORTHWEST;
+		gbc_cmbStatus.insets = new Insets(0, 0, 0, 5);
+		gbc_cmbStatus.gridx = 2;
+		gbc_cmbStatus.gridy = 2;
+		pnlDetails.add(cmbStatus, gbc_cmbStatus);
 		
-		JLabel lblPrice = new JLabel("Price/night");
-		pnlDetails.add(lblPrice);
+		lblPrice = new JLabel("Price/night");
+		GridBagConstraints gbc_lblPrice = new GridBagConstraints();
+		gbc_lblPrice.anchor = GridBagConstraints.EAST;
+		gbc_lblPrice.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPrice.gridx = 1;
+		gbc_lblPrice.gridy = 1;
+		pnlDetails.add(lblPrice, gbc_lblPrice);
 		
-		JSpinner spPrice = new JSpinner();
+		spPrice = new JSpinner();
 		spPrice.setModel(new SpinnerNumberModel(0.0f, 0.0f, null, 0.1f));
-		lblPrice.setLabelFor(spPrice);
-		pnlDetails.add(spPrice);
+		GridBagConstraints gbc_spPrice = new GridBagConstraints();
+		gbc_spPrice.fill = GridBagConstraints.HORIZONTAL;
+		gbc_spPrice.anchor = GridBagConstraints.NORTH;
+		gbc_spPrice.insets = new Insets(0, 0, 5, 5);
+		gbc_spPrice.gridx = 2;
+		gbc_spPrice.gridy = 1;
+		pnlDetails.add(spPrice, gbc_spPrice);
 		
-		JTextArea txtFeatures = new JTextArea();
-		pnlDetails.add(txtFeatures);
+		txtFeatures = new JTextArea();
+		txtFeatures.setTabSize(4);
+		txtFeatures.setLineWrap(true);
+		GridBagConstraints gbc_txtFeatures = new GridBagConstraints();
+		gbc_txtFeatures.fill = GridBagConstraints.BOTH;
+		gbc_txtFeatures.gridheight = 3;
+		gbc_txtFeatures.insets = new Insets(0, 0, 0, 5);
+		gbc_txtFeatures.gridx = 3;
+		gbc_txtFeatures.gridy = 0;
+		pnlDetails.add(txtFeatures, gbc_txtFeatures);
 		
-		JScrollPane sGallery = new JScrollPane();
-		pnlDetails.add(sGallery);
+		sGallery = new JScrollPane();
+		GridBagConstraints gbc_sGallery = new GridBagConstraints();
+		gbc_sGallery.gridheight = 3;
+		gbc_sGallery.fill = GridBagConstraints.BOTH;
+		gbc_sGallery.gridx = 4;
+		gbc_sGallery.gridy = 0;
+		pnlDetails.add(sGallery, gbc_sGallery);
 		
 		((ReservationTableModel)table.getModel()).setCurrentTags(new String[] {"Camping"});
 		
@@ -275,7 +334,7 @@ public class PanelAccomodation extends MainPanel {
 			}
 
 			int v = JOptionPane.showConfirmDialog(getMain().getFrame(),
-					"Are you sure you want to remove "+parentPath.getLastPathComponent().toString()+" object and all its reservations?",
+					"Are you sure you want to remove "+parentPath.getLastPathComponent().toString()+" object? All reservations will be preserved.",
 					"Delete object", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
 			if (v == JOptionPane.YES_OPTION) {
