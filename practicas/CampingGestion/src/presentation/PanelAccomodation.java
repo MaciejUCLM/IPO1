@@ -53,9 +53,11 @@ public class PanelAccomodation extends MainPanel {
 	private JComboBox<EnumObjectStates> cmbStatus;
 	private JLabel lblPrice;
 	private JSpinner spPrice;
-	private JTextArea txtFeatures;
-	private JScrollPane sGallery;
 	private JLabel lblFeatures;
+	private JSplitPane detailSplit;
+	private JScrollPane sGallery;
+	private JScrollPane sText;
+	private JTextArea txtFeatures;
 
 	/**
 	 * Create the panel.
@@ -84,24 +86,6 @@ public class PanelAccomodation extends MainPanel {
 		
 		JSplitPane splitPane = new JSplitPane();
 		add(splitPane, BorderLayout.CENTER);
-		
-		DefaultTreeModel treeModel = new DefaultTreeModel(
-			new DefaultMutableTreeNode("Camping") {
-				{
-					DefaultMutableTreeNode node_1;
-					node_1 = new DefaultMutableTreeNode("Bungalows");
-						node_1.add(new DefaultMutableTreeNode("Deluxe"));
-						node_1.add(new DefaultMutableTreeNode("Standard"));
-					add(node_1);
-					node_1 = new DefaultMutableTreeNode("Fields");
-						node_1.add(new DefaultMutableTreeNode("Small"));
-						node_1.add(new DefaultMutableTreeNode("Medium"));
-						node_1.add(new DefaultMutableTreeNode("Big"));
-						node_1.add(new DefaultMutableTreeNode("Caravan"));
-					add(node_1);
-				}
-			}
-		);
 		
 		tree = new JTree();
 		tree.setMinimumSize(new Dimension(20, 0));
@@ -172,9 +156,9 @@ public class PanelAccomodation extends MainPanel {
 		JPanel pnlDetails = new JPanel();
 		subSplit.setRightComponent(pnlDetails);
 		GridBagLayout gbl_pnlDetails = new GridBagLayout();
-		gbl_pnlDetails.columnWidths = new int[]{69, 54, 31, 78, 51, 0};
+		gbl_pnlDetails.columnWidths = new int[]{69, 54, 31, 51, 0};
 		gbl_pnlDetails.rowHeights = new int[]{20, 0, 0, 0};
-		gbl_pnlDetails.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
+		gbl_pnlDetails.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		gbl_pnlDetails.rowWeights = new double[]{1.0, 0.0, 0.0, Double.MIN_VALUE};
 		pnlDetails.setLayout(gbl_pnlDetails);
 		
@@ -192,6 +176,26 @@ public class PanelAccomodation extends MainPanel {
 		gbc_lblFeatures.gridx = 2;
 		gbc_lblFeatures.gridy = 0;
 		pnlDetails.add(lblFeatures, gbc_lblFeatures);
+		
+		detailSplit = new JSplitPane();
+		GridBagConstraints gbc_detailSplit = new GridBagConstraints();
+		gbc_detailSplit.gridheight = 3;
+		gbc_detailSplit.insets = new Insets(0, 0, 5, 0);
+		gbc_detailSplit.fill = GridBagConstraints.BOTH;
+		gbc_detailSplit.gridx = 3;
+		gbc_detailSplit.gridy = 0;
+		pnlDetails.add(detailSplit, gbc_detailSplit);
+		
+		sGallery = new JScrollPane();
+		detailSplit.setRightComponent(sGallery);
+		
+		sText = new JScrollPane();
+		detailSplit.setLeftComponent(sText);
+		
+		txtFeatures = new JTextArea();
+		txtFeatures.setTabSize(4);
+		txtFeatures.setLineWrap(true);
+		sText.setViewportView(txtFeatures);
 		
 		lblStatus = new JLabel("Status");
 		GridBagConstraints gbc_lblStatus = new GridBagConstraints();
@@ -227,25 +231,6 @@ public class PanelAccomodation extends MainPanel {
 		gbc_spPrice.gridx = 2;
 		gbc_spPrice.gridy = 1;
 		pnlDetails.add(spPrice, gbc_spPrice);
-		
-		txtFeatures = new JTextArea();
-		txtFeatures.setTabSize(4);
-		txtFeatures.setLineWrap(true);
-		GridBagConstraints gbc_txtFeatures = new GridBagConstraints();
-		gbc_txtFeatures.fill = GridBagConstraints.BOTH;
-		gbc_txtFeatures.gridheight = 3;
-		gbc_txtFeatures.insets = new Insets(0, 0, 0, 5);
-		gbc_txtFeatures.gridx = 3;
-		gbc_txtFeatures.gridy = 0;
-		pnlDetails.add(txtFeatures, gbc_txtFeatures);
-		
-		sGallery = new JScrollPane();
-		GridBagConstraints gbc_sGallery = new GridBagConstraints();
-		gbc_sGallery.gridheight = 3;
-		gbc_sGallery.fill = GridBagConstraints.BOTH;
-		gbc_sGallery.gridx = 4;
-		gbc_sGallery.gridy = 0;
-		pnlDetails.add(sGallery, gbc_sGallery);
 		
 		((ReservationTableModel)table.getModel()).setCurrentTags(new String[] {"Camping"});
 		
