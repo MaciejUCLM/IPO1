@@ -45,7 +45,7 @@ public class LoginWindow implements IAppWindow {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					IController ctl = IAppWindow.getController();
+					IController ctl = IController.getController();
 					ctl.openWindow(EnumWindows.LOGIN);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -111,7 +111,7 @@ public class LoginWindow implements IAppWindow {
 				if (Arrays.equals(passwordField.getPassword(), user.getPassword().toCharArray()) && textUser.getText().equals(user.getLogin())) {
 					log("Login succesful");
 					frmLogin.getContentPane().setBackground(bgSucess);
-					((MainWindow) IAppWindow.getController().openWindow(EnumWindows.MAIN)).setUser(user);
+					((MainWindow) IController.getController().openWindow(EnumWindows.MAIN)).setUser(user);
 					frmLogin.dispose();
 				}
 				else {
@@ -137,7 +137,7 @@ public class LoginWindow implements IAppWindow {
 		lblLogo.setBounds(10, 25, 494, 50);
 		frmLogin.getContentPane().add(lblLogo);
 		
-		lblSources = new JLabel("Version: " + IAppWindow.getVersion());
+		lblSources = new JLabel("Version: " + IController.getVersion());
 		lblSources.setForeground(new Color(255, 255, 255));
 		lblSources.setBounds(10, 346, 245, 14);
 		frmLogin.getContentPane().add(lblSources);

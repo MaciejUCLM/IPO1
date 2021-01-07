@@ -267,14 +267,14 @@ public class MainWindow implements IAppWindow {
 	private class MnHelpMouseListener extends MouseAdapter {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			IAppWindow.getController().openWindow(EnumWindows.HELP);
+			IController.getController().openWindow(EnumWindows.HELP);
 			log("Opened help window");
 		}
 	}
 	private class MnAboutMouseListener extends MouseAdapter {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			IAppWindow.getController().openWindow(EnumWindows.ABOUT);
+			IController.getController().openWindow(EnumWindows.ABOUT);
 			log("Opened about window");
 		}
 	}

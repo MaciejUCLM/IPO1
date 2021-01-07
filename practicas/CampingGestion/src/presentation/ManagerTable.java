@@ -14,7 +14,7 @@ public class ManagerTable extends JTable {
 	private static IAppWindow main;
 	private static IAppWindow getMain() {
 		if (main == null)
-			main = IAppWindow.getController().getWindow(EnumWindows.MAIN);
+			main = IController.getController().getWindow(EnumWindows.MAIN);
 		return main;
 	}
 	

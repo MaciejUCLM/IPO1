@@ -42,7 +42,7 @@ public class AboutWindow implements IAppWindow {
 		
 		JTextArea taAbout = new JTextArea();
 		taAbout.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		taAbout.setText("This application is a project made for the purpose of practice in the subject Human-Computer Interactions 1 on the University of Castilla La Mancha.\r\n\r\nAuthors: Maciej Nalepa, Piotr Maliszewski\r\n\r\nVersion: "+IAppWindow.getVersion()+"\r\n\r\nProject uses following sources:\r\n- https://icons8.com/");
+		taAbout.setText("This application is a project made for the purpose of practice in the subject Human-Computer Interactions 1 on the University of Castilla La Mancha.\r\n\r\nAuthors: Maciej Nalepa, Piotr Maliszewski\r\n\r\nVersion: "+IController.getVersion()+"\r\n\r\nProject uses following sources:\r\n- https://icons8.com/");
 		taAbout.setEditable(false);
 		taAbout.setLineWrap(true);
 		taAbout.setWrapStyleWord(true);
