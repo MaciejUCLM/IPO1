@@ -45,6 +45,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.event.ChangeEvent;
 import java.awt.event.ItemListener;
 import java.io.File;
@@ -306,6 +308,20 @@ public class PanelAccomodation extends MainPanel {
 		IAppWindow.addPopup(sGallery, popupMenu);
 		
 		updateDetails();
+
+		table.getModel().addTableModelListener(new TableModelListener() {
+			@Override
+			public void tableChanged(TableModelEvent arg0) {
+				ManagerTable tab = table;
+				int row = tab.getSelectedRow();
+				if (tab.getLength() > 0 && row >= 0) {
+					Date start = (Date) tab.getValueAt(row, 1);
+					Date finish = (Date) tab.getValueAt(row, 2);
+					if (start.after(finish))
+						tab.setValueAt(start, row, 2);
+				}
+			}
+		});
 	}
 	
 	public void updateDetails() {

@@ -21,6 +21,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.text.MaskFormatter;
 import javax.swing.event.ChangeEvent;
 
@@ -181,6 +183,20 @@ public class MainWindow implements IAppWindow {
 		pnlRoutes.getTable().getColumnModel().getColumn(3).setCellEditor(new SpinnerEditor(_spCapacity));
 		pnlRoutes.getTable().getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(cmbDifficulty));
 		pnlRoutes.getTable().getColumnModel().getColumn(7).setCellEditor(new PhotoCellEditor());
+		
+		pnlRoutes.getTable().getModel().addTableModelListener(new TableModelListener() {
+			@Override
+			public void tableChanged(TableModelEvent arg0) {
+				ManagerTable tab = pnlRoutes.getTable();
+				int row = tab.getSelectedRow();
+				if (tab.getLength() > 0 && row >= 0) {
+					Date start = (Date) tab.getValueAt(row, 1);
+					Date finish = (Date) tab.getValueAt(row, 2);
+					if (start.after(finish))
+						tab.setValueAt(start, row, 2);
+				}
+			}
+		});
 		
 		pnlMap = new PanelMap();
 		tabbedPane.addTab("Map",
