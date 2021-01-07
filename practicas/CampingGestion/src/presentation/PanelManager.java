@@ -4,11 +4,12 @@ import java.util.Locale;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 
 import java.awt.BorderLayout;
 
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 
 public class PanelManager extends MainPanel {
 	
@@ -35,6 +36,16 @@ public class PanelManager extends MainPanel {
 		add(scrollPane, BorderLayout.CENTER);
 		
 		scrollPane.setViewportView(table);
+
+		JPopupMenu popupMenu = new JPopupMenu();
+		JMenuItem mntmAdd = new JMenuItem("Add");
+		mntmAdd.addActionListener(table.new AddRowActionListener());
+		popupMenu.add(mntmAdd);
+		JMenuItem mntmRemove = new JMenuItem("Delete");
+		mntmRemove.addActionListener(table.new DeleteRowActionListener());
+		popupMenu.add(mntmRemove);
+		IAppWindow.addPopup(table, popupMenu);
+		IAppWindow.addPopup(scrollPane, popupMenu);
 	}
 
 	@Override
