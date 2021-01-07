@@ -426,8 +426,10 @@ public class PanelAccomodation extends MainPanel {
 				parentNode = (DefaultMutableTreeNode) (parentPath.getLastPathComponent());
 				if (parentNode != (DefaultMutableTreeNode) (tree.getModel().getRoot()))
 					((DefaultTreeModel) tree.getModel()).removeNodeFromParent(parentNode);
-				else
+				else {
 					getMain().log("ERROR: trying to remove root node");
+					JOptionPane.showMessageDialog(getMain().getFrame(), "Trying to remove root node!", "Deletion error", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		}
 	}
