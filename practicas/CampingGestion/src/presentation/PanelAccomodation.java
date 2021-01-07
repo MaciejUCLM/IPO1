@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.SpinnerDateModel;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
@@ -31,7 +32,9 @@ import javax.swing.event.TreeSelectionEvent;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
@@ -44,11 +47,15 @@ import java.awt.Insets;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 import java.awt.event.ItemListener;
+import java.io.File;
 import java.awt.event.ItemEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.event.CaretEvent;
+import javax.swing.border.TitledBorder;
 
 public class PanelAccomodation extends MainPanel {
+	
+	private static final int galleryImageSize = 92;
 	
 	private AccomodationTreeNode selectedNode;
 	
@@ -65,6 +72,7 @@ public class PanelAccomodation extends MainPanel {
 	private JScrollPane sGallery;
 	private JScrollPane sText;
 	private JTextArea txtFeatures;
+	private JPanel pnlGallery;
 
 	/**
 	 * Create the panel.
@@ -192,6 +200,7 @@ public class PanelAccomodation extends MainPanel {
 		pnlDetails.add(detailSplit, gbc_detailSplit);
 		
 		sGallery = new JScrollPane();
+		sGallery.setBorder(new TitledBorder(null, "Gallery", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		detailSplit.setRightComponent(sGallery);
 		
 		sText = new JScrollPane();
@@ -268,6 +277,34 @@ public class PanelAccomodation extends MainPanel {
 
 		sReservations.setViewportView(table);
 		
+		pnlGallery = new JPanel();
+		sGallery.setViewportView(pnlGallery);
+
+		JPopupMenu popupMenu = new JPopupMenu();
+		JMenuItem mntmAdd = new JMenuItem("New reservation");
+		mntmAdd.addActionListener(table.new AddRowActionListener());
+		popupMenu.add(mntmAdd);
+		JMenuItem mntmRemove = new JMenuItem("Delete");
+		mntmRemove.addActionListener(table.new DeleteRowActionListener());
+		popupMenu.add(mntmRemove);
+		IAppWindow.addPopup(table, popupMenu);
+		IAppWindow.addPopup(sReservations, popupMenu);
+
+		popupMenu = new JPopupMenu();
+		mntmAdd = new JMenuItem("New object");
+		mntmAdd.addActionListener(new NewNodeActionListener());
+		popupMenu.add(mntmAdd);
+		mntmRemove = new JMenuItem("Delete object");
+		mntmRemove.addActionListener(new DeleteNodeActionListener());
+		popupMenu.add(mntmRemove);
+		IAppWindow.addPopup(tree, popupMenu);
+		
+		popupMenu = new JPopupMenu();
+		mntmAdd = new JMenuItem("Add photo");
+		mntmAdd.addActionListener(new AddToGalleryActionListener());
+		popupMenu.add(mntmAdd);
+		IAppWindow.addPopup(sGallery, popupMenu);
+		
 		updateDetails();
 	}
 	
@@ -286,12 +323,10 @@ public class PanelAccomodation extends MainPanel {
 		cmbStatus.setSelectedItem(sn.getState());
 		spPrice.setValue(sn.getPrice());
 
-		sGallery.removeAll();
-		for (ImageIcon ic : sn.getImages()) {
-			JLabel lb = new JLabel("");
-			lb.setIcon(ic);
-			sGallery.add(lb);
-		}
+		pnlGallery.removeAll();
+		for (ImageIcon ic : sn.getImages())
+			pnlGallery.add(galleryFactory(ic));
+		sGallery.repaint();
 	}
 
 	@Override
@@ -342,6 +377,29 @@ public class PanelAccomodation extends MainPanel {
 			selectedNode = (AccomodationTreeNode) tree.getModel().getRoot();
 		return selectedNode;
 	}
+	
+	private JLabel galleryFactory(ImageIcon ic) {
+		JLabel lbl = new JLabel("");
+		lbl.setIcon(ic);
+		
+		JPopupMenu popupMenu = new JPopupMenu();
+		JMenuItem mntmAdd = new JMenuItem("Add photo");
+		mntmAdd.addActionListener(new AddToGalleryActionListener());
+		popupMenu.add(mntmAdd);
+		JMenuItem mntmRemove = new JMenuItem("Delete");
+		mntmRemove.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				getSelectedNode().removeImage(ic);
+				updateDetails();
+				getMain().log("Removed image from gallery of " + getSelectedNode().toString());
+			}
+		});
+		popupMenu.add(mntmRemove);
+		IAppWindow.addPopup(lbl, popupMenu);
+
+		return lbl;
+	}
 
 	private class NewNodeActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
@@ -370,6 +428,21 @@ public class PanelAccomodation extends MainPanel {
 					((DefaultTreeModel) tree.getModel()).removeNodeFromParent(parentNode);
 				else
 					getMain().log("ERROR: trying to remove root node");
+			}
+		}
+	}
+	
+	private class AddToGalleryActionListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			JFileChooser fc = new JFileChooser();
+			int v = fc.showOpenDialog(getMain().getFrame());
+
+			if (v == JFileChooser.APPROVE_OPTION) {
+				File file = fc.getSelectedFile();
+				getSelectedNode().addImage(IAppWindow.resizeImage(new ImageIcon(file.getAbsolutePath()), galleryImageSize, galleryImageSize));
+				getMain().log("Added new image to gallery");
+				updateDetails();
 			}
 		}
 	}

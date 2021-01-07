@@ -137,7 +137,7 @@ public class LoginWindow implements IAppWindow {
 		lblLogo.setBounds(10, 25, 494, 50);
 		frmLogin.getContentPane().add(lblLogo);
 		
-		lblSources = new JLabel("Icons provided by icons8.com");
+		lblSources = new JLabel("Version: " + IAppWindow.getVersion());
 		lblSources.setForeground(new Color(255, 255, 255));
 		lblSources.setBounds(10, 346, 245, 14);
 		frmLogin.getContentPane().add(lblSources);

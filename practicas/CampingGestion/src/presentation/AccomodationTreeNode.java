@@ -15,10 +15,6 @@ public class AccomodationTreeNode extends DefaultMutableTreeNode {
 	private String features = "";
 	private Vector<ImageIcon> images = new Vector<>();
 	
-	private void retrieveTags() {
-		setTags(Arrays.stream(this.getPath()).map(x -> x.toString()).toArray(String[]::new));
-	}
-	
 	public AccomodationTreeNode(String n) {
 		super(n);
 		retrieveTags();
@@ -79,6 +75,13 @@ public class AccomodationTreeNode extends DefaultMutableTreeNode {
 	
 	public void removeImage(ImageIcon img) {
 		this.images.remove(img);
+	}
+	
+	private void retrieveTags() {
+		if (this.getParent() != null)
+			System.err.println("Parent is not null! Problem solved!");
+		// TODO check if error persists when executed lazily
+		setTags(Arrays.stream(this.getPath()).map(x -> x.toString()).toArray(String[]::new));
 	}
 	
 }
