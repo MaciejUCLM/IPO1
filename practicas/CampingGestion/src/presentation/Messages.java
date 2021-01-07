@@ -22,7 +22,7 @@ public class Messages {
 	private static final String BUNDLE_NAME = "presentation.messages"; //$NON-NLS-1$
 	private static ResourceBundle RESOURCE_BUNDLE = loadBundle();
 	private static ResourceBundle loadBundle() {
-		return ResourceBundle.getBundle(BUNDLE_NAME, getLocale("es"));
+		return ResourceBundle.getBundle(BUNDLE_NAME);
 	}
 	////////////////////////////////////////////////////////////////////////////
 	//
@@ -38,16 +38,23 @@ public class Messages {
 		}
 	}
 	
-	private static Locale getLocale(String appIdioma){
+	private static Locale getLocale(EnumLanguages lang) {
 		Locale locale;
-		if (appIdioma.equals("en"))
+		switch (lang) {
+		case POLISH:
+			locale = new Locale("pl");
+			break;
+		case SPANISH:
 			locale = new Locale("es");
-		else
-			locale = new Locale("es");
+			break;
+		case ENGLISH:
+		default:
+			locale = new Locale("en");
+		}
 		return locale;
 	}
 
-	public static void setIdioma(String idioma){
-		RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME, getLocale(idioma));
+	public static void setLanguage(EnumLanguages lang){
+		RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME, getLocale(lang));
 	}
 }

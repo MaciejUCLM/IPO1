@@ -4,7 +4,6 @@ import java.awt.Component;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Locale;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -40,7 +39,7 @@ public interface IAppWindow {
 	
 	void log(String msg);
 
-	void onLocaleChange(Locale rb);
+	void onLocaleChange();
 
 	JFrame getFrame();
 

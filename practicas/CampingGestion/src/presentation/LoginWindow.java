@@ -1,25 +1,24 @@
 package presentation;
 
 import java.awt.EventQueue;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 import javax.swing.JFrame;
-import java.awt.Color;
-
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
-import java.awt.Font;
-import java.util.Arrays;
-import java.util.Locale;
-
 import javax.swing.SwingConstants;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.util.Arrays;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class LoginWindow implements IAppWindow {
 	
@@ -35,6 +34,7 @@ public class LoginWindow implements IAppWindow {
 	private JButton btnLogin;
 	private JLabel lblSources;
 	private JLabel lblMessage;
+	private JComboBox<ImageIcon> comboLanguage;
 	
 	private User user = new User("Elvis Presley", new ImageIcon(LoginWindow.class.getResource("/presentation/resources/name-tag.png")));
 
@@ -125,7 +125,8 @@ public class LoginWindow implements IAppWindow {
 		btnLogin.setBounds(157, 248, 203, 39);
 		frmLogin.getContentPane().add(btnLogin);
 		
-		JComboBox comboLanguage = new JComboBox();
+		comboLanguage = new JComboBox<>();
+		comboLanguage.addItemListener(new ComboLanguageItemListener());
 		comboLanguage.setModel(new LangComboModel());
 		comboLanguage.setBounds(415, 300, 89, 60);
 		frmLogin.getContentPane().add(comboLanguage);
@@ -151,26 +152,8 @@ public class LoginWindow implements IAppWindow {
 		
 	}
 	
-	class LangComboModel extends DefaultComboBoxModel<ImageIcon> {
-		public LangComboModel() {
-			for (EnumLanguages e : EnumLanguages.values()) {
-				switch (e) {
-				case POLISH:
-					this.addElement(new ImageIcon(LoginWindow.class.getResource("/presentation/flags/polish.png")));
-					break;
-				case SPANISH:
-					this.addElement(new ImageIcon(LoginWindow.class.getResource("/presentation/flags/spanish.png")));
-					break;
-				default:
-				case ENGLISH:
-					this.addElement(new ImageIcon(LoginWindow.class.getResource("/presentation/flags/english.png")));
-				}
-			}
-		}
-	}
-	
 	@Override
-	public void onLocaleChange(Locale rb) {
+	public void onLocaleChange() {
 		// TODO implement
 	}
 
@@ -189,4 +172,27 @@ public class LoginWindow implements IAppWindow {
 		lblMessage.setText(msg);
 	}
 
+	private class ComboLanguageItemListener implements ItemListener {
+		public void itemStateChanged(ItemEvent arg0) {
+			IController.getController().changeLocale(EnumLanguages.values()[comboLanguage.getSelectedIndex()]);
+		}
+	}
+	
+	private class LangComboModel extends DefaultComboBoxModel<ImageIcon> {
+		public LangComboModel() {
+			for (EnumLanguages e : EnumLanguages.values()) {
+				switch (e) {
+				case POLISH:
+					this.addElement(new ImageIcon(LoginWindow.class.getResource("/presentation/flags/polish.png")));
+					break;
+				case SPANISH:
+					this.addElement(new ImageIcon(LoginWindow.class.getResource("/presentation/flags/spanish.png")));
+					break;
+				default:
+				case ENGLISH:
+					this.addElement(new ImageIcon(LoginWindow.class.getResource("/presentation/flags/english.png")));
+				}
+			}
+		}
+	}
 }

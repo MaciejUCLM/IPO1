@@ -1,16 +1,15 @@
 package presentation;
 
-import java.util.Locale;
-
 import javax.swing.JFrame;
 import javax.swing.JButton;
-import java.awt.BorderLayout;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+
+import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
-import javax.swing.JTextArea;
 
 public class AboutWindow implements IAppWindow {
 
@@ -60,7 +59,7 @@ public class AboutWindow implements IAppWindow {
 	}
 
 	@Override
-	public void onLocaleChange(Locale rb) {
+	public void onLocaleChange() {
 		// TODO Auto-generated method stub
 	}
 

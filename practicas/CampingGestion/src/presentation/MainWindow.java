@@ -8,7 +8,6 @@ import javax.swing.JSpinner;
 import java.awt.BorderLayout;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 import javax.swing.JToolBar;
 import javax.swing.SpinnerDateModel;
@@ -205,7 +204,7 @@ public class MainWindow implements IAppWindow {
 	}
 
 	@Override
-	public void onLocaleChange(Locale rb) {
+	public void onLocaleChange() {
 		// TODO implement
 	}
 

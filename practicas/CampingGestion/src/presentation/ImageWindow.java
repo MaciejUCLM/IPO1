@@ -1,7 +1,5 @@
 package presentation;
 
-import java.util.Locale;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -58,7 +56,7 @@ public class ImageWindow implements IAppWindow {
 	}
 
 	@Override
-	public void onLocaleChange(Locale rb) {
+	public void onLocaleChange() {
 		// TODO Auto-generated method stub
 	}
 

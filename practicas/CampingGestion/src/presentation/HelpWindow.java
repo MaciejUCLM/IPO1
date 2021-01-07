@@ -1,14 +1,13 @@
 package presentation;
 
-import java.util.Locale;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import java.awt.Toolkit;
 import javax.swing.JTabbedPane;
-import java.awt.BorderLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+
+import java.awt.Toolkit;
+import java.awt.BorderLayout;
 import java.awt.Font;
 
 public class HelpWindow implements IAppWindow {
@@ -140,7 +139,7 @@ public class HelpWindow implements IAppWindow {
 	}
 
 	@Override
-	public void onLocaleChange(Locale rb) {
+	public void onLocaleChange() {
 		// TODO Auto-generated method stub
 	}
 
