@@ -8,6 +8,10 @@ import java.awt.Toolkit;
 import javax.swing.JTabbedPane;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JTextPane;
+import javax.swing.JTextArea;
+import java.awt.Font;
 
 public class HelpWindow implements IAppWindow {
 
@@ -29,7 +33,7 @@ public class HelpWindow implements IAppWindow {
 		frmHelpOfCamping = new JFrame();
 		frmHelpOfCamping.setIconImage(Toolkit.getDefaultToolkit().getImage(HelpWindow.class.getResource("/presentation/resources/help.png")));
 		frmHelpOfCamping.setTitle("Help Camping Manager");
-		frmHelpOfCamping.setBounds(100, 100, 660, 480);
+		frmHelpOfCamping.setBounds(100, 100, 380, 320);
 		frmHelpOfCamping.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -39,6 +43,15 @@ public class HelpWindow implements IAppWindow {
 		tabbedPane.addTab("Welcome",
 				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/help.png")), tabImageSize, tabImageSize),
 				helpWelcome, null);
+		helpWelcome.setLayout(new BorderLayout(0, 0));
+		
+		JTextArea taWelcome = new JTextArea();
+		taWelcome.setWrapStyleWord(true);
+		taWelcome.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		taWelcome.setText("Camping Manager is organized in tabs with different functionalities.\r\nTool bar is associated with each tab and allows context appropriate operations.\r\nMenu bar allows the user to logout or exit but also change current user preferences (name or password).\r\n\r\nEach tab in this help window describes the functionality of a specific tab.");
+		taWelcome.setEditable(false);
+		taWelcome.setLineWrap(true);
+		helpWelcome.add(taWelcome);
 		
 		JPanel helpAccount = new JPanel();
 		tabbedPane.addTab("Account",

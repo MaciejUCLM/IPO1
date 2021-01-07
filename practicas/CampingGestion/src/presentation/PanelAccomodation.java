@@ -209,6 +209,7 @@ public class PanelAccomodation extends MainPanel {
 		detailSplit.setLeftComponent(sText);
 		
 		txtFeatures = new JTextArea();
+		txtFeatures.setWrapStyleWord(true);
 		txtFeatures.addCaretListener(new TxtFeaturesCaretListener());
 		txtFeatures.setPreferredSize(new Dimension(200, 16));
 		txtFeatures.setTabSize(4);

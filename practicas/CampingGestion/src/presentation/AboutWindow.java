@@ -6,15 +6,11 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
-import javax.swing.JLabel;
-import java.awt.FlowLayout;
-import java.awt.CardLayout;
-import javax.swing.SwingConstants;
-import javax.swing.JTextPane;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
+import javax.swing.JTextArea;
 
 public class AboutWindow implements IAppWindow {
 
@@ -44,15 +40,13 @@ public class AboutWindow implements IAppWindow {
 		btnOk.addActionListener(new BtnOkActionListener());
 		pnlButtons.add(btnOk);
 		
-		JLabel lblHead = new JLabel("Camping Manager application");
-		lblHead.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblHead.setHorizontalAlignment(SwingConstants.CENTER);
-		frmAboutCampingManager.getContentPane().add(lblHead, BorderLayout.NORTH);
-		
-		JTextPane txtpnAbout = new JTextPane();
-		txtpnAbout.setEditable(false);
-		txtpnAbout.setText("This application is a project made for the purpose of practice in the subject Human-Computer Interactions 1 on the University of Castilla La Mancha.\r\n\r\nAuthors: Maciej Nalepa, Piotr Maliszewski\r\n\r\nVersion: "+IAppWindow.getVersion()+"\r\n\r\nProject uses following sources:\r\n- https://icons8.com/");
-		frmAboutCampingManager.getContentPane().add(txtpnAbout, BorderLayout.CENTER);
+		JTextArea taAbout = new JTextArea();
+		taAbout.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		taAbout.setText("This application is a project made for the purpose of practice in the subject Human-Computer Interactions 1 on the University of Castilla La Mancha.\r\n\r\nAuthors: Maciej Nalepa, Piotr Maliszewski\r\n\r\nVersion: "+IAppWindow.getVersion()+"\r\n\r\nProject uses following sources:\r\n- https://icons8.com/");
+		taAbout.setEditable(false);
+		taAbout.setLineWrap(true);
+		taAbout.setWrapStyleWord(true);
+		frmAboutCampingManager.getContentPane().add(taAbout, BorderLayout.CENTER);
 	}
 
 	@Override
