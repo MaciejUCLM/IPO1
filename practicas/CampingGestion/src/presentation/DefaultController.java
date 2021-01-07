@@ -51,6 +51,9 @@ public class DefaultController implements IController {
 			case ABOUT:
 				newWindow = new AboutWindow();
 				break;
+			case IMAGE:
+				newWindow = new ImageWindow();
+				break;
 			case LOGIN:
 			default:
 				newWindow = new LoginWindow();

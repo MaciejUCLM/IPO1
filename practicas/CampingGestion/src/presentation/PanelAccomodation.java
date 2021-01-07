@@ -397,9 +397,18 @@ public class PanelAccomodation extends MainPanel {
 	
 	private JLabel galleryFactory(ImageIcon ic) {
 		JLabel lbl = new JLabel("");
-		lbl.setIcon(ic);
+		lbl.setIcon(IAppWindow.resizeImage(ic, galleryImageSize, galleryImageSize));
 		
 		JPopupMenu popupMenu = new JPopupMenu();
+		JMenuItem mntmShow = new JMenuItem("Preview");
+		mntmShow.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				ImageWindow.openImagePreview(ic);
+				getMain().log("Opened image preview");
+			}
+		});
+		popupMenu.add(mntmShow);
 		JMenuItem mntmAdd = new JMenuItem("Add photo");
 		mntmAdd.addActionListener(new AddToGalleryActionListener());
 		popupMenu.add(mntmAdd);
@@ -459,7 +468,7 @@ public class PanelAccomodation extends MainPanel {
 
 			if (v == JFileChooser.APPROVE_OPTION) {
 				File file = fc.getSelectedFile();
-				getSelectedNode().addImage(IAppWindow.resizeImage(new ImageIcon(file.getAbsolutePath()), galleryImageSize, galleryImageSize));
+				getSelectedNode().addImage(new ImageIcon(file.getAbsolutePath()));
 				getMain().log("Added new image to gallery");
 				updateDetails();
 			}
