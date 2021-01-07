@@ -54,6 +54,7 @@ import java.awt.event.ItemEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.event.CaretEvent;
 import javax.swing.border.TitledBorder;
+import javax.swing.ScrollPaneConstants;
 
 public class PanelAccomodation extends MainPanel {
 	
@@ -206,12 +207,13 @@ public class PanelAccomodation extends MainPanel {
 		detailSplit.setRightComponent(sGallery);
 		
 		sText = new JScrollPane();
+		sText.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		sText.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		detailSplit.setLeftComponent(sText);
 		
 		txtFeatures = new JTextArea();
 		txtFeatures.setWrapStyleWord(true);
 		txtFeatures.addCaretListener(new TxtFeaturesCaretListener());
-		txtFeatures.setPreferredSize(new Dimension(200, 16));
 		txtFeatures.setTabSize(4);
 		txtFeatures.setLineWrap(true);
 		sText.setViewportView(txtFeatures);

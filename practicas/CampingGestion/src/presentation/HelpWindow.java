@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import java.awt.Toolkit;
 import javax.swing.JTabbedPane;
 import java.awt.BorderLayout;
-import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import java.awt.Font;
 
@@ -31,17 +31,16 @@ public class HelpWindow implements IAppWindow {
 		frmHelpOfCamping = new JFrame();
 		frmHelpOfCamping.setIconImage(Toolkit.getDefaultToolkit().getImage(HelpWindow.class.getResource("/presentation/resources/help.png")));
 		frmHelpOfCamping.setTitle("Help Camping Manager");
-		frmHelpOfCamping.setBounds(100, 100, 380, 320);
+		frmHelpOfCamping.setBounds(100, 100, 440, 480);
 		frmHelpOfCamping.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		frmHelpOfCamping.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
-		JPanel helpWelcome = new JPanel();
+		JScrollPane helpWelcome = new JScrollPane();
 		tabbedPane.addTab("Welcome",
 				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/help.png")), tabImageSize, tabImageSize),
 				helpWelcome, null);
-		helpWelcome.setLayout(new BorderLayout(0, 0));
 		
 		JTextArea taWelcome = new JTextArea();
 		taWelcome.setWrapStyleWord(true);
@@ -49,13 +48,12 @@ public class HelpWindow implements IAppWindow {
 		taWelcome.setText("Camping Manager is organized in tabs with different functionalities.\r\nTool bar is associated with each tab and allows context appropriate operations.\r\nMenu bar allows the user to logout or exit but also change current user preferences (name or password).\r\n\r\nEach tab in this help window describes the functionality of a specific tab.");
 		taWelcome.setEditable(false);
 		taWelcome.setLineWrap(true);
-		helpWelcome.add(taWelcome);
+		helpWelcome.setViewportView(taWelcome);
 		
-		JPanel helpAccount = new JPanel();
+		JScrollPane helpAccount = new JScrollPane();
 		tabbedPane.addTab("Account",
 				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/home.png")), tabImageSize, tabImageSize),
 				helpAccount, null);
-		helpAccount.setLayout(new BorderLayout(0, 0));
 		
 		JTextArea taAccount = new JTextArea();
 		taAccount.setWrapStyleWord(true);
@@ -63,13 +61,12 @@ public class HelpWindow implements IAppWindow {
 		taAccount.setLineWrap(true);
 		taAccount.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		taAccount.setEditable(false);
-		helpAccount.add(taAccount);
+		helpAccount.setViewportView(taAccount);
 		
-		JPanel helpReservations = new JPanel();
+		JScrollPane helpReservations = new JScrollPane();
 		tabbedPane.addTab("Reservations & Accomodation",
 				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/calendar.png")), tabImageSize, tabImageSize),
 				helpReservations, null);
-		helpReservations.setLayout(new BorderLayout(0, 0));
 		
 		JTextArea taReservations = new JTextArea();
 		taReservations.setWrapStyleWord(true);
@@ -77,13 +74,12 @@ public class HelpWindow implements IAppWindow {
 		taReservations.setLineWrap(true);
 		taReservations.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		taReservations.setEditable(false);
-		helpReservations.add(taReservations);
+		helpReservations.setViewportView(taReservations);
 		
-		JPanel helpActivites = new JPanel();
+		JScrollPane helpActivites = new JScrollPane();
 		tabbedPane.addTab("Activities",
 				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/clock.png")), tabImageSize, tabImageSize),
 				helpActivites, null);
-		helpActivites.setLayout(new BorderLayout(0, 0));
 		
 		JTextArea taActivities = new JTextArea();
 		taActivities.setWrapStyleWord(true);
@@ -91,13 +87,12 @@ public class HelpWindow implements IAppWindow {
 		taActivities.setLineWrap(true);
 		taActivities.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		taActivities.setEditable(false);
-		helpActivites.add(taActivities);
+		helpActivites.setViewportView(taActivities);
 		
-		JPanel helpEmployees = new JPanel();
+		JScrollPane helpEmployees = new JScrollPane();
 		tabbedPane.addTab("Employees",
 				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/search-client.png")), tabImageSize, tabImageSize),
 				helpEmployees, null);
-		helpEmployees.setLayout(new BorderLayout(0, 0));
 		
 		JTextArea taEmployees = new JTextArea();
 		taEmployees.setWrapStyleWord(true);
@@ -105,13 +100,12 @@ public class HelpWindow implements IAppWindow {
 		taEmployees.setLineWrap(true);
 		taEmployees.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		taEmployees.setEditable(false);
-		helpEmployees.add(taEmployees);
+		helpEmployees.setViewportView(taEmployees);
 		
-		JPanel helpRoutes = new JPanel();
+		JScrollPane helpRoutes = new JScrollPane();
 		tabbedPane.addTab("Routes",
 				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/anchor-nodes.png")), tabImageSize, tabImageSize),
 				helpRoutes, null);
-		helpRoutes.setLayout(new BorderLayout(0, 0));
 		
 		JTextArea taRoutes = new JTextArea();
 		taRoutes.setWrapStyleWord(true);
@@ -119,13 +113,12 @@ public class HelpWindow implements IAppWindow {
 		taRoutes.setLineWrap(true);
 		taRoutes.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		taRoutes.setEditable(false);
-		helpRoutes.add(taRoutes);
+		helpRoutes.setViewportView(taRoutes);
 		
-		JPanel helpMap = new JPanel();
+		JScrollPane helpMap = new JScrollPane();
 		tabbedPane.addTab("Map",
 				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/waypoint-map.png")), tabImageSize, tabImageSize),
 				helpMap, null);
-		helpMap.setLayout(new BorderLayout(0, 0));
 		
 		JTextArea taMap = new JTextArea();
 		taMap.setWrapStyleWord(true);
@@ -133,7 +126,7 @@ public class HelpWindow implements IAppWindow {
 		taMap.setLineWrap(true);
 		taMap.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		taMap.setEditable(false);
-		helpMap.add(taMap);
+		helpMap.setViewportView(taMap);
 	}
 
 	@Override
