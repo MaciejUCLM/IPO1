@@ -8,8 +8,6 @@ import java.awt.Toolkit;
 import javax.swing.JTabbedPane;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JTextPane;
 import javax.swing.JTextArea;
 import java.awt.Font;
 
@@ -57,31 +55,85 @@ public class HelpWindow implements IAppWindow {
 		tabbedPane.addTab("Account",
 				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/home.png")), tabImageSize, tabImageSize),
 				helpAccount, null);
+		helpAccount.setLayout(new BorderLayout(0, 0));
+		
+		JTextArea taAccount = new JTextArea();
+		taAccount.setWrapStyleWord(true);
+		taAccount.setText("The Account tab is a summary of current user logged in.\r\n\r\n\t\"Change avatar\" button allows to load another user icon from image file.\r\n\r\n\t\"Last access time\" is showing the date of last successful login attempt.\r\n\r\nTo change user name or user password use \"Preferences\" menu at the top.");
+		taAccount.setLineWrap(true);
+		taAccount.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		taAccount.setEditable(false);
+		helpAccount.add(taAccount);
 		
 		JPanel helpReservations = new JPanel();
 		tabbedPane.addTab("Reservations & Accomodation",
 				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/calendar.png")), tabImageSize, tabImageSize),
 				helpReservations, null);
+		helpReservations.setLayout(new BorderLayout(0, 0));
+		
+		JTextArea taReservations = new JTextArea();
+		taReservations.setWrapStyleWord(true);
+		taReservations.setText("The Reservations & Accomodation tab");
+		taReservations.setLineWrap(true);
+		taReservations.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		taReservations.setEditable(false);
+		helpReservations.add(taReservations);
 		
 		JPanel helpActivites = new JPanel();
 		tabbedPane.addTab("Activities",
 				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/clock.png")), tabImageSize, tabImageSize),
 				helpActivites, null);
+		helpActivites.setLayout(new BorderLayout(0, 0));
+		
+		JTextArea taActivities = new JTextArea();
+		taActivities.setWrapStyleWord(true);
+		taActivities.setText("The Activities tab");
+		taActivities.setLineWrap(true);
+		taActivities.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		taActivities.setEditable(false);
+		helpActivites.add(taActivities);
 		
 		JPanel helpEmployees = new JPanel();
 		tabbedPane.addTab("Employees",
 				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/search-client.png")), tabImageSize, tabImageSize),
 				helpEmployees, null);
+		helpEmployees.setLayout(new BorderLayout(0, 0));
+		
+		JTextArea taEmployees = new JTextArea();
+		taEmployees.setWrapStyleWord(true);
+		taEmployees.setText("The Employees tab");
+		taEmployees.setLineWrap(true);
+		taEmployees.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		taEmployees.setEditable(false);
+		helpEmployees.add(taEmployees);
 		
 		JPanel helpRoutes = new JPanel();
 		tabbedPane.addTab("Routes",
 				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/anchor-nodes.png")), tabImageSize, tabImageSize),
 				helpRoutes, null);
+		helpRoutes.setLayout(new BorderLayout(0, 0));
+		
+		JTextArea taRoutes = new JTextArea();
+		taRoutes.setWrapStyleWord(true);
+		taRoutes.setText("The Routes tab");
+		taRoutes.setLineWrap(true);
+		taRoutes.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		taRoutes.setEditable(false);
+		helpRoutes.add(taRoutes);
 		
 		JPanel helpMap = new JPanel();
 		tabbedPane.addTab("Map",
 				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/waypoint-map.png")), tabImageSize, tabImageSize),
 				helpMap, null);
+		helpMap.setLayout(new BorderLayout(0, 0));
+		
+		JTextArea taMap = new JTextArea();
+		taMap.setWrapStyleWord(true);
+		taMap.setText("The Map tab");
+		taMap.setLineWrap(true);
+		taMap.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		taMap.setEditable(false);
+		helpMap.add(taMap);
 	}
 
 	@Override
