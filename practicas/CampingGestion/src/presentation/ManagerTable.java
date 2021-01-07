@@ -73,6 +73,7 @@ public class ManagerTable extends JTable {
 			int n = getSelectedRow();
 			if (n < 0) {
 				getMain().log("ERROR: no row selected");
+				JOptionPane.showMessageDialog(getMain().getFrame(), "No entry selected! Make sure to mark row you want to remove.", "Error", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 
