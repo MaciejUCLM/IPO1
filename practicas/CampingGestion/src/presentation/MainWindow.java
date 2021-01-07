@@ -33,7 +33,6 @@ import java.text.ParseException;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
-import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 
@@ -56,7 +55,6 @@ public class MainWindow implements IAppWindow {
 	
 	private User user;
 	private JMenu mnPreferences;
-	private JCheckBoxMenuItem chmntmDarkMode;
 	private JMenuItem mntmChangeName;
 	private JMenuItem mntmChangePassword;
 
@@ -105,9 +103,6 @@ public class MainWindow implements IAppWindow {
 		
 		mnPreferences = new JMenu("Preferences");
 		menuBar.add(mnPreferences);
-		
-		chmntmDarkMode = new JCheckBoxMenuItem("Dark mode");
-		mnPreferences.add(chmntmDarkMode);
 		
 		mntmChangeName = new JMenuItem("Change name");
 		mnPreferences.add(mntmChangeName);
