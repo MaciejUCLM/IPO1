@@ -69,19 +69,19 @@ public class LoginWindow implements IAppWindow {
 		frmLogin = new JFrame();
 		frmLogin.getContentPane().setBackground(bgDefault);
 		frmLogin.setResizable(false);
-		frmLogin.setTitle("Camping Manager - Login");
+		frmLogin.setTitle(Messages.getString("LoginWindow.frmLogin.title")); //$NON-NLS-1$
 		frmLogin.setBounds(100, 100, 520, 400);
 		frmLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmLogin.getContentPane().setLayout(null);
 		
-		lblUser = new JLabel("Username");
+		lblUser = new JLabel(Messages.getString("LoginWindow.lblUser.text")); //$NON-NLS-1$
 		lblUser.setHorizontalAlignment(SwingConstants.LEFT);
 		lblUser.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblUser.setForeground(new Color(255, 255, 255));
 		lblUser.setBounds(120, 141, 270, 22);
 		frmLogin.getContentPane().add(lblUser);
 		
-		lblPass = new JLabel("Password");
+		lblPass = new JLabel(Messages.getString("LoginWindow.lblPass.text")); //$NON-NLS-1$
 		lblPass.setHorizontalAlignment(SwingConstants.LEFT);
 		lblPass.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblPass.setForeground(new Color(255, 255, 255));
@@ -104,7 +104,7 @@ public class LoginWindow implements IAppWindow {
 		passwordField.setBounds(120, 215, 270, 22);
 		frmLogin.getContentPane().add(passwordField);
 		
-		btnLogin = new JButton("Log in");
+		btnLogin = new JButton(Messages.getString("LoginWindow.btnLogin.text")); //$NON-NLS-1$
 		btnLogin.setIcon(IAppWindow.resizeImage(new ImageIcon(LoginWindow.class.getResource("/presentation/resources/enter.png")), 24, 24));
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -130,7 +130,7 @@ public class LoginWindow implements IAppWindow {
 		comboLanguage.setBounds(415, 300, 89, 60);
 		frmLogin.getContentPane().add(comboLanguage);
 		
-		JLabel lblLogo = new JLabel("Camping Manager");
+		JLabel lblLogo = new JLabel(Messages.getString("LoginWindow.lblLogo.text")); //$NON-NLS-1$
 		lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogo.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		lblLogo.setForeground(new Color(255, 255, 255));
@@ -142,7 +142,7 @@ public class LoginWindow implements IAppWindow {
 		lblSources.setBounds(10, 346, 245, 14);
 		frmLogin.getContentPane().add(lblSources);
 		
-		lblMessage = new JLabel("Please enter your credentials");
+		lblMessage = new JLabel(Messages.getString("LoginWindow.lblMessage.text")); //$NON-NLS-1$
 		lblMessage.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMessage.setForeground(Color.WHITE);
 		lblMessage.setFont(new Font("Tahoma", Font.PLAIN, 14));
