@@ -41,6 +41,8 @@ public class MainWindow implements IAppWindow {
 	
 	private static final int tabImageSize = 24;
 
+	private User user;
+
 	private JFrame frmMain;
 	private MainPanel pnlAccount;
 	private MainPanel pnlAccomodation;
@@ -53,8 +55,6 @@ public class MainWindow implements IAppWindow {
 	private JLabel lblStatus;
 	private JPanel pnlBars;
 	private JMenuItem mntmExit;
-	
-	private User user;
 	private JMenu mnPreferences;
 	private JMenuItem mntmChangeName;
 	private JMenuItem mntmChangePassword;
@@ -71,11 +71,11 @@ public class MainWindow implements IAppWindow {
 	 */
 	private void initialize() {
 		frmMain = new JFrame();
-		frmMain.setTitle("Camping Manager");
+		frmMain.setTitle(Messages.getString("MainWindow.frmMain.title")); //$NON-NLS-1$
 		frmMain.setBounds(100, 100, 990, 590);
 		frmMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		lblStatus = new JLabel("...");
+		lblStatus = new JLabel("..."); //$NON-NLS-1$
 		lblStatus.setBackground(new Color(255, 255, 255));
 		lblStatus.setBorder(new LineBorder(new Color(0, 0, 0)));
 		frmMain.getContentPane().add(lblStatus, BorderLayout.SOUTH);
@@ -87,14 +87,14 @@ public class MainWindow implements IAppWindow {
 		JMenuBar menuBar = new JMenuBar();
 		pnlBars.add(menuBar, BorderLayout.NORTH);
 		
-		JMenu mnFile = new JMenu("File");
+		JMenu mnFile = new JMenu(Messages.getString("MainWindow.mnFile.text")); //$NON-NLS-1$
 		menuBar.add(mnFile);
 		
-		JMenuItem mntmLogout = new JMenuItem("Logout");
+		JMenuItem mntmLogout = new JMenuItem(Messages.getString("MainWindow.mntmLogout.text")); //$NON-NLS-1$
 		mntmLogout.addActionListener(new LogoutActionListener());
 		mnFile.add(mntmLogout);
 		
-		mntmExit = new JMenuItem("Exit");
+		mntmExit = new JMenuItem(Messages.getString("MainWindow.mntmExit.text")); //$NON-NLS-1$
 		mntmExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg) {
 				System.exit(0);
@@ -102,20 +102,20 @@ public class MainWindow implements IAppWindow {
 		});
 		mnFile.add(mntmExit);
 		
-		mnPreferences = new JMenu("Preferences");
+		mnPreferences = new JMenu(Messages.getString("MainWindow.mnPreferences.text")); //$NON-NLS-1$
 		menuBar.add(mnPreferences);
 		
-		mntmChangeName = new JMenuItem("Change name");
+		mntmChangeName = new JMenuItem(Messages.getString("MainWindow.mntmChangeName.text")); //$NON-NLS-1$
 		mnPreferences.add(mntmChangeName);
 		
-		mntmChangePassword = new JMenuItem("Change password");
+		mntmChangePassword = new JMenuItem(Messages.getString("MainWindow.mntmChangePassword.text")); //$NON-NLS-1$
 		mnPreferences.add(mntmChangePassword);
 		
-		JMenu mnAbout = new JMenu("About");
+		JMenu mnAbout = new JMenu(Messages.getString("MainWindow.mnAbout.text")); //$NON-NLS-1$
 		mnAbout.addMouseListener(new MnAboutMouseListener());
 		menuBar.add(mnAbout);
 		
-		JMenu mnHelp = new JMenu("Help");
+		JMenu mnHelp = new JMenu(Messages.getString("MainWindow.mnHelp.text")); //$NON-NLS-1$
 		mnHelp.addMouseListener(new MnHelpMouseListener());
 		menuBar.add(mnHelp);
 		
@@ -135,18 +135,18 @@ public class MainWindow implements IAppWindow {
 		frmMain.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
 		pnlAccount = new PanelAccount();
-		tabbedPane.addTab("Account",
-				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/home.png")), tabImageSize, tabImageSize),
+		tabbedPane.addTab(Messages.getString("MainWindow.0"), //$NON-NLS-1$
+				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/home.png")), tabImageSize, tabImageSize), //$NON-NLS-1$
 				pnlAccount, null);
 		
 		pnlAccomodation = new PanelAccomodation();
-		tabbedPane.addTab("Reservations & Accomodation",
-				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/calendar.png")), tabImageSize, tabImageSize),
+		tabbedPane.addTab(Messages.getString("MainWindow.3"), //$NON-NLS-1$
+				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/calendar.png")), tabImageSize, tabImageSize), //$NON-NLS-1$
 				pnlAccomodation, null);
 		
 		pnlActivities = new PanelManager(ManagerTableModel.activitiesTableModel());
-		tabbedPane.addTab("Activities",
-				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/clock.png")), tabImageSize, tabImageSize),
+		tabbedPane.addTab(Messages.getString("MainWindow.5"), //$NON-NLS-1$
+				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/clock.png")), tabImageSize, tabImageSize), //$NON-NLS-1$
 				pnlActivities, null);
 		pnlActivities.getTable().getColumnModel().getColumn(1).setCellEditor(new SpinnerEditor(_spDate));
 		pnlActivities.getTable().getColumnModel().getColumn(1).setCellRenderer(new DateCellRenderer());
@@ -154,14 +154,14 @@ public class MainWindow implements IAppWindow {
 		pnlActivities.getTable().getColumnModel().getColumn(6).setCellEditor(new SpinnerEditor(_spPrice));
 		
 		pnlEmployees = new PanelManager(ManagerTableModel.employeesTableModel());
-		tabbedPane.addTab("Employees",
-				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/search-client.png")), tabImageSize, tabImageSize),
+		tabbedPane.addTab(Messages.getString("MainWindow.7"), //$NON-NLS-1$
+				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/search-client.png")), tabImageSize, tabImageSize), //$NON-NLS-1$
 				pnlEmployees, null);
 
 		pnlEmployees.getTable().getColumnModel().getColumn(1).setCellEditor(new PhotoCellEditor());
 		try {
 			MaskFormatter formatTel;
-			formatTel = new MaskFormatter("'(###')' ###' ###' ###");
+			formatTel = new MaskFormatter("'(###')' ###' ###' ###"); //$NON-NLS-1$
 			formatTel.setPlaceholderCharacter('*');
 			pnlEmployees.getTable().getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(new JFormattedTextField(formatTel)));
 		} catch (ParseException e) {
@@ -169,8 +169,8 @@ public class MainWindow implements IAppWindow {
 		}
 		
 		pnlRoutes = new PanelManager(ManagerTableModel.routesTableModel());
-		tabbedPane.addTab("Routes",
-				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/anchor-nodes.png")), tabImageSize, tabImageSize),
+		tabbedPane.addTab(Messages.getString("MainWindow.10"), //$NON-NLS-1$
+				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/anchor-nodes.png")), tabImageSize, tabImageSize), //$NON-NLS-1$
 				pnlRoutes, null);
 
 		JComboBox<EnumDifficulty> cmbDifficulty = new JComboBox<>();
@@ -198,14 +198,20 @@ public class MainWindow implements IAppWindow {
 		});
 		
 		pnlMap = new PanelMap();
-		tabbedPane.addTab("Map",
-				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/waypoint-map.png")), tabImageSize, tabImageSize),
+		tabbedPane.addTab(Messages.getString("MainWindow.12"), //$NON-NLS-1$
+				IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/waypoint-map.png")), tabImageSize, tabImageSize), //$NON-NLS-1$
 				pnlMap, null);
 	}
 
 	@Override
 	public void onLocaleChange() {
-		// TODO implement
+		pnlAccount.onLocaleChange();
+		pnlAccomodation.onLocaleChange();
+		pnlActivities.onLocaleChange();
+		pnlEmployees.onLocaleChange();
+		pnlRoutes.onLocaleChange();
+		pnlMap.onLocaleChange();
+		frmMain.setTitle(Messages.getString("MainWindow.frmMain.title")); //$NON-NLS-1$
 	}
 
 	@Override
@@ -267,14 +273,14 @@ public class MainWindow implements IAppWindow {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			IController.getController().openWindow(EnumWindows.HELP);
-			log("Opened help window");
+			log(Messages.getString("MainWindow.14")); //$NON-NLS-1$
 		}
 	}
 	private class MnAboutMouseListener extends MouseAdapter {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			IController.getController().openWindow(EnumWindows.ABOUT);
-			log("Opened about window");
+			log(Messages.getString("MainWindow.15")); //$NON-NLS-1$
 		}
 	}
 
