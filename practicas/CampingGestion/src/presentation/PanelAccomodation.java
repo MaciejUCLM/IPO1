@@ -3,7 +3,6 @@ package presentation;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 import java.util.stream.Collectors;
 
 import javax.swing.ImageIcon;
@@ -349,7 +348,7 @@ public class PanelAccomodation extends MainPanel {
 	}
 
 	@Override
-	public void onLocaleChange(Locale rb) {
+	public void onLocaleChange() {
 		// TODO Auto-generated method stub
 	}
 

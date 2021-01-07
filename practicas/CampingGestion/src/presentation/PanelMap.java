@@ -1,7 +1,5 @@
 package presentation;
 
-import java.util.Locale;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -120,7 +118,7 @@ public class PanelMap extends MainPanel {
 	}
 
 	@Override
-	public void onLocaleChange(Locale rb) {
+	public void onLocaleChange() {
 		// TODO Auto-generated method stub
 	}
 
