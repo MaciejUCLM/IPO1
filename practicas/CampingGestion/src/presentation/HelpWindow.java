@@ -73,7 +73,7 @@ public class HelpWindow implements IAppWindow {
 		
 		JTextArea taReservations = new JTextArea();
 		taReservations.setWrapStyleWord(true);
-		taReservations.setText("The Reservations & Accomodation tab");
+		taReservations.setText("The Reservations & Accomodation tab provides tools to manage camping structure and reservations.\r\n\r\nThe left hand side tree panel allows to navigate over the camping. New camping objects and categories can be added or removed using \"New object\" and \"Delete object\". When creating a new object a name text field will pop up. Object names can be edited with double-click.\r\nEvery object has its details at the bottom side of the panel. Once an object is selected its details are loaded. On the right side of the panel there is a gallery where you can add, remove or preview images of the selected object using right-mouse click.\r\n\r\nThe center table allows to add, remove and edit current reservations falling into the category of the selected object. New reservation is always added into the selected object in the tree panel.\r\n\r\nAll the funcionality is a available in the popup menus under right-mouse button.");
 		taReservations.setLineWrap(true);
 		taReservations.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		taReservations.setEditable(false);
@@ -87,7 +87,7 @@ public class HelpWindow implements IAppWindow {
 		
 		JTextArea taActivities = new JTextArea();
 		taActivities.setWrapStyleWord(true);
-		taActivities.setText("The Activities tab");
+		taActivities.setText("The Activities tab provides a table to manage current activities on the camping.\r\n\r\nTo sort by a specific column click on the column name.\r\n\r\nRight-mouse click opens a shortcut menu.");
 		taActivities.setLineWrap(true);
 		taActivities.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		taActivities.setEditable(false);
@@ -101,7 +101,7 @@ public class HelpWindow implements IAppWindow {
 		
 		JTextArea taEmployees = new JTextArea();
 		taEmployees.setWrapStyleWord(true);
-		taEmployees.setText("The Employees tab");
+		taEmployees.setText("The Employees tab provides a table to manage currently hired personel.\r\n\r\nTo sort by a specific column click on the column name.\r\n\r\nRight-mouse click opens a shortcut menu.");
 		taEmployees.setLineWrap(true);
 		taEmployees.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		taEmployees.setEditable(false);
@@ -115,7 +115,7 @@ public class HelpWindow implements IAppWindow {
 		
 		JTextArea taRoutes = new JTextArea();
 		taRoutes.setWrapStyleWord(true);
-		taRoutes.setText("The Routes tab");
+		taRoutes.setText("The Routes tab provides a table to manage available routes in the camping.\r\n\r\n*Map* column is integrated with Map tab which allows editing information on the map.\r\n*Monitors* column is integrated with Employees tab and provides selection between current employees.\r\n\r\nTo sort by a specific column click on the column name.\r\n\r\nRight-mouse click opens a shortcut menu.");
 		taRoutes.setLineWrap(true);
 		taRoutes.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		taRoutes.setEditable(false);
@@ -129,7 +129,7 @@ public class HelpWindow implements IAppWindow {
 		
 		JTextArea taMap = new JTextArea();
 		taMap.setWrapStyleWord(true);
-		taMap.setText("The Map tab");
+		taMap.setText("The Map tab provides tools to add information on the map images of existing routes.\r\nTo load a route first select it on the Routes panel.\r\nAfter loading the route add your markings and apply the changes using \"Save route\" tool.\r\n\r\nDrawing can be done with the rightmost tools from the toolbar.\r\nTo cancel using a tool use right-mouse click.\r\nTo cancel typing text click Enter keeping the text field empty.");
 		taMap.setLineWrap(true);
 		taMap.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		taMap.setEditable(false);
