@@ -12,7 +12,7 @@ public abstract class MainPanel extends JPanel implements IMainPanel {
 	private static IAppWindow main;
 	protected static IAppWindow getMain() {
 		if (main == null)
-			main = IAppWindow.getController().getWindow(EnumWindows.MAIN);
+			main = IController.getController().getWindow(EnumWindows.MAIN);
 		return main;
 	}
 

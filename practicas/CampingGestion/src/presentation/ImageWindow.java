@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 public class ImageWindow implements IAppWindow {
 	
 	public static IAppWindow openImagePreview(ImageIcon img) {
-		ImageWindow window = (ImageWindow) IAppWindow.getController().openWindow(EnumWindows.IMAGE);
+		ImageWindow window = (ImageWindow) IController.getController().openWindow(EnumWindows.IMAGE);
 		window.setImage(img);
 		return window;
 	}

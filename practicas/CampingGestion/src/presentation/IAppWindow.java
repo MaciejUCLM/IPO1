@@ -11,14 +11,6 @@ import javax.swing.JFrame;
 import javax.swing.JPopupMenu;
 
 public interface IAppWindow {
-	
-	static String getVersion() {
-		return "1.0.0";
-	}
-
-	static IController getController() {
-		return DefaultController.getInstance();
-	}
 
 	static ImageIcon resizeImage(ImageIcon src, int w, int h){
 		Image resizedImg;
