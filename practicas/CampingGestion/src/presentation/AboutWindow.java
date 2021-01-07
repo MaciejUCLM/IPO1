@@ -15,6 +15,8 @@ public class AboutWindow implements IAppWindow {
 
 	private JFrame frmAboutCampingManager;
 
+	private JTextArea taAbout;
+
 	/**
 	 * Create the application.
 	 */
@@ -27,22 +29,22 @@ public class AboutWindow implements IAppWindow {
 	 */
 	private void initialize() {
 		frmAboutCampingManager = new JFrame();
-		frmAboutCampingManager.setIconImage(Toolkit.getDefaultToolkit().getImage(AboutWindow.class.getResource("/presentation/resources/about.png")));
-		frmAboutCampingManager.setTitle("About Camping Manager");
+		frmAboutCampingManager.setIconImage(Toolkit.getDefaultToolkit().getImage(AboutWindow.class.getResource("/presentation/resources/about.png"))); //$NON-NLS-1$
+		frmAboutCampingManager.setTitle(Messages.getString("AboutWindow.frmAboutCampingManager.title")); //$NON-NLS-1$
 		frmAboutCampingManager.setBounds(100, 100, 450, 300);
 		frmAboutCampingManager.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JPanel pnlButtons = new JPanel();
 		frmAboutCampingManager.getContentPane().add(pnlButtons, BorderLayout.SOUTH);
 		
-		JButton btnOk = new JButton("OK");
+		JButton btnOk = new JButton("OK"); //$NON-NLS-1$
 		btnOk.addActionListener(new BtnOkActionListener());
 		pnlButtons.add(btnOk);
 		
-		JTextArea taAbout = new JTextArea();
-		taAbout.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		String about = "This application is a project made for the purpose of practice in the subject Human-Computer Interactions 1 on the University of Castilla La Mancha.\r\n\r\nAuthors: Maciej Nalepa, Piotr Maliszewski\r\nContact: secretario@uclm.es\r\n\r\nRelease date: 11 January 2021\r\nVersion: "
-				+ IController.getVersion() + "\r\n\r\nProject uses following sources:\r\n- https://icons8.com/";
+		taAbout = new JTextArea();
+		taAbout.setFont(new Font("Tahoma", Font.PLAIN, 14)); //$NON-NLS-1$
+		String about = Messages.getString("AboutWindow.aboutA") //$NON-NLS-1$
+				+ IController.getVersion() + Messages.getString("AboutWindow.aboutB"); //$NON-NLS-1$
 		taAbout.setText(about);
 		taAbout.setEditable(false);
 		taAbout.setLineWrap(true);
@@ -62,7 +64,10 @@ public class AboutWindow implements IAppWindow {
 
 	@Override
 	public void onLocaleChange() {
-		// TODO Auto-generated method stub
+		frmAboutCampingManager.setTitle(Messages.getString("AboutWindow.frmAboutCampingManager.title")); //$NON-NLS-1$
+		String about = Messages.getString("AboutWindow.aboutA") //$NON-NLS-1$
+				+ IController.getVersion() + Messages.getString("AboutWindow.aboutB"); //$NON-NLS-1$
+		taAbout.setText(about);
 	}
 
 	@Override

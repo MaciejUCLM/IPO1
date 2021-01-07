@@ -30,7 +30,7 @@ public class ImageWindow implements IAppWindow {
 	private void initialize() {
 		frmImg = new JFrame();
 		//frmImg.setIconImage(Toolkit.getDefaultToolkit().getImage(HelpWindow.class.getResource("/presentation/resources/help.png")));
-		frmImg.setTitle("Image Preview");
+		frmImg.setTitle(Messages.getString("ImageWindow.frmImg.title")); //$NON-NLS-1$
 		frmImg.setBounds(100, 100, 640, 480);
 		frmImg.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
@@ -57,7 +57,7 @@ public class ImageWindow implements IAppWindow {
 
 	@Override
 	public void onLocaleChange() {
-		// TODO Auto-generated method stub
+		frmImg.setTitle(Messages.getString("ImageWindow.frmImg.title")); //$NON-NLS-1$
 	}
 
 	@Override
