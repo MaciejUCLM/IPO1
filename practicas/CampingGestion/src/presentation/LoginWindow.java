@@ -34,9 +34,10 @@ public class LoginWindow implements IAppWindow {
 	private JButton btnLogin;
 	private JLabel lblSources;
 	private JLabel lblMessage;
+	private JLabel lblLogo;
 	private JComboBox<ImageIcon> comboLanguage;
 	
-	private User user = new User("Elvis Presley", new ImageIcon(LoginWindow.class.getResource("/presentation/resources/name-tag.png")));
+	private User user = new User("Elvis Presley", new ImageIcon(LoginWindow.class.getResource("/presentation/resources/name-tag.png"))); //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
 	 * Launch the application.
@@ -76,14 +77,14 @@ public class LoginWindow implements IAppWindow {
 		
 		lblUser = new JLabel(Messages.getString("LoginWindow.lblUser.text")); //$NON-NLS-1$
 		lblUser.setHorizontalAlignment(SwingConstants.LEFT);
-		lblUser.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblUser.setFont(new Font("Tahoma", Font.PLAIN, 14)); //$NON-NLS-1$
 		lblUser.setForeground(new Color(255, 255, 255));
 		lblUser.setBounds(120, 141, 270, 22);
 		frmLogin.getContentPane().add(lblUser);
 		
 		lblPass = new JLabel(Messages.getString("LoginWindow.lblPass.text")); //$NON-NLS-1$
 		lblPass.setHorizontalAlignment(SwingConstants.LEFT);
-		lblPass.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblPass.setFont(new Font("Tahoma", Font.PLAIN, 14)); //$NON-NLS-1$
 		lblPass.setForeground(new Color(255, 255, 255));
 		lblPass.setBounds(120, 195, 270, 22);
 		frmLogin.getContentPane().add(lblPass);
@@ -91,7 +92,7 @@ public class LoginWindow implements IAppWindow {
 		textUser = new JTextField();
 		textUser.addFocusListener(new TextInputFocusListener());
 		textUser.setText(user.getLogin());
-		textUser.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		textUser.setFont(new Font("Tahoma", Font.PLAIN, 14)); //$NON-NLS-1$
 		textUser.setBounds(120, 162, 270, 22);
 		frmLogin.getContentPane().add(textUser);
 		textUser.setColumns(10);
@@ -99,28 +100,28 @@ public class LoginWindow implements IAppWindow {
 		passwordField = new JPasswordField();
 		passwordField.addFocusListener(new TextInputFocusListener());
 		passwordField.setText(user.getPassword());
-		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 14)); //$NON-NLS-1$
 		passwordField.setColumns(10);
 		passwordField.setBounds(120, 215, 270, 22);
 		frmLogin.getContentPane().add(passwordField);
 		
 		btnLogin = new JButton(Messages.getString("LoginWindow.btnLogin.text")); //$NON-NLS-1$
-		btnLogin.setIcon(IAppWindow.resizeImage(new ImageIcon(LoginWindow.class.getResource("/presentation/resources/enter.png")), 24, 24));
+		btnLogin.setIcon(IAppWindow.resizeImage(new ImageIcon(LoginWindow.class.getResource("/presentation/resources/enter.png")), 24, 24)); //$NON-NLS-1$
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (Arrays.equals(passwordField.getPassword(), user.getPassword().toCharArray()) && textUser.getText().equals(user.getLogin())) {
-					log("Login succesful");
+					log(Messages.getString("LoginWindow.7")); //$NON-NLS-1$
 					frmLogin.getContentPane().setBackground(bgSucess);
 					((MainWindow) IController.getController().openWindow(EnumWindows.MAIN)).setUser(user);
 					frmLogin.dispose();
 				}
 				else {
-					log("Incorrect login or password. Try again");
+					log(Messages.getString("LoginWindow.8")); //$NON-NLS-1$
 					frmLogin.getContentPane().setBackground(bgError);
 				}
 			}
 		});
-		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 14)); //$NON-NLS-1$
 		btnLogin.setBackground(new Color(255, 255, 255));
 		btnLogin.setBounds(157, 248, 203, 39);
 		frmLogin.getContentPane().add(btnLogin);
@@ -131,14 +132,14 @@ public class LoginWindow implements IAppWindow {
 		comboLanguage.setBounds(415, 300, 89, 60);
 		frmLogin.getContentPane().add(comboLanguage);
 		
-		JLabel lblLogo = new JLabel(Messages.getString("LoginWindow.lblLogo.text")); //$NON-NLS-1$
+		lblLogo = new JLabel(Messages.getString("LoginWindow.lblLogo.text")); //$NON-NLS-1$
 		lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLogo.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		lblLogo.setFont(new Font("Tahoma", Font.PLAIN, 40)); //$NON-NLS-1$
 		lblLogo.setForeground(new Color(255, 255, 255));
 		lblLogo.setBounds(10, 25, 494, 50);
 		frmLogin.getContentPane().add(lblLogo);
 		
-		lblSources = new JLabel("Version: " + IController.getVersion());
+		lblSources = new JLabel(Messages.getString("LoginWindow.11") + IController.getVersion()); //$NON-NLS-1$
 		lblSources.setForeground(new Color(255, 255, 255));
 		lblSources.setBounds(10, 346, 245, 14);
 		frmLogin.getContentPane().add(lblSources);
@@ -146,7 +147,7 @@ public class LoginWindow implements IAppWindow {
 		lblMessage = new JLabel(Messages.getString("LoginWindow.lblMessage.text")); //$NON-NLS-1$
 		lblMessage.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMessage.setForeground(Color.WHITE);
-		lblMessage.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblMessage.setFont(new Font("Tahoma", Font.PLAIN, 14)); //$NON-NLS-1$
 		lblMessage.setBounds(10, 108, 494, 22);
 		frmLogin.getContentPane().add(lblMessage);
 		
@@ -154,7 +155,13 @@ public class LoginWindow implements IAppWindow {
 	
 	@Override
 	public void onLocaleChange() {
-		// TODO implement
+		frmLogin.setTitle(Messages.getString("LoginWindow.frmLogin.title")); //$NON-NLS-1$
+		lblUser.setText(Messages.getString("LoginWindow.lblUser.text")); //$NON-NLS-1$
+		lblPass.setText(Messages.getString("LoginWindow.lblPass.text")); //$NON-NLS-1$
+		btnLogin.setText(Messages.getString("LoginWindow.btnLogin.text")); //$NON-NLS-1$
+		lblLogo.setText(Messages.getString("LoginWindow.lblLogo.text")); //$NON-NLS-1$
+		lblMessage.setText(Messages.getString("LoginWindow.lblMessage.text")); //$NON-NLS-1$
+		lblSources.setText(Messages.getString("LoginWindow.11") + IController.getVersion()); //$NON-NLS-1$
 	}
 
 	@Override
@@ -183,14 +190,14 @@ public class LoginWindow implements IAppWindow {
 			for (EnumLanguages e : EnumLanguages.values()) {
 				switch (e) {
 				case POLISH:
-					this.addElement(new ImageIcon(LoginWindow.class.getResource("/presentation/flags/polish.png")));
+					this.addElement(new ImageIcon(LoginWindow.class.getResource("/presentation/flags/polish.png"))); //$NON-NLS-1$
 					break;
 				case SPANISH:
-					this.addElement(new ImageIcon(LoginWindow.class.getResource("/presentation/flags/spanish.png")));
+					this.addElement(new ImageIcon(LoginWindow.class.getResource("/presentation/flags/spanish.png"))); //$NON-NLS-1$
 					break;
 				default:
 				case ENGLISH:
-					this.addElement(new ImageIcon(LoginWindow.class.getResource("/presentation/flags/english.png")));
+					this.addElement(new ImageIcon(LoginWindow.class.getResource("/presentation/flags/english.png"))); //$NON-NLS-1$
 				}
 			}
 		}
