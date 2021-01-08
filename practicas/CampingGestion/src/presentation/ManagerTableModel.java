@@ -10,22 +10,22 @@ public class ManagerTableModel extends AbstractTableModel {
 	
 	public static ManagerTableModel employeesTableModel() {
 		return new ManagerTableModel(
-				new String[] {"Name", "Photo", "Phone", "e-mail", "Languages", "Temporary"},
-				new Object[] {"?", new ImageIcon(MainWindow.class.getClassLoader().getResource("presentation/resources/name-tag.png")), "", "@", "", false}
+				new String[] {Messages.getString("ManagerTableModel.0"), Messages.getString("ManagerTableModel.1"), Messages.getString("ManagerTableModel.2"), Messages.getString("ManagerTableModel.3"), Messages.getString("ManagerTableModel.4"), Messages.getString("ManagerTableModel.5")}, //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
+				new Object[] {"?", new ImageIcon(MainWindow.class.getClassLoader().getResource("presentation/resources/name-tag.png")), "", "@", "", false} //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 				);
 	}
 
 	public static ManagerTableModel routesTableModel() {
 		return new ManagerTableModel(
-				new String[] {"Route", "Start Date", "Finish Date", "Capacity", "Difficulty", "Description", "Monitor", "Map"},
-				new Object[] {"unnamed", new Date(), new Date(), 10, EnumDifficulty.MEDIUM, "none", "", new ImageIcon(MainWindow.class.getClassLoader().getResource("presentation/resources/map-cr.jpg"))}
+				new String[] {Messages.getString("ManagerTableModel.11"), Messages.getString("ManagerTableModel.12"), Messages.getString("ManagerTableModel.13"), Messages.getString("ManagerTableModel.14"), Messages.getString("ManagerTableModel.15"), Messages.getString("ManagerTableModel.16"), Messages.getString("ManagerTableModel.17"), Messages.getString("ManagerTableModel.18")}, //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$
+				new Object[] {Messages.getString("ManagerTableModel.unnamed"), new Date(), new Date(), 10, EnumDifficulty.MEDIUM, Messages.getString("ManagerTableModel.none"), "", new ImageIcon(MainWindow.class.getClassLoader().getResource("presentation/resources/map-cr.jpg"))} //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 				);
 	}
 
 	public static ManagerTableModel activitiesTableModel() {
 		return new ManagerTableModel(
-				new String[] {"Activity", "Time", "Capacity", "Location", "Children", "Description", "Price"},
-				new Object[] {"unnamed", new Date(), 10, "", false, "none", 0.0f}
+				new String[] {Messages.getString("ManagerTableModel.23"), Messages.getString("ManagerTableModel.24"), Messages.getString("ManagerTableModel.25"), Messages.getString("ManagerTableModel.26"), Messages.getString("ManagerTableModel.27"), Messages.getString("ManagerTableModel.28"), Messages.getString("ManagerTableModel.29")}, //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+				new Object[] {Messages.getString("ManagerTableModel.unnamed"), new Date(), 10, "", false, Messages.getString("ManagerTableModel.none"), 0.0f} //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				);
 	}
 

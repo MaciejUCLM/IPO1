@@ -32,8 +32,8 @@ public class ReservationTableModel extends ManagerTableModel {
 	
 	public ReservationTableModel() {
 		super(
-				new String[] {"Client", "Start date", "Finish date", "Occupants", "Phone", "e-mail", "Price", "Comments", "Tags"},
-				new Object[] {"?", new Date(), new Date(), 1, "", "@", 0.0f, "", ""}
+				new String[] {Messages.getString("ReservationTableModel.0"), Messages.getString("ReservationTableModel.1"), Messages.getString("ReservationTableModel.2"), Messages.getString("ReservationTableModel.3"), Messages.getString("ReservationTableModel.4"), Messages.getString("ReservationTableModel.5"), Messages.getString("ReservationTableModel.6"), Messages.getString("ReservationTableModel.7"), Messages.getString("ReservationTableModel.8")}, //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$ //$NON-NLS-9$
+				new Object[] {"?", new Date(), new Date(), 1, "", "@", 0.0f, "", ""} //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 		);
 		reservations = new Vector<>();
 	}
@@ -53,10 +53,10 @@ public class ReservationTableModel extends ManagerTableModel {
 
 	@Override
 	public void addRow(Object[] row) {
-		String colTags = "";
+		String colTags = ""; //$NON-NLS-1$
 		String[] tags = getCurrentTags();
 		for (int i = tags.length - 1; i >= 0; i--) {
-			colTags += tags[i] + ",";
+			colTags += tags[i] + ","; //$NON-NLS-1$
 		}
 		row[8] = colTags.substring(0, colTags.length() - 1);
 		reservations.add(new Reservation(row, getCurrentTags()));
