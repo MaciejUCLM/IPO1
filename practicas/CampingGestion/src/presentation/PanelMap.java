@@ -47,36 +47,36 @@ public class PanelMap extends MainPanel {
 	 */
 	public PanelMap() {
 		tools = new JButton[8];
-		tools[0] = new JButton("Clear route");
+		tools[0] = new JButton(Messages.getString("PanelMap.0")); //$NON-NLS-1$
 		tools[0].addActionListener(new BtnClearActionListener());
-		tools[0].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/trash.png")), toolBarImageSize, toolBarImageSize));
+		tools[0].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/trash.png")), toolBarImageSize, toolBarImageSize)); //$NON-NLS-1$
 
-		tools[1] = new JButton("Load route");
+		tools[1] = new JButton(Messages.getString("PanelMap.2")); //$NON-NLS-1$
 		tools[1].addActionListener(new BtnLoadActionListener());
-		tools[1].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/download.png")), toolBarImageSize, toolBarImageSize));
+		tools[1].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/download.png")), toolBarImageSize, toolBarImageSize)); //$NON-NLS-1$
 
-		tools[2] = new JButton("Save route");
-		tools[2].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/save.png")), toolBarImageSize, toolBarImageSize));
+		tools[2] = new JButton(Messages.getString("PanelMap.4")); //$NON-NLS-1$
+		tools[2].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/save.png")), toolBarImageSize, toolBarImageSize)); //$NON-NLS-1$
 		
-		tools[3] = new JButton("Erase");
+		tools[3] = new JButton(Messages.getString("PanelMap.6")); //$NON-NLS-1$
 		tools[3].addActionListener(new BtnChangeModeActionListener(EnumMapMode.REMOVE));
-		tools[3].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/erase-line.png")), toolBarImageSize, toolBarImageSize));
+		tools[3].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/erase-line.png")), toolBarImageSize, toolBarImageSize)); //$NON-NLS-1$
 
-		tools[4] = new JButton("Point");
+		tools[4] = new JButton(Messages.getString("PanelMap.8")); //$NON-NLS-1$
 		tools[4].addActionListener(new BtnChangeModeActionListener(EnumMapMode.POINT));
-		tools[4].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/heart-plus.png")), toolBarImageSize, toolBarImageSize));
+		tools[4].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/heart-plus.png")), toolBarImageSize, toolBarImageSize)); //$NON-NLS-1$
 
-		tools[5] = new JButton("Line");
+		tools[5] = new JButton(Messages.getString("PanelMap.10")); //$NON-NLS-1$
 		tools[5].addActionListener(new BtnChangeModeActionListener(EnumMapMode.LINE));
-		tools[5].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/ruler.png")), toolBarImageSize, toolBarImageSize));
+		tools[5].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/ruler.png")), toolBarImageSize, toolBarImageSize)); //$NON-NLS-1$
 
-		tools[6] = new JButton("Rectangle");
+		tools[6] = new JButton(Messages.getString("PanelMap.12")); //$NON-NLS-1$
 		tools[6].addActionListener(new BtnChangeModeActionListener(EnumMapMode.RECTANGLE));
-		tools[6].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/rectangle.png")), toolBarImageSize, toolBarImageSize));
+		tools[6].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/rectangle.png")), toolBarImageSize, toolBarImageSize)); //$NON-NLS-1$
 
-		tools[7] = new JButton("Caption");
+		tools[7] = new JButton(Messages.getString("PanelMap.14")); //$NON-NLS-1$
 		tools[7].addActionListener(new BtnChangeModeActionListener(EnumMapMode.CAPTION));
-		tools[7].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/speech-bubble.png")), toolBarImageSize, toolBarImageSize));
+		tools[7].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/speech-bubble.png")), toolBarImageSize, toolBarImageSize)); //$NON-NLS-1$
 
 		setLayout(new BorderLayout(0, 0));
 		
@@ -90,26 +90,26 @@ public class PanelMap extends MainPanel {
 
 		// Images and cursors
 		toolkit = Toolkit.getDefaultToolkit();
-		imgCursorLine = toolkit.getImage(getClass().getClassLoader().getResource("presentation/resources/ruler.png"));
-		imgCursorRectangle = toolkit.getImage(getClass().getClassLoader().getResource("presentation/resources/rectangle.png"));
-		imgCursorCaption = toolkit.getImage(getClass().getClassLoader().getResource("presentation/resources/speech-bubble.png"));
-		imgCursorRemove = toolkit.getImage(getClass().getClassLoader().getResource("presentation/resources/erase-line.png"));
+		imgCursorLine = toolkit.getImage(getClass().getClassLoader().getResource("presentation/resources/ruler.png")); //$NON-NLS-1$
+		imgCursorRectangle = toolkit.getImage(getClass().getClassLoader().getResource("presentation/resources/rectangle.png")); //$NON-NLS-1$
+		imgCursorCaption = toolkit.getImage(getClass().getClassLoader().getResource("presentation/resources/speech-bubble.png")); //$NON-NLS-1$
+		imgCursorRemove = toolkit.getImage(getClass().getClassLoader().getResource("presentation/resources/erase-line.png")); //$NON-NLS-1$
 
 		cursorPoint = Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR);
-		cursorLine = toolkit.createCustomCursor(imgCursorLine, new Point(0,0), "CURSOR_LINE");
-		cursorRectangle = toolkit.createCustomCursor(imgCursorRectangle, new Point(0,0), "CURSOR_RECTANGLE");
-		cursorCaption = toolkit.createCustomCursor(imgCursorCaption, new Point(0,0), "CURSOR_CAPTION");
-		cursorRemove = toolkit.createCustomCursor(imgCursorRemove, new Point(0,0), "CURSOR_REMOVE");
+		cursorLine = toolkit.createCustomCursor(imgCursorLine, new Point(0,0), "CURSOR_LINE"); //$NON-NLS-1$
+		cursorRectangle = toolkit.createCustomCursor(imgCursorRectangle, new Point(0,0), "CURSOR_RECTANGLE"); //$NON-NLS-1$
+		cursorCaption = toolkit.createCustomCursor(imgCursorCaption, new Point(0,0), "CURSOR_CAPTION"); //$NON-NLS-1$
+		cursorRemove = toolkit.createCustomCursor(imgCursorRemove, new Point(0,0), "CURSOR_REMOVE"); //$NON-NLS-1$
 		cursorDefault = Cursor.getDefaultCursor();
 
 		txtCaption.setBounds(0, 0, 200,30);
 		txtCaption.setVisible(false);
 		txtCaption.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg) {
-				if(!txtCaption.getText().equals(""))
+				if(!txtCaption.getText().equals("")) //$NON-NLS-1$
 					sketchMap.addGraphicObject(new GraphicText(x, y, txtCaption.getText(), Color.RED));
 
-				txtCaption.setText("");
+				txtCaption.setText(""); //$NON-NLS-1$
 				txtCaption.setVisible(false);
 				sketchMap.repaint();
 			}
@@ -124,7 +124,7 @@ public class PanelMap extends MainPanel {
 
 	private class BtnClearActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			int v = JOptionPane.showConfirmDialog(getMain().getFrame(), "Are you sure you want to remove all map markings?", "Clear route", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+			int v = JOptionPane.showConfirmDialog(getMain().getFrame(), Messages.getString("PanelMap.26"), Messages.getString("PanelMap.27"), JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 			if (v == JOptionPane.YES_OPTION) {
 				sketchMap.clear();
 				sketchMap.repaint();
@@ -135,15 +135,15 @@ public class PanelMap extends MainPanel {
 	private class BtnLoadActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			if (img != null) {
-				int v = JOptionPane.showConfirmDialog(getMain().getFrame(), "Are you sure you want to load another map? Unsaved changes will be lost!", "Reload map", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+				int v = JOptionPane.showConfirmDialog(getMain().getFrame(), Messages.getString("PanelMap.28"), Messages.getString("PanelMap.29"), JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 				if (v != JOptionPane.YES_OPTION)
 					return;
 			}
 			
 			Object[] row = ((MainWindow) getMain()).getSelectedRoute();
 			if (row == null) {
-				JOptionPane.showConfirmDialog(getMain().getFrame(), "No route selected!", "Load map error", JOptionPane.CLOSED_OPTION, JOptionPane.ERROR_MESSAGE);
-				getMain().log("ERROR: failed to load map, no route selected");
+				JOptionPane.showConfirmDialog(getMain().getFrame(), Messages.getString("PanelMap.30"), Messages.getString("PanelMap.31"), JOptionPane.CLOSED_OPTION, JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
+				getMain().log(Messages.getString("PanelMap.32")); //$NON-NLS-1$
 				return;
 			}
 
@@ -151,7 +151,7 @@ public class PanelMap extends MainPanel {
 			sketchMap.clear();
 			sketchMap.setIcon(img);
 			sketchMap.repaint();
-			getMain().log("Loaded route map");
+			getMain().log(Messages.getString("PanelMap.33")); //$NON-NLS-1$
 		}
 	}
 
