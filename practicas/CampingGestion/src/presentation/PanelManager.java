@@ -52,7 +52,8 @@ public class PanelManager extends MainPanel {
 
 	@Override
 	public void onLocaleChange() {
-		// TODO Auto-generated method stub
+		tools[0].setText(Messages.getString("PanelManager.add")); //$NON-NLS-1$
+		tools[1].setText(Messages.getString("PanelManager.delete")); //$NON-NLS-1$
 	}
 	
 	public ManagerTable getTable() {

@@ -86,7 +86,8 @@ public class PanelAccount extends MainPanel {
 
 	@Override
 	public void onLocaleChange() {
-		// TODO Auto-generated method stub
+		tools[0].setText(Messages.getString("PanelAccount.0")); //$NON-NLS-1$
+		btnChangeAvatar.setText(Messages.getString("PanelAccount.btnChangeAvatar.text")); //$NON-NLS-1$
 	}
 	
 	public void updateUser(User user) {
