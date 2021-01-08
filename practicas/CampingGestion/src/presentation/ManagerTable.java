@@ -63,6 +63,7 @@ public class ManagerTable extends JTable {
 		public void actionPerformed(ActionEvent arg0) {
 			mdlTable.addRow(mdlTable.getRowTemplate().clone());
 			mdlTable.fireTableDataChanged();
+			getRowSorter().allRowsChanged();
 			getMain().log("Added new element");
 			((MainWindow) getMain()).updateCells();
 		}
@@ -80,9 +81,11 @@ public class ManagerTable extends JTable {
 			int v = JOptionPane.showConfirmDialog(getMain().getFrame(), "Are you sure you want to remove "+mdlTable.getValueAt(n, 0).toString()+"?", "Delete entry",
 					JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 			if (v == JOptionPane.YES_OPTION) {
+				clearSelection();
 				if (n != -1)
-					mdlTable.removeRow(getSelectedRow());
+					mdlTable.removeRow(n);
 				mdlTable.fireTableDataChanged();
+				getRowSorter().allRowsChanged();
 				getMain().log("Deleted element " + n);
 				((MainWindow) getMain()).updateCells();
 			}
