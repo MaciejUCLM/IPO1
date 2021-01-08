@@ -119,7 +119,14 @@ public class PanelMap extends MainPanel {
 
 	@Override
 	public void onLocaleChange() {
-		// TODO Auto-generated method stub
+		tools[0].setText(Messages.getString("PanelMap.0")); //$NON-NLS-1$
+		tools[1].setText(Messages.getString("PanelMap.2")); //$NON-NLS-1$
+		tools[2].setText(Messages.getString("PanelMap.4")); //$NON-NLS-1$
+		tools[3].setText(Messages.getString("PanelMap.6")); //$NON-NLS-1$
+		tools[4].setText(Messages.getString("PanelMap.8")); //$NON-NLS-1$
+		tools[5].setText(Messages.getString("PanelMap.10")); //$NON-NLS-1$
+		tools[6].setText(Messages.getString("PanelMap.12")); //$NON-NLS-1$
+		tools[7].setText(Messages.getString("PanelMap.14")); //$NON-NLS-1$
 	}
 
 	private class BtnClearActionListener implements ActionListener {

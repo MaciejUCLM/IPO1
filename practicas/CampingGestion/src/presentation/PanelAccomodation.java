@@ -349,7 +349,14 @@ public class PanelAccomodation extends MainPanel {
 
 	@Override
 	public void onLocaleChange() {
-		// TODO Auto-generated method stub
+		tools[0].setText(Messages.getString("PanelAccomodation.0")); //$NON-NLS-1$
+		tools[1].setText(Messages.getString("PanelAccomodation.2")); //$NON-NLS-1$
+		tools[2].setText(Messages.getString("PanelAccomodation.4")); //$NON-NLS-1$
+		tools[3].setText(Messages.getString("PanelAccomodation.6")); //$NON-NLS-1$
+		lblFeatures.setText(Messages.getString("PanelAccomodation.lblFeatures.text")); //$NON-NLS-1$
+		lblStatus.setText(Messages.getString("PanelAccomodation.lblStatus.text")); //$NON-NLS-1$
+		lblPrice.setText(Messages.getString("PanelAccomodation.lblPrice.text")); //$NON-NLS-1$
+		((TitledBorder)sGallery.getBorder()).setTitle(Messages.getString("PanelAccomodation.sGallery.borderTitle"));
 	}
 
 	private class TreeTreeSelectionListener implements TreeSelectionListener {
