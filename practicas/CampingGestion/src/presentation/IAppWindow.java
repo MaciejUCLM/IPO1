@@ -13,6 +13,10 @@ public interface IAppWindow {
 
 	static ImageIcon resizeImage(ImageIcon src, int w, int h){
 		Image resizedImg;
+		if (w < 2)
+			w = 2;
+		if (h < 2)
+			h = 2;
 		resizedImg = src.getImage().getScaledInstance(w, h, Image.SCALE_SMOOTH);
 	    return new ImageIcon(resizedImg);
 	}
