@@ -35,7 +35,7 @@ public class ManagerTable extends JTable {
 					selectedRow = getSelectedRow();
 					if (selectedRow != -1) {
 						String contents = mdlTable.getValueAt(selectedRow, 0).toString();
-						getMain().log("Selected: " + contents);
+						getMain().log(Messages.getString("ManagerTable.0") + contents); //$NON-NLS-1$
 					}
 				}
 			}
@@ -63,7 +63,8 @@ public class ManagerTable extends JTable {
 		public void actionPerformed(ActionEvent arg0) {
 			mdlTable.addRow(mdlTable.getRowTemplate().clone());
 			mdlTable.fireTableDataChanged();
-			getMain().log("Added new element");
+			getRowSorter().allRowsChanged();
+			getMain().log(Messages.getString("ManagerTable.1")); //$NON-NLS-1$
 			((MainWindow) getMain()).updateCells();
 		}
 	}
@@ -72,18 +73,20 @@ public class ManagerTable extends JTable {
 		public void actionPerformed(ActionEvent arg0) {
 			int n = getSelectedRow();
 			if (n < 0) {
-				getMain().log("ERROR: no row selected");
-				JOptionPane.showMessageDialog(getMain().getFrame(), "No entry selected! Make sure to mark row you want to remove.", "Error", JOptionPane.ERROR_MESSAGE);
+				getMain().log(Messages.getString("ManagerTable.2")); //$NON-NLS-1$
+				JOptionPane.showMessageDialog(getMain().getFrame(), Messages.getString("ManagerTable.3"), "Error", JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 				return;
 			}
 
-			int v = JOptionPane.showConfirmDialog(getMain().getFrame(), "Are you sure you want to remove "+mdlTable.getValueAt(n, 0).toString()+"?", "Delete entry",
+			int v = JOptionPane.showConfirmDialog(getMain().getFrame(), Messages.getString("ManagerTable.5")+mdlTable.getValueAt(n, 0).toString()+"?", Messages.getString("ManagerTable.7"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 					JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 			if (v == JOptionPane.YES_OPTION) {
+				clearSelection();
 				if (n != -1)
-					mdlTable.removeRow(getSelectedRow());
+					mdlTable.removeRow(n);
 				mdlTable.fireTableDataChanged();
-				getMain().log("Deleted element " + n);
+				getRowSorter().allRowsChanged();
+				getMain().log(Messages.getString("ManagerTable.8") + n); //$NON-NLS-1$
 				((MainWindow) getMain()).updateCells();
 			}
 		}

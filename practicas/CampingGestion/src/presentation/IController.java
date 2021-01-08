@@ -1,7 +1,5 @@
 package presentation;
 
-import java.util.Locale;
-
 public interface IController {
 	
 	static String getVersion() {
@@ -16,6 +14,6 @@ public interface IController {
 	IAppWindow openWindow(EnumWindows win);
 	IAppWindow getWindow(EnumWindows win);
 
-	void changeLocale(Locale rb);
+	void changeLocale(EnumLanguages lang);
 	
 }

@@ -1,7 +1,5 @@
 package presentation;
 
-import java.util.Locale;
-
 public class DefaultController implements IController {
 	
 	private static IController controller = null;
@@ -33,8 +31,12 @@ public class DefaultController implements IController {
 	}
 
 	@Override
-	public void changeLocale(Locale rb) {
-		// TODO
+	public void changeLocale(EnumLanguages lang) {
+		Messages.setLanguage(lang);
+		for (IAppWindow w : windows) {
+			if (w != null)
+				w.onLocaleChange();
+		}
 	}
 
 	@Override

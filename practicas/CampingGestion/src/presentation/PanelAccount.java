@@ -1,7 +1,5 @@
 package presentation;
 
-import java.util.Locale;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -36,9 +34,9 @@ public class PanelAccount extends MainPanel {
 	 */
 	public PanelAccount() {
 		tools = new JButton[1];
-		tools[0] = new JButton("Logout");
+		tools[0] = new JButton(Messages.getString("PanelAccount.0")); //$NON-NLS-1$
 		tools[0].addActionListener(new LogoutActionListener());
-		tools[0].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/exit.png")), toolBarImageSize, toolBarImageSize));
+		tools[0].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/exit.png")), toolBarImageSize, toolBarImageSize)); //$NON-NLS-1$
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{70, 0};
 		gridBagLayout.rowHeights = new int[]{64, 0};
@@ -56,12 +54,12 @@ public class PanelAccount extends MainPanel {
 		panel_1 = new JPanel();
 		panel.add(panel_1, BorderLayout.WEST);
 		
-		btnChangeAvatar = new JButton("Change Avatar");
+		btnChangeAvatar = new JButton(Messages.getString("PanelAccount.btnChangeAvatar.text")); //$NON-NLS-1$
 		btnChangeAvatar.addActionListener(new BtnChangeAvatarActionListener());
 		panel_1.setLayout(new BorderLayout(0, 0));
 		panel_1.add(btnChangeAvatar, BorderLayout.SOUTH);
 		
-		lblPhoto = new JLabel("");
+		lblPhoto = new JLabel(""); //$NON-NLS-1$
 		lblPhoto.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_1.add(lblPhoto);
 		
@@ -69,7 +67,7 @@ public class PanelAccount extends MainPanel {
 		panel.add(panel_2, BorderLayout.CENTER);
 		panel_2.setLayout(new BorderLayout(0, 0));
 		
-		lblLastAccess = new JLabel("Last access time");
+		lblLastAccess = new JLabel("Last access time"); //$NON-NLS-1$
 		panel_2.add(lblLastAccess, BorderLayout.SOUTH);
 		
 		panel_3 = new JPanel();
@@ -78,21 +76,22 @@ public class PanelAccount extends MainPanel {
 		flowLayout_1.setHgap(15);
 		panel_2.add(panel_3, BorderLayout.CENTER);
 		
-		lblName = new JLabel("Name Surname");
-		lblName.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblName = new JLabel("Name Surname"); //$NON-NLS-1$
+		lblName.setFont(new Font("Tahoma", Font.PLAIN, 16)); //$NON-NLS-1$
 		panel_3.add(lblName);
 		
-		lblLogin = new JLabel("LOGIN");
+		lblLogin = new JLabel("LOGIN"); //$NON-NLS-1$
 		panel_3.add(lblLogin);
 	}
 
 	@Override
-	public void onLocaleChange(Locale rb) {
-		// TODO Auto-generated method stub
+	public void onLocaleChange() {
+		tools[0].setText(Messages.getString("PanelAccount.0")); //$NON-NLS-1$
+		btnChangeAvatar.setText(Messages.getString("PanelAccount.btnChangeAvatar.text")); //$NON-NLS-1$
 	}
 	
 	public void updateUser(User user) {
-		lblLastAccess.setText("Last access: " + user.getAccessTime().toString());
+		lblLastAccess.setText(Messages.getString("PanelAccount.7") + user.getAccessTime().toString()); //$NON-NLS-1$
 		lblLogin.setText(user.getLogin());
 		setAvatar(user.getAvatar());
 		lblName.setText(user.getName());
@@ -110,7 +109,7 @@ public class PanelAccount extends MainPanel {
 			if (v == JFileChooser.APPROVE_OPTION) {
 				File file = fc.getSelectedFile();
 				setAvatar(new ImageIcon(file.getAbsolutePath()));
-				getMain().log("Updated avatar");
+				getMain().log(Messages.getString("PanelAccount.8")); //$NON-NLS-1$
 			}
 		}
 	}

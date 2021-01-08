@@ -3,7 +3,6 @@ package presentation;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 import java.util.stream.Collectors;
 
 import javax.swing.ImageIcon;
@@ -84,21 +83,21 @@ public class PanelAccomodation extends MainPanel {
 		table = new ManagerTable(new ReservationTableModel());
 
 		tools = new JButton[4];
-		tools[0] = new JButton("New reservation");
+		tools[0] = new JButton(Messages.getString("PanelAccomodation.0")); //$NON-NLS-1$
 		tools[0].addActionListener(table.new AddRowActionListener());
-		tools[0].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/add.png")), toolBarImageSize, toolBarImageSize));
+		tools[0].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/add.png")), toolBarImageSize, toolBarImageSize)); //$NON-NLS-1$
 
-		tools[1] = new JButton("New object");
+		tools[1] = new JButton(Messages.getString("PanelAccomodation.2")); //$NON-NLS-1$
 		tools[1].addActionListener(new NewNodeActionListener());
-		tools[1].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/add-tab.png")), toolBarImageSize, toolBarImageSize));
+		tools[1].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/add-tab.png")), toolBarImageSize, toolBarImageSize)); //$NON-NLS-1$
 
-		tools[2] = new JButton("Delete reservation");
+		tools[2] = new JButton(Messages.getString("PanelAccomodation.4")); //$NON-NLS-1$
 		tools[2].addActionListener(table.new DeleteRowActionListener());
-		tools[2].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/delete-bin.png")), toolBarImageSize, toolBarImageSize));
+		tools[2].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/delete-bin.png")), toolBarImageSize, toolBarImageSize)); //$NON-NLS-1$
 		
-		tools[3] = new JButton("Delete object");
+		tools[3] = new JButton(Messages.getString("PanelAccomodation.6")); //$NON-NLS-1$
 		tools[3].addActionListener(new DeleteNodeActionListener());
-		tools[3].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/close-tab.png")), toolBarImageSize, toolBarImageSize));
+		tools[3].setIcon(IAppWindow.resizeImage(new ImageIcon(MainWindow.class.getResource("/presentation/resources/close-tab.png")), toolBarImageSize, toolBarImageSize)); //$NON-NLS-1$
 
 		setLayout(new BorderLayout(0, 0));
 		
@@ -111,35 +110,35 @@ public class PanelAccomodation extends MainPanel {
 		tree.addTreeSelectionListener(new TreeTreeSelectionListener());
 		tree.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		tree.setEditable(true);
-		selectedNode = new AccomodationTreeNode("Camping") {
+		selectedNode = new AccomodationTreeNode("Camping") { //$NON-NLS-1$
 				{
 					DefaultMutableTreeNode node_1;
 					DefaultMutableTreeNode node_2;
-					node_1 = new AccomodationTreeNode("Bungalows");
-						node_2 = new AccomodationTreeNode("Deluxe");
-							node_2.add(new AccomodationTreeNode("A"));
-							node_2.add(new AccomodationTreeNode("B"));
+					node_1 = new AccomodationTreeNode(Messages.getString("PanelAccomodation.9")); //$NON-NLS-1$
+						node_2 = new AccomodationTreeNode("Deluxe"); //$NON-NLS-1$
+							node_2.add(new AccomodationTreeNode("A")); //$NON-NLS-1$
+							node_2.add(new AccomodationTreeNode("B")); //$NON-NLS-1$
 						node_1.add(node_2);
-						node_2 = new AccomodationTreeNode("Standard");
-							node_2.add(new AccomodationTreeNode("A"));
-							node_2.add(new AccomodationTreeNode("B"));
-							node_2.add(new AccomodationTreeNode("C"));
+						node_2 = new AccomodationTreeNode("Standard"); //$NON-NLS-1$
+							node_2.add(new AccomodationTreeNode("A")); //$NON-NLS-1$
+							node_2.add(new AccomodationTreeNode("B")); //$NON-NLS-1$
+							node_2.add(new AccomodationTreeNode("C")); //$NON-NLS-1$
 						node_1.add(node_2);
 					add(node_1);
-					node_1 = new AccomodationTreeNode("Fields");
-						node_2 = new AccomodationTreeNode("Small");
-							node_2.add(new AccomodationTreeNode("A"));
-							node_2.add(new AccomodationTreeNode("B"));
+					node_1 = new AccomodationTreeNode(Messages.getString("PanelAccomodation.17")); //$NON-NLS-1$
+						node_2 = new AccomodationTreeNode(Messages.getString("PanelAccomodation.18")); //$NON-NLS-1$
+							node_2.add(new AccomodationTreeNode("A")); //$NON-NLS-1$
+							node_2.add(new AccomodationTreeNode("B")); //$NON-NLS-1$
 						node_1.add(node_2);
-						node_2 = new AccomodationTreeNode("Medium");
-							node_2.add(new AccomodationTreeNode("A"));
-							node_2.add(new AccomodationTreeNode("B"));
+						node_2 = new AccomodationTreeNode(Messages.getString("PanelAccomodation.21")); //$NON-NLS-1$
+							node_2.add(new AccomodationTreeNode("A")); //$NON-NLS-1$
+							node_2.add(new AccomodationTreeNode("B")); //$NON-NLS-1$
 						node_1.add(node_2);
-						node_2 = new AccomodationTreeNode("Big");
-							node_2.add(new AccomodationTreeNode("A"));
+						node_2 = new AccomodationTreeNode(Messages.getString("PanelAccomodation.24")); //$NON-NLS-1$
+							node_2.add(new AccomodationTreeNode("A")); //$NON-NLS-1$
 						node_1.add(node_2);
-						node_2 = new AccomodationTreeNode("Caravan");
-							node_2.add(new AccomodationTreeNode("A"));
+						node_2 = new AccomodationTreeNode(Messages.getString("PanelAccomodation.26")); //$NON-NLS-1$
+							node_2.add(new AccomodationTreeNode("A")); //$NON-NLS-1$
 						node_1.add(node_2);
 					add(node_1);
 				}
@@ -153,10 +152,10 @@ public class PanelAccomodation extends MainPanel {
 		txtNode.setVisible(false);
 		txtNode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg) {
-				if(!txtNode.getText().equals(""))
+				if(!txtNode.getText().equals("")) //$NON-NLS-1$
 					addObject(txtNode.getText());
 
-				txtNode.setText("");
+				txtNode.setText(""); //$NON-NLS-1$
 				txtNode.setVisible(false);
 			}
 		});
@@ -179,14 +178,14 @@ public class PanelAccomodation extends MainPanel {
 		gbl_pnlDetails.rowWeights = new double[]{1.0, 0.0, 0.0, Double.MIN_VALUE};
 		pnlDetails.setLayout(gbl_pnlDetails);
 		
-		lblTags = new JLabel("NAMETAGS");
+		lblTags = new JLabel("NAMETAGS"); //$NON-NLS-1$
 		GridBagConstraints gbc_lblTags = new GridBagConstraints();
 		gbc_lblTags.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTags.gridx = 0;
 		gbc_lblTags.gridy = 0;
 		pnlDetails.add(lblTags, gbc_lblTags);
 		
-		lblFeatures = new JLabel("Features");
+		lblFeatures = new JLabel(Messages.getString("PanelAccomodation.lblFeatures.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblFeatures = new GridBagConstraints();
 		gbc_lblFeatures.anchor = GridBagConstraints.NORTHEAST;
 		gbc_lblFeatures.insets = new Insets(0, 0, 5, 5);
@@ -203,7 +202,7 @@ public class PanelAccomodation extends MainPanel {
 		pnlDetails.add(detailSplit, gbc_detailSplit);
 		
 		sGallery = new JScrollPane();
-		sGallery.setBorder(new TitledBorder(null, "Gallery", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		sGallery.setBorder(new TitledBorder(null, Messages.getString("PanelAccomodation.sGallery.borderTitle"), TitledBorder.LEADING, TitledBorder.TOP, null, null)); //$NON-NLS-1$
 		detailSplit.setRightComponent(sGallery);
 		
 		sText = new JScrollPane();
@@ -218,7 +217,7 @@ public class PanelAccomodation extends MainPanel {
 		txtFeatures.setLineWrap(true);
 		sText.setViewportView(txtFeatures);
 		
-		lblStatus = new JLabel("Status");
+		lblStatus = new JLabel(Messages.getString("PanelAccomodation.lblStatus.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblStatus = new GridBagConstraints();
 		gbc_lblStatus.anchor = GridBagConstraints.EAST;
 		gbc_lblStatus.insets = new Insets(0, 0, 0, 5);
@@ -236,7 +235,7 @@ public class PanelAccomodation extends MainPanel {
 		gbc_cmbStatus.gridy = 2;
 		pnlDetails.add(cmbStatus, gbc_cmbStatus);
 		
-		lblPrice = new JLabel("Price/night");
+		lblPrice = new JLabel(Messages.getString("PanelAccomodation.lblPrice.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblPrice = new GridBagConstraints();
 		gbc_lblPrice.anchor = GridBagConstraints.EAST;
 		gbc_lblPrice.insets = new Insets(0, 0, 5, 5);
@@ -255,11 +254,11 @@ public class PanelAccomodation extends MainPanel {
 		gbc_spPrice.gridy = 1;
 		pnlDetails.add(spPrice, gbc_spPrice);
 		
-		((ReservationTableModel)table.getModel()).setCurrentTags(new String[] {"Camping"});
+		((ReservationTableModel)table.getModel()).setCurrentTags(new String[] {"Camping"}); //$NON-NLS-1$
 		
 		try {
 			MaskFormatter formatTel;
-			formatTel = new MaskFormatter("'(###')' ###' ###' ###");
+			formatTel = new MaskFormatter("'(###')' ###' ###' ###"); //$NON-NLS-1$
 			formatTel.setPlaceholderCharacter('*');
 			table.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(new JFormattedTextField(formatTel)));
 		} catch (ParseException e) {
@@ -286,26 +285,26 @@ public class PanelAccomodation extends MainPanel {
 		sGallery.setViewportView(pnlGallery);
 
 		JPopupMenu popupMenu = new JPopupMenu();
-		JMenuItem mntmAdd = new JMenuItem("New reservation");
+		JMenuItem mntmAdd = new JMenuItem(Messages.getString("PanelAccomodation.mntmAdd.text_2")); //$NON-NLS-1$
 		mntmAdd.addActionListener(table.new AddRowActionListener());
 		popupMenu.add(mntmAdd);
-		JMenuItem mntmRemove = new JMenuItem("Delete");
+		JMenuItem mntmRemove = new JMenuItem(Messages.getString("PanelAccomodation.mntmRemove.text_2")); //$NON-NLS-1$
 		mntmRemove.addActionListener(table.new DeleteRowActionListener());
 		popupMenu.add(mntmRemove);
 		IAppWindow.addPopup(table, popupMenu);
 		IAppWindow.addPopup(sReservations, popupMenu);
 
 		popupMenu = new JPopupMenu();
-		mntmAdd = new JMenuItem("New object");
+		mntmAdd = new JMenuItem(Messages.getString("PanelAccomodation.mntmAdd.text")); //$NON-NLS-1$
 		mntmAdd.addActionListener(new NewNodeActionListener());
 		popupMenu.add(mntmAdd);
-		mntmRemove = new JMenuItem("Delete object");
+		mntmRemove = new JMenuItem(Messages.getString("PanelAccomodation.mntmRemove.text")); //$NON-NLS-1$
 		mntmRemove.addActionListener(new DeleteNodeActionListener());
 		popupMenu.add(mntmRemove);
 		IAppWindow.addPopup(tree, popupMenu);
 		
 		popupMenu = new JPopupMenu();
-		mntmAdd = new JMenuItem("Add photo");
+		mntmAdd = new JMenuItem(Messages.getString("PanelAccomodation.mntmAdd.text_3")); //$NON-NLS-1$
 		mntmAdd.addActionListener(new AddToGalleryActionListener());
 		popupMenu.add(mntmAdd);
 		IAppWindow.addPopup(sGallery, popupMenu);
@@ -331,12 +330,12 @@ public class PanelAccomodation extends MainPanel {
 		AccomodationTreeNode sn = getSelectedNode();
 		String[] ts = sn.getTags();
 		if (ts.length > 0) {
-			String nameTags = "";
+			String nameTags = ""; //$NON-NLS-1$
 			for (int i = ts.length - 1; i >= 0; i--)
-				nameTags += ts[i] + ",";
+				nameTags += ts[i] + ","; //$NON-NLS-1$
 			lblTags.setText(nameTags.substring(0, nameTags.length() - 1));
 		} else
-			lblTags.setText("no selection");
+			lblTags.setText(Messages.getString("PanelAccomodation.35")); //$NON-NLS-1$
 
 		txtFeatures.setText(sn.getFeatures());
 		cmbStatus.setSelectedItem(sn.getState());
@@ -349,8 +348,15 @@ public class PanelAccomodation extends MainPanel {
 	}
 
 	@Override
-	public void onLocaleChange(Locale rb) {
-		// TODO Auto-generated method stub
+	public void onLocaleChange() {
+		tools[0].setText(Messages.getString("PanelAccomodation.0")); //$NON-NLS-1$
+		tools[1].setText(Messages.getString("PanelAccomodation.2")); //$NON-NLS-1$
+		tools[2].setText(Messages.getString("PanelAccomodation.4")); //$NON-NLS-1$
+		tools[3].setText(Messages.getString("PanelAccomodation.6")); //$NON-NLS-1$
+		lblFeatures.setText(Messages.getString("PanelAccomodation.lblFeatures.text")); //$NON-NLS-1$
+		lblStatus.setText(Messages.getString("PanelAccomodation.lblStatus.text")); //$NON-NLS-1$
+		lblPrice.setText(Messages.getString("PanelAccomodation.lblPrice.text")); //$NON-NLS-1$
+		((TitledBorder)sGallery.getBorder()).setTitle(Messages.getString("PanelAccomodation.sGallery.borderTitle"));
 	}
 
 	private class TreeTreeSelectionListener implements TreeSelectionListener {
@@ -362,7 +368,7 @@ public class PanelAccomodation extends MainPanel {
 			mdl.filter();
 			selectedNode = (AccomodationTreeNode) tree.getLastSelectedPathComponent();
 			updateDetails();
-			getMain().log("Selected node: " + Arrays.stream(tags).collect(Collectors.joining(", ")));
+			getMain().log(Messages.getString("PanelAccomodation.36") + Arrays.stream(tags).collect(Collectors.joining(", "))); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
@@ -398,29 +404,29 @@ public class PanelAccomodation extends MainPanel {
 	}
 	
 	private JLabel galleryFactory(ImageIcon ic) {
-		JLabel lbl = new JLabel("");
+		JLabel lbl = new JLabel(""); //$NON-NLS-1$
 		lbl.setIcon(IAppWindow.resizeImage(ic, galleryImageSize, galleryImageSize));
 		
 		JPopupMenu popupMenu = new JPopupMenu();
-		JMenuItem mntmShow = new JMenuItem("Preview");
+		JMenuItem mntmShow = new JMenuItem(Messages.getString("PanelAccomodation.39")); //$NON-NLS-1$
 		mntmShow.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				ImageWindow.openImagePreview(ic);
-				getMain().log("Opened image preview");
+				getMain().log(Messages.getString("PanelAccomodation.40")); //$NON-NLS-1$
 			}
 		});
 		popupMenu.add(mntmShow);
-		JMenuItem mntmAdd = new JMenuItem("Add photo");
+		JMenuItem mntmAdd = new JMenuItem(Messages.getString("PanelAccomodation.41")); //$NON-NLS-1$
 		mntmAdd.addActionListener(new AddToGalleryActionListener());
 		popupMenu.add(mntmAdd);
-		JMenuItem mntmRemove = new JMenuItem("Delete");
+		JMenuItem mntmRemove = new JMenuItem(Messages.getString("PanelAccomodation.42")); //$NON-NLS-1$
 		mntmRemove.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				getSelectedNode().removeImage(ic);
 				updateDetails();
-				getMain().log("Removed image from gallery of " + getSelectedNode().toString());
+				getMain().log(Messages.getString("PanelAccomodation.43") + getSelectedNode().toString()); //$NON-NLS-1$
 			}
 		});
 		popupMenu.add(mntmRemove);
@@ -442,21 +448,21 @@ public class PanelAccomodation extends MainPanel {
 			DefaultMutableTreeNode parentNode = null;
 			TreePath parentPath = tree.getSelectionPath();
 			if (parentPath == null) {
-				getMain().log("Cannot delete object. Please select a node!");
+				getMain().log(Messages.getString("PanelAccomodation.44")); //$NON-NLS-1$
 				return;
 			}
 
 			int v = JOptionPane.showConfirmDialog(getMain().getFrame(),
-					"Are you sure you want to remove "+parentPath.getLastPathComponent().toString()+" object? All reservations will be preserved.",
-					"Delete object", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+					Messages.getString("PanelAccomodation.45")+parentPath.getLastPathComponent().toString()+Messages.getString("PanelAccomodation.46"), //$NON-NLS-1$ //$NON-NLS-2$
+					Messages.getString("PanelAccomodation.47"), JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$
 
 			if (v == JOptionPane.YES_OPTION) {
 				parentNode = (DefaultMutableTreeNode) (parentPath.getLastPathComponent());
 				if (parentNode != (DefaultMutableTreeNode) (tree.getModel().getRoot()))
 					((DefaultTreeModel) tree.getModel()).removeNodeFromParent(parentNode);
 				else {
-					getMain().log("ERROR: trying to remove root node");
-					JOptionPane.showMessageDialog(getMain().getFrame(), "Trying to remove root node!", "Deletion error", JOptionPane.ERROR_MESSAGE);
+					getMain().log(Messages.getString("PanelAccomodation.48")); //$NON-NLS-1$
+					JOptionPane.showMessageDialog(getMain().getFrame(), Messages.getString("PanelAccomodation.49"), Messages.getString("PanelAccomodation.50"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 				}
 			}
 		}
@@ -471,7 +477,7 @@ public class PanelAccomodation extends MainPanel {
 			if (v == JFileChooser.APPROVE_OPTION) {
 				File file = fc.getSelectedFile();
 				getSelectedNode().addImage(new ImageIcon(file.getAbsolutePath()));
-				getMain().log("Added new image to gallery");
+				getMain().log(Messages.getString("PanelAccomodation.51")); //$NON-NLS-1$
 				updateDetails();
 			}
 		}
