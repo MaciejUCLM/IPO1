@@ -58,6 +58,10 @@ public class MainWindow implements IAppWindow {
 	private JMenu mnPreferences;
 	private JMenuItem mntmChangeName;
 	private JMenuItem mntmChangePassword;
+	private JMenu mnFile;
+	private JMenuItem mntmLogout;
+	private JMenu mnAbout;
+	private JMenu mnHelp;
 
 	/**
 	 * Create the application.
@@ -87,10 +91,10 @@ public class MainWindow implements IAppWindow {
 		JMenuBar menuBar = new JMenuBar();
 		pnlBars.add(menuBar, BorderLayout.NORTH);
 		
-		JMenu mnFile = new JMenu(Messages.getString("MainWindow.mnFile.text")); //$NON-NLS-1$
+		mnFile = new JMenu(Messages.getString("MainWindow.mnFile.text")); //$NON-NLS-1$
 		menuBar.add(mnFile);
 		
-		JMenuItem mntmLogout = new JMenuItem(Messages.getString("MainWindow.mntmLogout.text")); //$NON-NLS-1$
+		mntmLogout = new JMenuItem(Messages.getString("MainWindow.mntmLogout.text")); //$NON-NLS-1$
 		mntmLogout.addActionListener(new LogoutActionListener());
 		mnFile.add(mntmLogout);
 		
@@ -111,11 +115,11 @@ public class MainWindow implements IAppWindow {
 		mntmChangePassword = new JMenuItem(Messages.getString("MainWindow.mntmChangePassword.text")); //$NON-NLS-1$
 		mnPreferences.add(mntmChangePassword);
 		
-		JMenu mnAbout = new JMenu(Messages.getString("MainWindow.mnAbout.text")); //$NON-NLS-1$
+		mnAbout = new JMenu(Messages.getString("MainWindow.mnAbout.text")); //$NON-NLS-1$
 		mnAbout.addMouseListener(new MnAboutMouseListener());
 		menuBar.add(mnAbout);
 		
-		JMenu mnHelp = new JMenu(Messages.getString("MainWindow.mnHelp.text")); //$NON-NLS-1$
+		mnHelp = new JMenu(Messages.getString("MainWindow.mnHelp.text")); //$NON-NLS-1$
 		mnHelp.addMouseListener(new MnHelpMouseListener());
 		menuBar.add(mnHelp);
 		
@@ -205,13 +209,18 @@ public class MainWindow implements IAppWindow {
 
 	@Override
 	public void onLocaleChange() {
-		pnlAccount.onLocaleChange();
-		pnlAccomodation.onLocaleChange();
-		pnlActivities.onLocaleChange();
-		pnlEmployees.onLocaleChange();
-		pnlRoutes.onLocaleChange();
-		pnlMap.onLocaleChange();
+		MainPanel[] panels = new MainPanel[] {pnlAccount, pnlAccomodation, pnlActivities, pnlEmployees, pnlRoutes, pnlMap};
+		for (MainPanel p : panels)
+			p.onLocaleChange();
 		frmMain.setTitle(Messages.getString("MainWindow.frmMain.title")); //$NON-NLS-1$
+		mnFile.setText(Messages.getString("MainWindow.mnFile.text")); //$NON-NLS-1$
+		mntmLogout.setText(Messages.getString("MainWindow.mntmLogout.text")); //$NON-NLS-1$
+		mntmExit.setText(Messages.getString("MainWindow.mntmExit.text")); //$NON-NLS-1$
+		mnPreferences.setText(Messages.getString("MainWindow.mnPreferences.text")); //$NON-NLS-1$
+		mntmChangeName.setText(Messages.getString("MainWindow.mntmChangeName.text")); //$NON-NLS-1$
+		mntmChangePassword.setText(Messages.getString("MainWindow.mntmChangePassword.text")); //$NON-NLS-1$
+		mnAbout.setText(Messages.getString("MainWindow.mnAbout.text")); //$NON-NLS-1$
+		mnHelp.setText(Messages.getString("MainWindow.mnHelp.text")); //$NON-NLS-1$
 	}
 
 	@Override
