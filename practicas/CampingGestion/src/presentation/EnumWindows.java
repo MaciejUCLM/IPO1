@@ -4,5 +4,6 @@ public enum EnumWindows {
 	LOGIN,
 	MAIN,
 	HELP,
-	ABOUT
+	ABOUT,
+	IMAGE
 }

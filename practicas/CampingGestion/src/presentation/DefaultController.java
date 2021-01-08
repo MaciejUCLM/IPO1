@@ -1,7 +1,5 @@
 package presentation;
 
-import java.util.Locale;
-
 public class DefaultController implements IController {
 	
 	private static IController controller = null;
@@ -33,14 +31,18 @@ public class DefaultController implements IController {
 	}
 
 	@Override
-	public void changeLocale(Locale rb) {
-		// TODO
+	public void changeLocale(EnumLanguages lang) {
+		Messages.setLanguage(lang);
+		for (IAppWindow w : windows) {
+			if (w != null)
+				w.onLocaleChange();
+		}
 	}
 
 	@Override
-	public void openWindow(EnumWindows win) {
-		if (getWindow(win) == null) {
-			IAppWindow newWindow;
+	public IAppWindow openWindow(EnumWindows win) {
+		IAppWindow newWindow = getWindow(win);
+		if (newWindow == null) {
 			switch (win) {
 			case MAIN:
 				newWindow = new MainWindow();
@@ -51,13 +53,17 @@ public class DefaultController implements IController {
 			case ABOUT:
 				newWindow = new AboutWindow();
 				break;
+			case IMAGE:
+				newWindow = new ImageWindow();
+				break;
 			case LOGIN:
 			default:
 				newWindow = new LoginWindow();
 			}
 			windows[win.ordinal()] = newWindow;
 		}
-		getWindow(win).getFrame().setVisible(true);
+		newWindow.getFrame().setVisible(true);
+		return newWindow;
 	}
 
 	@Override
