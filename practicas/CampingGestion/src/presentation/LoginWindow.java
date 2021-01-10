@@ -130,6 +130,7 @@ public class LoginWindow implements IAppWindow {
 		comboLanguage.addItemListener(new ComboLanguageItemListener());
 		comboLanguage.setModel(new LangComboModel());
 		comboLanguage.setBounds(415, 300, 89, 60);
+		comboLanguage.setSelectedIndex(Messages.getCurrentLanguage().ordinal());
 		frmLogin.getContentPane().add(comboLanguage);
 		
 		lblLogo = new JLabel(Messages.getString("LoginWindow.lblLogo.text")); //$NON-NLS-1$

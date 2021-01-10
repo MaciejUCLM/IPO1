@@ -38,6 +38,23 @@ public class Messages {
 		}
 	}
 	
+	public static EnumLanguages getCurrentLanguage() {
+		EnumLanguages lang;
+		ResourceBundle bundle = Beans.isDesignTime() ? loadBundle() : RESOURCE_BUNDLE;
+		switch (bundle.getLocale().getLanguage()) {
+		case "pl":
+			lang = EnumLanguages.POLISH;
+			break;
+		case "es":
+			lang = EnumLanguages.SPANISH;
+			break;
+		case "en":
+		default:
+			lang = EnumLanguages.ENGLISH;
+		}
+		return lang;
+	}
+	
 	private static Locale getLocale(EnumLanguages lang) {
 		Locale locale;
 		switch (lang) {
