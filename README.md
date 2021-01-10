@@ -1,9 +1,9 @@
 # IPO1
-Ese repositorio es por Interaccion Persona Ordenador trabajos de UCLM.
+Este repositorio sirve para trabajos de Interaccion Persona Ordenador de UCLM.
 
 ## Carpetas
-Dos proyectos:
-- trabajo teoríca
+Proyectos:
+- trabajo teoríco
 - trabajo prácticas
 
 ## Grupo
